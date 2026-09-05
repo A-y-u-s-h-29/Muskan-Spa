@@ -132,7 +132,7 @@ function LoadingScreen({ onComplete }) {
           {/* Decorative line */}
           <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-px bg-stone-300" />
           
-          {/* Brand name with letter-by-letter animation - Responsive */}
+          {/* Brand name with letter-by-letter animation */}
           <div className="font-serif text-3xl sm:text-5xl md:text-7xl tracking-tight text-stone-900">
             <span className="inline-block animate-[fadeUp_0.6s_ease-out_forwards] opacity-0" style={{ animationDelay: '0.1s' }}>
               M
@@ -222,9 +222,9 @@ function Header({ page, setPage, menuOpen, setMenuOpen }) {
           onClick={() => { setPage("home"); setMenuOpen(false); window.scrollTo(0, 0); }} 
           className="text-left group flex-shrink-0 min-w-0"
         >
-          <span className="font-serif text-base sm:text-xl lg:text-2xl xl:text-3xl tracking-tight text-emerald-800">Mahika</span>
-          <span className="font-serif text-base sm:text-xl lg:text-2xl xl:text-3xl text-stone-800 hidden xs:inline"> Russian Spa</span>
-          <span className="block text-[7px] xs:text-[8px] sm:text-[9px] lg:text-[10px] xl:text-[11px] uppercase tracking-[0.2em] xs:tracking-[0.25em] sm:tracking-[0.3em] lg:tracking-[0.35em] text-stone-400 mt-0.5 font-light truncate max-w-[120px] xs:max-w-none">Aerocity · Delhi NCR</span>
+          <span className="font-serif text-sm xs:text-base sm:text-xl lg:text-2xl xl:text-3xl tracking-tight text-emerald-800">Mahika</span>
+          <span className="font-serif text-sm xs:text-base sm:text-xl lg:text-2xl xl:text-3xl text-stone-800"> Russian Spa</span>
+          <span className="block text-[7px] xs:text-[8px] sm:text-[9px] lg:text-[10px] xl:text-[11px] uppercase tracking-[0.2em] xs:tracking-[0.25em] sm:tracking-[0.3em] lg:tracking-[0.35em] text-stone-400 mt-0.5 font-light">Aerocity · Delhi NCR</span>
         </button>
         
         <nav className="hidden md:flex items-center gap-4 lg:gap-10 xl:gap-12">
@@ -287,7 +287,7 @@ function Footer({ setPage }) {
     <footer className="bg-stone-900 text-stone-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 lg:py-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12">
         <div className="sm:col-span-2 lg:col-span-1">
-          <p className="font-serif text-2xl sm:text-3xl text-stone-100">Mahika</p>
+          <p className="font-serif text-2xl sm:text-3xl text-stone-100">Mahika Russian Spa</p>
           <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] sm:tracking-[0.35em] text-stone-400 mt-1.5">Russian Spa · Aerocity</p>
           <p className="mt-4 sm:mt-5 text-sm text-stone-400 leading-relaxed max-w-xs">
             Twenty-five locations across Delhi NCR, one standard of care.
@@ -343,14 +343,14 @@ function HomePage({ setPage }) {
 
   return (
     <div className={`transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-      {/* Hero Section - Reference Inspired */}
+      {/* Hero Section */}
       <section className="relative min-h-screen flex items-center overflow-hidden bg-[#f5f0eb]">
         {/* Background elements */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#f5f0eb] via-white to-[#e8f0ed]" />
         <div className="absolute -top-40 -right-40 h-[30rem] sm:h-[40rem] w-[30rem] sm:w-[40rem] rounded-full bg-emerald-100/30 blur-3xl" />
         <div className="absolute -bottom-40 -left-40 h-[30rem] sm:h-[40rem] w-[30rem] sm:w-[40rem] rounded-full bg-stone-100/40 blur-3xl" />
         
-        {/* Decorative oversized text - Hidden on mobile */}
+        {/* Decorative oversized text */}
         <div className="absolute bottom-4 right-4 sm:bottom-8 sm:right-8 lg:bottom-16 lg:right-16 opacity-[0.02] sm:opacity-[0.04] select-none pointer-events-none hidden sm:block">
           <span className="font-serif text-[4rem] sm:text-[8rem] lg:text-[14rem] xl:text-[20rem] leading-none text-stone-900 whitespace-nowrap">
             SPA
@@ -363,21 +363,21 @@ function HomePage({ setPage }) {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 lg:pt-32 xl:pt-40 pb-10 sm:pb-16 lg:pb-20 xl:pb-28 grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 xl:gap-20 items-center w-full relative z-10">
-          {/* Left Content - Editorial Style */}
+          {/* Left Content */}
           <div className="relative order-2 lg:order-1">
             {/* Subtitle */}
             <span className="inline-flex items-center gap-1.5 sm:gap-2 lg:gap-3 rounded-full border border-emerald-200/60 bg-white/80 px-2.5 sm:px-3 lg:px-5 py-1 sm:py-1.5 lg:py-2 text-[8px] xs:text-[9px] sm:text-[10px] lg:text-[11px] uppercase tracking-[0.15em] sm:tracking-[0.2em] lg:tracking-[0.25em] text-emerald-700 backdrop-blur-sm">
-              <Sparkles size={10} className="sm:size-[12px] lg:size-[14px]" /> <span className="hidden xs:inline">25 Locations ·</span> Delhi NCR
+              <Sparkles size={10} className="sm:size-[12px] lg:size-[14px]" /> 25 Locations · Delhi NCR
             </span>
 
-            {/* Main Headline - Mobile Optimized */}
+            {/* Main Headline */}
             <h1 className="mt-4 sm:mt-6 lg:mt-8 font-serif text-[2.2rem] xs:text-[2.6rem] sm:text-[3.2rem] md:text-[3.8rem] lg:text-[4.5rem] xl:text-[5.5rem] leading-[1.05] text-stone-900">
               <span className="block">Find Your</span>
               <span className="block italic text-emerald-600">Inner Calm</span>
               <span className="block">Today</span>
             </h1>
 
-            {/* Description with accent line */}
+            {/* Description */}
             <div className="mt-4 sm:mt-6 lg:mt-8 flex items-start gap-3 sm:gap-4 lg:gap-6">
               <span className="mt-2 sm:mt-2.5 lg:mt-3 h-px w-8 sm:w-10 lg:w-16 flex-shrink-0 bg-emerald-400/60" />
               <p className="text-sm xs:text-base sm:text-lg leading-relaxed text-stone-600 font-light max-w-sm">
@@ -387,7 +387,7 @@ function HomePage({ setPage }) {
               </p>
             </div>
 
-            {/* CTA Buttons - Mobile Optimized */}
+            {/* CTA Buttons */}
             <div className="mt-6 sm:mt-8 lg:mt-12 flex flex-wrap gap-2.5 sm:gap-3 lg:gap-4">
               <button
                 onClick={() => setPage("services")}
@@ -406,7 +406,7 @@ function HomePage({ setPage }) {
               </a>
             </div>
 
-            {/* Rating/Rewards - Mobile Optimized */}
+            {/* Rating/Rewards */}
             <div className="mt-6 sm:mt-8 lg:mt-12 flex flex-wrap items-center gap-3 sm:gap-4 lg:gap-8">
               <div className="flex items-center gap-1 sm:gap-1.5 lg:gap-2">
                 <div className="flex gap-0.5">
@@ -416,7 +416,7 @@ function HomePage({ setPage }) {
                 </div>
                 <span className="text-xs sm:text-sm font-medium text-stone-700">4.9</span>
               </div>
-              <span className="text-stone-300 hidden xs:inline">|</span>
+              <span className="text-stone-300">|</span>
               <div className="flex items-center gap-1 sm:gap-1.5 lg:gap-2">
                 <Award size={12} className="sm:size-[14px] lg:size-[16px] text-emerald-600" />
                 <span className="text-[10px] xs:text-xs sm:text-sm text-stone-600">12k+ sessions a year</span>
@@ -426,10 +426,8 @@ function HomePage({ setPage }) {
 
           {/* Right Content - Hero Image */}
           <div className="relative mx-auto w-full max-w-[280px] xs:max-w-sm sm:max-w-md lg:max-w-none order-1 lg:order-2">
-            {/* Frame outline - Hidden on small screens */}
             <div className="absolute -right-2 -top-3 sm:-right-4 sm:-top-6 hidden md:block h-[105%] w-[88%] sm:w-[92%] lg:w-[95%] rounded-t-[8rem] sm:rounded-t-[10rem] lg:rounded-t-[14rem] rounded-b-3xl border border-emerald-200/50" />
 
-            {/* Main Image */}
             <div className="relative aspect-[3/4] overflow-hidden rounded-t-[8rem] sm:rounded-t-[10rem] lg:rounded-t-[14rem] rounded-b-2xl sm:rounded-b-3xl shadow-2xl shadow-stone-900/10 ring-1 ring-stone-200/50">
               <img
                 src="https://images.unsplash.com/photo-1620733723572-11c53f73a416?q=80&w=1200&auto=format&fit=crop"
@@ -440,7 +438,6 @@ function HomePage({ setPage }) {
               <div className="absolute inset-0 bg-gradient-to-t from-stone-900/30 via-transparent to-transparent" />
             </div>
 
-            {/* Floating Accent Images - Hidden on smaller screens */}
             <div className="absolute -left-3 sm:-left-4 lg:-left-8 top-16 sm:top-20 lg:top-28 hidden sm:block h-20 sm:h-28 lg:h-44 w-14 sm:w-20 lg:w-36 overflow-hidden rounded-xl sm:rounded-2xl ring-4 ring-white shadow-xl shadow-stone-900/15">
               <img
                 src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=500&auto=format&fit=crop"
@@ -459,13 +456,11 @@ function HomePage({ setPage }) {
               />
             </div>
 
-            {/* Price Tag - Mobile Optimized */}
             <div className="absolute -left-1.5 sm:-left-2 lg:-left-5 bottom-4 sm:bottom-5 lg:bottom-8 rounded-xl sm:rounded-2xl bg-emerald-700 px-2.5 sm:px-3 lg:px-5 xl:px-7 py-2 sm:py-2.5 lg:py-4 xl:py-5 text-white shadow-2xl shadow-emerald-700/30">
               <p className="text-[7px] xs:text-[8px] sm:text-[9px] lg:text-[10px] uppercase tracking-[0.1em] sm:tracking-[0.15em] lg:tracking-[0.2em] opacity-80 font-light">Sessions from</p>
               <p className="mt-0.5 sm:mt-1 font-serif text-lg sm:text-xl lg:text-3xl leading-none">₹999</p>
             </div>
 
-            {/* Hours Chip - Mobile Optimized */}
             <div className="absolute -top-1.5 sm:-top-2 lg:-top-4 right-1.5 sm:right-2 lg:right-4 xl:right-10 flex items-center gap-1 sm:gap-1.5 lg:gap-3 rounded-full bg-white/95 px-2 sm:px-2.5 lg:px-4 py-1 sm:py-1.5 lg:py-2.5 shadow-lg shadow-stone-900/8 backdrop-blur-sm">
               <Clock size={10} className="sm:size-[12px] lg:size-[15px] text-emerald-600" />
               <span className="text-[7px] xs:text-[8px] sm:text-[9px] lg:text-xs tracking-wide text-stone-600 whitespace-nowrap">10 AM – 10 PM</span>
@@ -474,7 +469,7 @@ function HomePage({ setPage }) {
         </div>
       </section>
 
-      {/* Testimonials Section - Mobile Optimized */}
+      {/* Testimonials Section */}
       <section className="py-10 sm:py-16 lg:py-20 xl:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6 sm:mb-8 lg:mb-10 xl:mb-14">
@@ -531,7 +526,7 @@ function HomePage({ setPage }) {
         </div>
       </section>
 
-      {/* Features Section - Mobile Optimized */}
+      {/* Features Section */}
       <section className="py-10 sm:py-16 lg:py-20 border-y border-stone-200/60 bg-stone-50/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 text-center">
           <div className="group">
@@ -558,7 +553,7 @@ function HomePage({ setPage }) {
         </div>
       </section>
 
-      {/* Signature Treatments - Mobile Optimized */}
+      {/* Signature Treatments */}
       <section className="py-10 sm:py-16 lg:py-20 xl:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 sm:mb-8 lg:mb-10 xl:mb-12">
@@ -596,7 +591,7 @@ function HomePage({ setPage }) {
         </div>
       </section>
 
-      {/* Gallery - Mobile Optimized */}
+      {/* Gallery */}
       <section className="pb-10 sm:pb-16 lg:pb-20 xl:pb-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-emerald-600 text-[9px] xs:text-[10px] sm:text-xs lg:text-sm tracking-[0.15em] sm:tracking-[0.2em] lg:tracking-[0.25em] uppercase font-light mb-1.5 sm:mb-2 lg:mb-3">Inside Mahika</p>
@@ -626,7 +621,7 @@ function HomePage({ setPage }) {
         </div>
       </section>
 
-      {/* Testimonial - Existing - Mobile Optimized */}
+      {/* Testimonial - Existing */}
       <section className="bg-stone-900 py-10 sm:py-16 lg:py-20 xl:py-28">
         <div className="max-w-3xl sm:max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Star className="mx-auto text-emerald-400/60 mb-3 sm:mb-4 lg:mb-6" size={20} className="sm:size-[24px] lg:size-[32px]" />
@@ -655,7 +650,6 @@ function ServicesPage({ setPage }) {
 
   return (
     <div className="animate-fadeIn">
-      {/* Banner - Mobile Optimized */}
       <section className="relative overflow-hidden min-h-[40vh] sm:min-h-[50vh] flex items-center">
         <img
           src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1800&auto=format&fit=crop"
@@ -677,7 +671,6 @@ function ServicesPage({ setPage }) {
         </div>
       </section>
 
-      {/* Filter - Mobile Optimized */}
       <div className="sticky top-14 sm:top-20 lg:top-24 z-30 border-b border-stone-200/60 bg-white/92 backdrop-blur-xl shadow-sm">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-4 flex items-center justify-between gap-3 sm:gap-4 lg:gap-6">
           <div className="flex gap-1 sm:gap-1.5 lg:gap-2 overflow-x-auto no-scrollbar -mx-2 px-2">
@@ -701,7 +694,6 @@ function ServicesPage({ setPage }) {
         </div>
       </div>
 
-      {/* Treatment Cards - Mobile Optimized */}
       <section className="py-10 sm:py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
@@ -742,7 +734,6 @@ function ServicesPage({ setPage }) {
         </div>
       </section>
 
-      {/* Ritual - Mobile Optimized */}
       <section className="bg-stone-50/80 border-y border-stone-200/60 py-10 sm:py-16 lg:py-20 xl:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-emerald-600 text-[9px] xs:text-[10px] sm:text-xs lg:text-sm tracking-[0.15em] sm:tracking-[0.2em] lg:tracking-[0.25em] uppercase font-light mb-1.5 sm:mb-2 lg:mb-3">The Ritual</p>
@@ -760,7 +751,6 @@ function ServicesPage({ setPage }) {
         </div>
       </section>
 
-      {/* CTA - Mobile Optimized */}
       <section className="py-10 sm:py-16 lg:py-20 xl:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-stone-900 px-5 sm:px-6 lg:px-12 xl:px-16 py-8 sm:py-10 lg:py-14 xl:py-20">
