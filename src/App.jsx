@@ -192,12 +192,11 @@ function LoadingScreen({ onComplete }) {
   );
 }
 
-function Header({ page, setPage, menuOpen, setMenuOpen }) {
+function Header({ page, setPage, menuOpen, setMenuOpen, selectedLocation }) {
   const [scrolled, setScrolled] = useState(false);
   const nav = [
     ["home", "Home"],
     ["services", "Services"],
-    ["locations", "Locations"],
   ];
 
   useEffect(() => {
@@ -244,6 +243,25 @@ function Header({ page, setPage, menuOpen, setMenuOpen }) {
               }`} />
             </button>
           ))}
+
+          {/* Live selected location button — replaces static "Locations" */}
+          <button
+            onClick={() => { setPage("locations"); window.scrollTo(0, 0); }}
+            className={`flex items-center gap-1.5 lg:gap-2 text-xs lg:text-sm tracking-[0.1em] lg:tracking-[0.15em] uppercase font-light relative pb-1 transition-colors duration-300 ${
+              page === "locations"
+                ? "text-emerald-700"
+                : "text-stone-500 hover:text-stone-800"
+            }`}
+          >
+            <MapPin size={13} className="lg:size-[15px]" />
+            <span className="truncate max-w-[120px] lg:max-w-[160px]">
+              {selectedLocation || "Locations"}
+            </span>
+            <span className={`absolute bottom-0 left-0 h-[2px] bg-emerald-600 transition-all duration-300 ${
+              page === "locations" ? "w-full" : "w-0"
+            }`} />
+          </button>
+
           <a
             href="tel:+911140001234"
             className="flex items-center gap-2 rounded-full bg-emerald-700 px-4 sm:px-5 lg:px-6 py-2 sm:py-2.5 lg:py-3 text-xs sm:text-sm text-white transition-all duration-300 hover:bg-emerald-800 hover:shadow-lg hover:shadow-emerald-700/20"
@@ -273,6 +291,17 @@ function Header({ page, setPage, menuOpen, setMenuOpen }) {
               {label}
             </button>
           ))}
+
+          {/* Live selected location in mobile menu */}
+          <button
+            onClick={() => { setPage("locations"); setMenuOpen(false); window.scrollTo(0, 0); }}
+            className={`flex items-center gap-2 text-left text-base sm:text-lg tracking-wide font-light py-1 ${
+              page === "locations" ? "text-emerald-700" : "text-stone-600"
+            }`}
+          >
+            <MapPin size={16} /> {selectedLocation || "Locations"}
+          </button>
+
           <a href="tel:+911140001234" className="text-center bg-emerald-700 text-white text-sm sm:text-base px-6 py-3.5 rounded-full hover:bg-emerald-800 transition-colors mt-2">
             Call Now
           </a>
@@ -646,6 +675,83 @@ const RITUAL_STEPS = [
 
 function ServicesPage({ setPage }) {
   const [filter, setFilter] = useState("All");
+
+  // All services from your provided text, integrated into the existing structure
+  const SERVICES = [
+    {
+      name: "Russian Massage",
+      tag: "Signature",
+      duration: "60 min",
+      price: "₹3,500",
+      desc: "Experience the ultimate relaxation and rejuvenation with our Russian massage services. Our skilled and experienced massage therapists use traditional techniques to provide a personalized massage experience that meets your unique needs and preferences.",
+      img: "https://images.unsplash.com/photo-1519824145371-296894a0daa9?q=80&w=1200&auto=format&fit=crop",
+    },
+    {
+      name: "Body to Body Massage",
+      tag: "Signature",
+      duration: "60 min",
+      price: "₹4,000",
+      desc: "Experience the ultimate pleasure and relaxation with our body to body massage services. Our skilled massage therapists use a full body approach to provide a unique and customized massage experience that is designed to meet your specific needs.",
+      img: "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=1200&auto=format&fit=crop",
+    },
+    {
+      name: "Swedish Massage",
+      tag: "Relaxation",
+      duration: "60 min",
+      price: "₹2,800",
+      desc: "Discover the ultimate relaxation and healing with our Swedish massage services. Our skilled massage therapists use long and smooth strokes, kneading, and circular movements to release tension and promote deep relaxation.",
+      img: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=1200&auto=format&fit=crop",
+    },
+    {
+      name: "Hot Stone Massage",
+      tag: "Therapeutic",
+      duration: "75 min",
+      price: "₹3,800",
+      desc: "Our skilled massage therapists use smooth, heated stones to apply pressure and promote deep relaxation. The heat from the stones can help to increase circulation, reduce muscle tension, and promote overall well-being.",
+      img: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=1200&auto=format&fit=crop    https://images.unsplash.com/photo-1596178065887-1198b6148b2b?q=80&w=1200&auto=format&fit=crop",
+    },
+    {
+      name: "Hot Oil Massage",
+      tag: "Therapeutic",
+      duration: "60 min",
+      price: "₹3,200",
+      desc: "Looking for a massage experience that goes beyond relaxation? Our skilled massage therapists use warm, natural oils that are infused with essential oils to promote deep relaxation and nourish the skin.",
+      img: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=1200&auto=format&fit=crop   https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=1200&auto=format&fit=crop",
+    },
+    {
+      name: "4 Hand Massage",
+      tag: "Signature",
+      duration: "60 min",
+      price: "₹5,500",
+      desc: "Experience the ultimate relaxation with our 4 hand massage services. Two skilled massage therapists work in harmony to provide a synchronized massage experience that is designed to melt away tension and leave you feeling rejuvenated.",
+      img: "4-HAND-MASSAGE.webp",
+    },
+    {
+      name: "Body Lotion Massage",
+      tag: "Relaxation",
+      duration: "60 min",
+      price: "₹2,500",
+      desc: "Indulge in the ultimate pampering experience with our body lotion massage services. Our skilled massage therapists use a specially-formulated lotion that is designed to nourish and hydrate the skin while providing a deeply relaxing massage experience.",
+      img: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=1200&auto=format&fit=crop",
+    },
+    {
+      name: "Deep Tissue Massage",
+      tag: "Therapeutic",
+      duration: "60 min",
+      price: "₹3,600",
+      desc: "Looking for a massage that goes beyond relaxation? Our deep tissue massage services are designed to release deep-seated tension and muscle knots. Our skilled massage therapists use slow, deep strokes to target the underlying muscle tissue, promoting circulation and easing tension.",
+      img: "Deep-Tissue-Massage.webp",
+    },
+  ];
+
+  const SERVICE_TAGS = ["All", "Signature", "Relaxation", "Therapeutic"];
+
+  const RITUAL_STEPS = [
+    ["01", "Consultation", "We begin with a brief conversation about your needs, preferences, and any areas of tension."],
+    ["02", "The Treatment", "Your therapist tailors the pressure, oils, and techniques to your body and goals."],
+    ["03", "Aftercare", "We finish with guidance on hydration and stretching to extend the benefits at home."],
+  ];
+
   const shown = filter === "All" ? SERVICES : SERVICES.filter((s) => s.tag === filter);
 
   return (
@@ -786,11 +892,13 @@ function ServicesPage({ setPage }) {
   );
 }
 
-function LocationsPage() {
-  const [selected, setSelected] = useState(LOCATIONS[0]);
+function LocationsPage({ selectedLocation, setSelectedLocation }) {
   const [form, setForm] = useState({ name: "", phone: "", service: SERVICES[0].name });
   const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
+
+  const selected = selectedLocation || LOCATIONS[0];
+  const setSelected = setSelectedLocation || (() => {});
 
   const waLink = () => {
     const message = [
@@ -827,7 +935,25 @@ function LocationsPage() {
         </p>
       </section>
 
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 sm:pb-16 lg:pb-20 xl:pb-28 grid lg:grid-cols-5 gap-6 sm:gap-8 lg:gap-10 xl:gap-12">
+      {/* Sticky Selected Location Bar — matches services page filter bar styling */}
+      <div className="sticky top-14 sm:top-20 lg:top-24 z-30 border-b border-stone-200/60 bg-white/92 backdrop-blur-xl shadow-sm">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-4 flex items-center justify-between gap-3 sm:gap-4 lg:gap-6">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            <MapPin size={14} className="sm:size-[15px] lg:size-[16px] text-emerald-700 flex-shrink-0" />
+            <span className="text-[10px] sm:text-xs lg:text-sm uppercase tracking-[0.12em] sm:tracking-[0.15em] text-stone-400 font-light flex-shrink-0 hidden xs:inline">
+              Selected
+            </span>
+            <span className="font-serif text-sm sm:text-base lg:text-lg text-emerald-700 truncate">
+              {selected} is selected
+            </span>
+          </div>
+          <span className="text-[10px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] text-stone-400 font-light flex-shrink-0">
+            {LOCATIONS.length} branches
+          </span>
+        </div>
+      </div>
+
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 lg:py-20 xl:py-28 grid lg:grid-cols-5 gap-6 sm:gap-8 lg:gap-10 xl:gap-12">
         <div className="lg:col-span-3">
           <div className="flex flex-wrap gap-1 sm:gap-1.5 lg:gap-3">
             {LOCATIONS.map((loc) => (
@@ -871,7 +997,7 @@ function LocationsPage() {
         </div>
 
         <div className="lg:col-span-2">
-          <div className="lg:sticky lg:top-20 sm:top-24 lg:top-24 xl:top-28 rounded-2xl sm:rounded-3xl border border-stone-200 bg-white p-4 sm:p-5 lg:p-7 xl:p-9 shadow-lg shadow-stone-900/5">
+          <div className="lg:sticky lg:top-32 sm:top-36 xl:top-40 rounded-2xl sm:rounded-3xl border border-stone-200 bg-white p-4 sm:p-5 lg:p-7 xl:p-9 shadow-lg shadow-stone-900/5">
             <p className="font-serif text-lg sm:text-xl lg:text-2xl text-stone-900 mb-0.5 sm:mb-1">Book at {selected}</p>
             <p className="text-xs sm:text-sm text-stone-400 font-light mb-3 sm:mb-4 lg:mb-6">Open daily, 10 AM – 10 PM</p>
             
@@ -956,6 +1082,7 @@ export default function MahikaRussianSpaWebsite() {
   const [page, setPage] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
   const [showLoading, setShowLoading] = useState(true);
+  const [selectedLocation, setSelectedLocation] = useState(LOCATIONS[0]);
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-white text-stone-800 font-sans antialiased">
@@ -998,10 +1125,22 @@ export default function MahikaRussianSpaWebsite() {
 
       {/* Main Content */}
       <div className={showLoading ? 'hidden' : ''}>
-        <Header page={page} setPage={setPage} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+        <Header
+          page={page}
+          setPage={setPage}
+          menuOpen={menuOpen}
+          setMenuOpen={setMenuOpen}
+          selectedLocation={selectedLocation}
+        />
         {page === "home" && <HomePage setPage={setPage} />}
         {page === "services" && <ServicesPage setPage={setPage} />}
-        {page === "locations" && <LocationsPage />}
+        {page === "locations" && (
+          <LocationsPage
+            selectedLocation={selectedLocation}
+            setSelectedLocation={setSelectedLocation}
+          />
+          
+        )}
         <Footer setPage={setPage} />
       </div>
     </div>
