@@ -63,8 +63,6 @@ const SERVICES = [
   },
 ];
 
-// Master list of every treatment offered at every branch.
-// Kept in one place so location pages can reference it without duplicating data.
 const ALL_TREATMENTS = [
   { name: "Russian Massage", price: "₹3,500", duration: "60 min", tag: "Signature",
     desc: "Traditional Russian techniques tailored to your body for deep relaxation and rejuvenation.",
@@ -92,44 +90,23 @@ const ALL_TREATMENTS = [
     img: "https://images.unsplash.com/photo-1639162906614-0603b0ae95fd?q=80&w=1200&auto=format&fit=crop" },
 ];
 
-// Location-specific service availability mapping.
-// Each entry lists the treatment names offered at that branch.
-// If a location is not present here, the full ALL_TREATMENTS list is used.
-// Easily maintainable — add/adjust a location's array without touching anything else.
-const LOCATION_SERVICES = {
-  Gurgaon: ["Russian Massage", "Body to Body Massage", "Swedish Massage", "Hot Stone Massage", "Hot Oil Massage", "4 Hand Massage", "Body Lotion Massage", "Deep Tissue Massage"],
-  Noida: ["Russian Massage", "Body to Body Massage", "Swedish Massage", "Hot Oil Massage", "Body Lotion Massage", "Deep Tissue Massage"],
-  Saket: ["Russian Massage", "Body to Body Massage", "Hot Stone Massage", "4 Hand Massage", "Deep Tissue Massage"],
-  Aerocity: ["Russian Massage", "Body to Body Massage", "Swedish Massage", "Hot Stone Massage", "Hot Oil Massage", "4 Hand Massage", "Body Lotion Massage", "Deep Tissue Massage"],
-  Mahipalpur: ["Russian Massage", "Swedish Massage", "Hot Oil Massage", "Body Lotion Massage"],
-  Dwarka: ["Russian Massage", "Body to Body Massage", "Swedish Massage", "Hot Stone Massage", "Deep Tissue Massage"],
-  CP: ["Russian Massage", "Body to Body Massage", "Swedish Massage", "4 Hand Massage", "Deep Tissue Massage"],
-  Delhi: ["Russian Massage", "Body to Body Massage", "Swedish Massage", "Hot Stone Massage", "Hot Oil Massage", "4 Hand Massage", "Body Lotion Massage", "Deep Tissue Massage"],
-  "Karol Bagh": ["Russian Massage", "Swedish Massage", "Hot Oil Massage", "Deep Tissue Massage"],
-  Chanakyapuri: ["Russian Massage", "Body to Body Massage", "Swedish Massage", "Hot Stone Massage"],
-  "Green Park": ["Russian Massage", "Swedish Massage", "Body Lotion Massage", "Deep Tissue Massage"],
-  Rohini: ["Russian Massage", "Body to Body Massage", "Hot Oil Massage", "4 Hand Massage"],
-  "RK Puram": ["Russian Massage", "Swedish Massage", "Hot Stone Massage"],
-  "Uttam Nagar": ["Russian Massage", "Body Lotion Massage", "Deep Tissue Massage"],
-  "Mayur Vihar": ["Russian Massage", "Body to Body Massage", "Swedish Massage", "Hot Oil Massage"],
-  "Malviya Nagar": ["Russian Massage", "Swedish Massage", "Hot Stone Massage", "4 Hand Massage"],
-  "Hauz Khas": ["Russian Massage", "Body to Body Massage", "Hot Stone Massage", "Deep Tissue Massage"],
-  "Paschim Vihar": ["Russian Massage", "Swedish Massage", "Hot Oil Massage"],
-  "Lajpat Nagar": ["Russian Massage", "Body to Body Massage", "Swedish Massage", "Body Lotion Massage"],
-  "Nehru Place": ["Russian Massage", "Swedish Massage", "Hot Stone Massage", "Deep Tissue Massage"],
-  "IGI Airport": ["Russian Massage", "Body to Body Massage", "Swedish Massage", "Hot Stone Massage", "Hot Oil Massage", "4 Hand Massage", "Body Lotion Massage", "Deep Tissue Massage"],
-  Paharganj: ["Russian Massage", "Swedish Massage", "Hot Oil Massage"],
-  "South Delhi": ["Russian Massage", "Body to Body Massage", "Swedish Massage", "Hot Stone Massage", "4 Hand Massage", "Deep Tissue Massage"],
-  "Punjabi Bagh": ["Russian Massage", "Body to Body Massage", "Swedish Massage", "Body Lotion Massage", "Deep Tissue Massage"],
-  "Basant Kunj": ["Russian Massage", "Body to Body Massage", "Swedish Massage", "Hot Stone Massage", "Hot Oil Massage", "4 Hand Massage", "Body Lotion Massage", "Deep Tissue Massage"],
-};
+// Every Mahika Russian Spa branch offers the complete treatment menu.
+// No per-location filtering — all 8 treatments shown for every location.
+const getServicesForLocation = () => ALL_TREATMENTS;
 
-// Resolve services for a given location.
-const getServicesForLocation = (loc) => {
-  const names = LOCATION_SERVICES[loc];
-  if (!names || names.length === 0) return ALL_TREATMENTS;
-  const filtered = ALL_TREATMENTS.filter((s) => names.includes(s.name));
-  return filtered.length > 0 ? filtered : ALL_TREATMENTS;
+// Build a pre-filled WhatsApp link for a specific service at a specific location.
+const buildServiceWhatsAppLink = (service, location) => {
+  const message = [
+    "Hello Mahika Russian Spa, I'd like to book the following service:",
+    "",
+    "Service: " + service.name,
+    "Price: " + service.price,
+    "Duration: " + service.duration,
+    "Location: " + (location || "Delhi NCR"),
+    "",
+    "Please confirm my booking.",
+  ].join("\n");
+  return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
 };
 
 const GALLERY = [
@@ -140,12 +117,9 @@ const GALLERY = [
   { src: "portrait-beautiful-russian-woman-getting-recreation-body-massage-close-up-portrait-beautiful-russian-girl-blue-eyes-120352860.webp", alt: "Massage oils and fresh flowers" },
   { src: "masseuse-makes-massage-to-a-charming-brunette-photo.jpg", alt: "Relaxing back massage" },
   { src: "https://images.unsplash.com/photo-1761470575018-135c213340eb?q=80&w=800&auto=format&fit=crop", alt: "Candlelit steam room" },
-{ src: "body-to-body-massage-628.jpg", alt: "Massage oils and fresh flowers" },
-
+  { src: "body-to-body-massage-628.jpg", alt: "Massage oils and fresh flowers" },
 ];
 
-// Extended gallery for the dedicated Gallery page.
-// Uses only premium, spa-relevant imagery consistent with existing theme.
 const FULL_GALLERY = [
   { src: "ajman-massage-spa.webp" },
   { src: "https://images.unsplash.com/photo-1620733723572-11c53f73a416?q=80&w=1200&auto=format&fit=crop", alt: "Candlelit spa treatment room" },
@@ -169,58 +143,45 @@ const FULL_GALLERY = [
 ];
 
 const TESTIMONIALS = [
-  {
-    name: "Ananya Sharma",
-    location: "Aerocity Branch",
-    rating: 5,
+  { name: "Ananya Sharma", location: "Aerocity Branch", rating: 5,
     text: "The Balinese massage was absolutely divine. The therapist's hands knew exactly where to work. I walked out feeling like a new person.",
-    treatment: "Balinese Body Massage"
-  },
-  {
-    name: "Priya Mehta",
-    location: "Gurgaon Branch",
-    rating: 5,
+    treatment: "Balinese Body Massage" },
+  { name: "Priya Mehta", location: "Gurgaon Branch", rating: 5,
     text: "I've been to many spas across Delhi, but nothing compares to the care and attention here. The hot stone ritual is my new favourite.",
-    treatment: "Aroma Hot Stone Ritual"
-  },
-  {
-    name: "Riya Kapoor",
-    location: "Saket Branch",
-    rating: 5,
+    treatment: "Aroma Hot Stone Ritual" },
+  { name: "Riya Kapoor", location: "Saket Branch", rating: 5,
     text: "The Signature Radiance Facial left my skin glowing for days. Such a gentle, luxurious experience from start to finish.",
-    treatment: "Signature Radiance Facial"
-  },
-  {
-    name: "Neha Verma",
-    location: "Dwarka Branch",
-    rating: 4.5,
+    treatment: "Signature Radiance Facial" },
+  { name: "Neha Verma", location: "Dwarka Branch", rating: 4.5,
     text: "Perfect for a quick unwind after work. The head and shoulder release melts away all the screen-time tension.",
-    treatment: "Head, Neck & Shoulder Release"
-  }
+    treatment: "Head, Neck & Shoulder Release" }
 ];
 
-// Hero slider slides — premium spa imagery with short captions.
 const HERO_SLIDES = [
-  {
-    src: "Deep-Tissue-Massage.webp",
+  { src: "Deep-Tissue-Massage.webp",
     title: "The Signature Ritual",
-    subtitle: "Warm oils, unhurried hands, complete stillness.",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1800&auto=format&fit=crop",
+    subtitle: "Warm oils, unhurried hands, complete stillness." },
+  { src: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1800&auto=format&fit=crop",
     title: "Oils & Botanicals",
-    subtitle: "Pure, warmed oils chosen for your skin and mood.",
-  },
-  {
-    src: "COUPLE-MASSAGE-3.jpg",
+    subtitle: "Pure, warmed oils chosen for your skin and mood." },
+  { src: "COUPLE-MASSAGE-3.jpg",
     title: "Private Treatment Rooms",
-    subtitle: "Every branch, the same quiet standard of care.",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1620733723572-11c53f73a416?q=80&w=1800&auto=format&fit=crop",
+    subtitle: "Every branch, the same quiet standard of care." },
+  { src: "https://images.unsplash.com/photo-1620733723572-11c53f73a416?q=80&w=1800&auto=format&fit=crop",
     title: "Candlelit Calm",
-    subtitle: "Step in from the city. Step out lighter.",
-  },
+    subtitle: "Step in from the city. Step out lighter." },
+];
+
+// Team members shown in the sliding team section on the home page.
+const TEAM_MEMBERS = [
+  { name: "Anastasia", role: "Senior Therapist", img: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?q=80&w=700&auto=format&fit=crop" },
+  { name: "Ekaterina", role: "Signature Specialist", img: "https://images.unsplash.com/photo-1594381898411-846e7d193883?q=80&w=700&auto=format&fit=crop" },
+  { name: "Olga", role: "Deep Tissue Expert", img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=700&auto=format&fit=crop" },
+  { name: "Natalia", role: "Aroma Therapist", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=700&auto=format&fit=crop" },
+  { name: "Irina", role: "Facial Specialist", img: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=700&auto=format&fit=crop" },
+  { name: "Svetlana", role: "Hot Stone Expert", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=700&auto=format&fit=crop" },
+  { name: "Yulia", role: "Reflexology Expert", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=700&auto=format&fit=crop" },
+  { name: "Viktoria", role: "Body Ritual Specialist", img: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=700&auto=format&fit=crop" },
 ];
 
 function LoadingScreen({ onComplete }) {
@@ -286,7 +247,6 @@ function Header({ page, setPage, menuOpen, setMenuOpen, selectedLocation, setSel
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close the location dropdown when clicking outside or pressing Escape.
   useEffect(() => {
     if (!locationOpen) return;
     const onClick = (e) => {
@@ -305,14 +265,12 @@ function Header({ page, setPage, menuOpen, setMenuOpen, selectedLocation, setSel
     };
   }, [locationOpen]);
 
-  // Close the dropdown when the mobile menu closes.
   useEffect(() => {
     if (!menuOpen) setLocationOpen(false);
   }, [menuOpen]);
 
   const overlay = page === "home" && !scrolled && !menuOpen;
 
-  // Called when the user actually picks a location from the dropdown.
   const pickLocation = (loc) => {
     if (setSelectedLocation) setSelectedLocation(loc);
     setLocationOpen(false);
@@ -321,8 +279,14 @@ function Header({ page, setPage, menuOpen, setMenuOpen, selectedLocation, setSel
     window.scrollTo(0, 0);
   };
 
-  // Toggle the dropdown (does NOT navigate).
   const toggleLocation = () => setLocationOpen((v) => !v);
+
+  // Overlay-aware colors so the header stays readable over the dark hero slider.
+  const logoPrimary = overlay ? "text-white" : "text-emerald-800";
+  const logoSecondary = overlay ? "text-white" : "text-stone-800";
+  const logoTagline = overlay ? "text-stone-300" : "text-stone-400";
+  const navBase = overlay ? "text-white/80 hover:text-white" : "text-stone-500 hover:text-stone-800";
+  const navActive = overlay ? "text-emerald-300" : "text-emerald-700";
 
   return (
     <header
@@ -335,9 +299,9 @@ function Header({ page, setPage, menuOpen, setMenuOpen, selectedLocation, setSel
           onClick={() => { setPage("home"); setMenuOpen(false); window.scrollTo(0, 0); }}
           className="text-left group flex-shrink-0 min-w-0"
         >
-          <span className="font-serif text-sm xs:text-base sm:text-xl lg:text-2xl xl:text-3xl tracking-tight text-emerald-800">Mahika</span>
-          <span className="font-serif text-sm xs:text-base sm:text-xl lg:text-2xl xl:text-3xl text-stone-800"> Russian Spa</span>
-          <span className="block text-[7px] xs:text-[8px] sm:text-[9px] lg:text-[10px] xl:text-[11px] uppercase tracking-[0.2em] xs:tracking-[0.25em] sm:tracking-[0.3em] lg:tracking-[0.35em] text-stone-400 mt-0.5 font-light">Aerocity · Delhi NCR</span>
+          <span className={`font-serif text-sm xs:text-base sm:text-xl lg:text-2xl xl:text-3xl tracking-tight ${logoPrimary}`}>Mahika</span>
+          <span className={`font-serif text-sm xs:text-base sm:text-xl lg:text-2xl xl:text-3xl ${logoSecondary}`}> Russian Spa</span>
+          <span className={`block text-[7px] xs:text-[8px] sm:text-[9px] lg:text-[10px] xl:text-[11px] uppercase tracking-[0.2em] xs:tracking-[0.25em] sm:tracking-[0.3em] lg:tracking-[0.35em] mt-0.5 font-light ${logoTagline}`}>Aerocity · Delhi NCR</span>
         </button>
 
         <nav className="hidden md:flex items-center gap-4 lg:gap-8 xl:gap-10">
@@ -346,42 +310,37 @@ function Header({ page, setPage, menuOpen, setMenuOpen, selectedLocation, setSel
               key={key}
               onClick={() => { setPage(key); window.scrollTo(0, 0); }}
               className={`text-xs lg:text-sm tracking-[0.1em] lg:tracking-[0.15em] uppercase font-light relative pb-1 transition-colors duration-300 ${
-                page === key ? "text-emerald-700" : "text-stone-500 hover:text-stone-800"
+                page === key ? navActive : navBase
               }`}
             >
               {label}
-              <span className={`absolute bottom-0 left-0 h-[2px] bg-emerald-600 transition-all duration-300 ${page === key ? "w-full" : "w-0"}`} />
+              <span className={`absolute bottom-0 left-0 h-[2px] transition-all duration-300 ${
+                overlay ? "bg-emerald-300" : "bg-emerald-600"
+              } ${page === key ? "w-full" : "w-0"}`} />
             </button>
           ))}
 
-          {/* Live selected location dropdown — shows all locations first, then navigates on pick */}
           <div className="relative" ref={locationRef}>
             <button
               onClick={toggleLocation}
               aria-haspopup="listbox"
               aria-expanded={locationOpen}
               className={`flex items-center gap-1.5 lg:gap-2 text-xs lg:text-sm tracking-[0.1em] lg:tracking-[0.15em] uppercase font-light relative pb-1 transition-colors duration-300 ${
-                page === "locations" || page === "location"
-                  ? "text-emerald-700"
-                  : "text-stone-500 hover:text-stone-800"
+                page === "locations" || page === "location" ? navActive : navBase
               }`}
             >
               <MapPin size={13} className="lg:size-[15px]" />
               <span className="truncate max-w-[110px] lg:max-w-[160px]">
                 {selectedLocation || "Locations"}
               </span>
-              <ChevronRight
-                size={12}
-                className={`lg:size-[14px] transition-transform duration-300 ${locationOpen ? "rotate-90" : ""}`}
-              />
-              <span className={`absolute bottom-0 left-0 h-[2px] bg-emerald-600 transition-all duration-300 ${page === "locations" || page === "location" ? "w-full" : "w-0"}`} />
+              <ChevronRight size={12} className={`lg:size-[14px] transition-transform duration-300 ${locationOpen ? "rotate-90" : ""}`} />
+              <span className={`absolute bottom-0 left-0 h-[2px] transition-all duration-300 ${
+                overlay ? "bg-emerald-300" : "bg-emerald-600"
+              } ${page === "locations" || page === "location" ? "w-full" : "w-0"}`} />
             </button>
 
             {locationOpen && (
-              <div
-                role="listbox"
-                className="absolute right-0 mt-3 w-72 max-h-[70vh] overflow-y-auto rounded-2xl border border-stone-200 bg-white shadow-2xl shadow-stone-900/10 p-2 z-50"
-              >
+              <div role="listbox" className="absolute right-0 mt-3 w-72 max-h-[70vh] overflow-y-auto rounded-2xl border border-stone-200 bg-white shadow-2xl shadow-stone-900/10 p-2 z-50">
                 <p className="px-3 pt-2 pb-1.5 text-[10px] uppercase tracking-[0.2em] text-stone-400 font-light">
                   Choose your location
                 </p>
@@ -395,9 +354,7 @@ function Header({ page, setPage, menuOpen, setMenuOpen, selectedLocation, setSel
                         aria-selected={isSelected}
                         onClick={() => pickLocation(loc)}
                         className={`text-left rounded-lg px-3 py-2 text-xs lg:text-sm transition-colors duration-200 truncate ${
-                          isSelected
-                            ? "bg-emerald-50 text-emerald-700 font-medium"
-                            : "text-stone-600 hover:bg-stone-50 hover:text-stone-900"
+                          isSelected ? "bg-emerald-50 text-emerald-700 font-medium" : "text-stone-600 hover:bg-stone-50 hover:text-stone-900"
                         }`}
                       >
                         {loc}
@@ -424,7 +381,7 @@ function Header({ page, setPage, menuOpen, setMenuOpen, selectedLocation, setSel
         </nav>
 
         <button
-          className="md:hidden text-stone-700 hover:text-emerald-700 transition-colors p-1 -mr-1"
+          className={`md:hidden transition-colors p-1 -mr-1 ${overlay ? "text-white hover:text-emerald-300" : "text-stone-700 hover:text-emerald-700"}`}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
@@ -446,7 +403,6 @@ function Header({ page, setPage, menuOpen, setMenuOpen, selectedLocation, setSel
             </button>
           ))}
 
-          {/* Mobile location dropdown */}
           <div>
             <button
               onClick={() => setLocationOpen((v) => !v)}
@@ -458,10 +414,7 @@ function Header({ page, setPage, menuOpen, setMenuOpen, selectedLocation, setSel
               <span className="flex items-center gap-2">
                 <MapPin size={16} /> {selectedLocation || "Locations"}
               </span>
-              <ChevronRight
-                size={16}
-                className={`transition-transform duration-300 ${locationOpen ? "rotate-90" : ""}`}
-              />
+              <ChevronRight size={16} className={`transition-transform duration-300 ${locationOpen ? "rotate-90" : ""}`} />
             </button>
 
             {locationOpen && (
@@ -477,9 +430,7 @@ function Header({ page, setPage, menuOpen, setMenuOpen, selectedLocation, setSel
                         key={loc}
                         onClick={() => pickLocation(loc)}
                         className={`text-left rounded-lg px-3 py-2 text-sm transition-colors duration-200 truncate ${
-                          isSelected
-                            ? "bg-emerald-50 text-emerald-700 font-medium"
-                            : "text-stone-600 hover:bg-stone-50 hover:text-stone-900"
+                          isSelected ? "bg-emerald-50 text-emerald-700 font-medium" : "text-stone-600 hover:bg-stone-50 hover:text-stone-900"
                         }`}
                       >
                         {loc}
@@ -535,12 +486,8 @@ function Footer({ setPage }) {
           <a href={"tel:+" + WHATSAPP_NUMBER} className="text-sm text-stone-400 flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3 hover:text-stone-100 transition-colors">
             <Phone size={14} className="text-stone-500 flex-shrink-0" /> +91 87969 10363
           </a>
-          <a
-            href={"https://wa.me/" + WHATSAPP_NUMBER}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm text-stone-400 flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3 hover:text-stone-100 transition-colors"
-          >
+          <a href={"https://wa.me/" + WHATSAPP_NUMBER} target="_blank" rel="noopener noreferrer"
+             className="text-sm text-stone-400 flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3 hover:text-stone-100 transition-colors">
             <MessageCircle size={14} className="text-stone-500 flex-shrink-0" /> Chat on WhatsApp
           </a>
           <p className="text-sm text-stone-400 flex items-center gap-2 sm:gap-3"><Clock size={14} className="text-stone-500 flex-shrink-0" /> Open daily, 10 AM – 10 PM</p>
@@ -560,18 +507,14 @@ function Footer({ setPage }) {
 }
 
 /* ============================================================
-   HERO IMAGE SLIDER — appears directly after the Hero section
+   HERO SLIDER — full-screen Home hero
    ============================================================ */
 function HeroSlider() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
 
-  const next = useCallback(() => {
-    setIndex((i) => (i + 1) % HERO_SLIDES.length);
-  }, []);
-  const prev = useCallback(() => {
-    setIndex((i) => (i - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
-  }, []);
+  const next = useCallback(() => setIndex((i) => (i + 1) % HERO_SLIDES.length), []);
+  const prev = useCallback(() => setIndex((i) => (i - 1 + HERO_SLIDES.length) % HERO_SLIDES.length), []);
 
   useEffect(() => {
     if (paused) return;
@@ -581,11 +524,11 @@ function HeroSlider() {
 
   return (
     <section
-      className="relative bg-stone-100"
+      className="relative bg-stone-900"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="relative h-[55vh] xs:h-[60vh] sm:h-[65vh] lg:h-[75vh] xl:h-[80vh] overflow-hidden">
+      <div className="relative h-screen min-h-[600px] w-full overflow-hidden">
         {HERO_SLIDES.map((slide, i) => (
           <div
             key={slide.src}
@@ -602,55 +545,57 @@ function HeroSlider() {
                 i === index ? "scale-105" : "scale-100"
               }`}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-stone-950/70 via-stone-900/30 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-r from-stone-950/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-900/35 to-stone-950/45" />
           </div>
         ))}
 
-        {/* Caption */}
-        <div className="absolute inset-0 flex items-end">
-          <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-10 sm:pb-14 lg:pb-20">
-            <div key={index} className="max-w-xl animate-[fadeIn_0.9s_ease-out_forwards]">
+        <div className="absolute inset-0 flex items-center">
+          <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 lg:pt-32">
+            <div key={index} className="max-w-2xl animate-[fadeIn_0.9s_ease-out_forwards]">
               <span className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-white/25 bg-white/10 px-2.5 sm:px-4 py-1 sm:py-1.5 text-[9px] sm:text-[10px] lg:text-[11px] uppercase tracking-[0.2em] sm:tracking-[0.25em] text-white/90 backdrop-blur-sm">
-                <Sparkles size={10} className="sm:size-[12px]" /> Inside Mahika
+                <Sparkles size={10} className="sm:size-[12px]" /> Mahika Russian Spa
               </span>
-              <h2 className="mt-3 sm:mt-4 lg:mt-5 font-serif text-2xl sm:text-3xl lg:text-5xl text-white leading-tight">
+              <h1 className="mt-4 sm:mt-6 lg:mt-8 font-serif text-[2.2rem] xs:text-[2.6rem] sm:text-[3.5rem] lg:text-[4.5rem] xl:text-[5.5rem] leading-[1.05] text-white">
                 {HERO_SLIDES[index].title}
-              </h2>
-              <p className="mt-1.5 sm:mt-2 lg:mt-3 text-stone-200/90 text-sm sm:text-base lg:text-lg font-light">
+              </h1>
+              <p className="mt-3 sm:mt-4 lg:mt-5 text-stone-200/90 text-sm sm:text-lg lg:text-xl font-light max-w-lg">
                 {HERO_SLIDES[index].subtitle}
               </p>
+              <div className="mt-6 sm:mt-8 lg:mt-10 flex flex-wrap gap-2.5 sm:gap-3 lg:gap-4">
+                <a
+                  href={"https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent("Hello Mahika Russian Spa, I would like to book a session.")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-center gap-2 rounded-full bg-emerald-600 px-5 sm:px-7 py-3 sm:py-3.5 text-xs sm:text-sm font-medium text-white shadow-xl shadow-emerald-900/30 transition-all duration-300 hover:bg-emerald-500 active:scale-95"
+                >
+                  <MessageCircle size={15} /> Book on WhatsApp
+                </a>
+                <a
+                  href="tel:+911140001234"
+                  className="flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-5 sm:px-7 py-3 sm:py-3.5 text-xs sm:text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 active:scale-95"
+                >
+                  <Phone size={15} /> Call Now
+                </a>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Arrows */}
-        <button
-          onClick={prev}
-          aria-label="Previous slide"
-          className="absolute left-2 sm:left-4 lg:left-8 top-1/2 -translate-y-1/2 z-10 flex h-9 w-9 sm:h-11 sm:w-11 lg:h-12 lg:w-12 items-center justify-center rounded-full bg-white/85 text-stone-700 backdrop-blur-sm shadow-lg transition-all duration-300 hover:bg-white hover:text-emerald-700 hover:shadow-xl active:scale-95"
-        >
+        <button onClick={prev} aria-label="Previous slide"
+          className="absolute left-2 sm:left-4 lg:left-8 top-1/2 -translate-y-1/2 z-10 flex h-9 w-9 sm:h-11 sm:w-11 lg:h-12 lg:w-12 items-center justify-center rounded-full bg-white/85 text-stone-700 backdrop-blur-sm shadow-lg transition-all duration-300 hover:bg-white hover:text-emerald-700 hover:shadow-xl active:scale-95">
           <ChevronLeft size={18} className="sm:size-[20px] lg:size-[22px]" />
         </button>
-        <button
-          onClick={next}
-          aria-label="Next slide"
-          className="absolute right-2 sm:right-4 lg:right-8 top-1/2 -translate-y-1/2 z-10 flex h-9 w-9 sm:h-11 sm:w-11 lg:h-12 lg:w-12 items-center justify-center rounded-full bg-white/85 text-stone-700 backdrop-blur-sm shadow-lg transition-all duration-300 hover:bg-white hover:text-emerald-700 hover:shadow-xl active:scale-95"
-        >
+        <button onClick={next} aria-label="Next slide"
+          className="absolute right-2 sm:right-4 lg:right-8 top-1/2 -translate-y-1/2 z-10 flex h-9 w-9 sm:h-11 sm:w-11 lg:h-12 lg:w-12 items-center justify-center rounded-full bg-white/85 text-stone-700 backdrop-blur-sm shadow-lg transition-all duration-300 hover:bg-white hover:text-emerald-700 hover:shadow-xl active:scale-95">
           <ChevronRight size={18} className="sm:size-[20px] lg:size-[22px]" />
         </button>
 
-        {/* Dots */}
-        <div className="absolute bottom-3 sm:bottom-4 lg:bottom-6 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5 sm:gap-2">
+        <div className="absolute bottom-6 sm:bottom-8 lg:bottom-10 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5 sm:gap-2">
           {HERO_SLIDES.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setIndex(i)}
-              aria-label={`Go to slide ${i + 1}`}
+            <button key={i} onClick={() => setIndex(i)} aria-label={`Go to slide ${i + 1}`}
               className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 ${
                 i === index ? "w-6 sm:w-8 bg-emerald-400" : "w-1.5 sm:w-2 bg-white/60 hover:bg-white/90"
-              }`}
-            />
+              }`} />
           ))}
         </div>
       </div>
@@ -658,7 +603,88 @@ function HeroSlider() {
   );
 }
 
-function HomePage({ setPage }) {
+/* ============================================================
+   TEAM SECTION — sliding carousel of therapists
+   ============================================================ */
+function TeamSection() {
+  const track = [...TEAM_MEMBERS, ...TEAM_MEMBERS];
+  return (
+    <section className="py-12 sm:py-16 lg:py-24 bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 sm:mb-8 lg:mb-12">
+        <p className="text-emerald-600 text-[9px] xs:text-[10px] sm:text-xs lg:text-sm tracking-[0.15em] sm:tracking-[0.2em] lg:tracking-[0.25em] uppercase font-light mb-1.5 sm:mb-2 lg:mb-3">
+          Our Therapists
+        </p>
+        <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-stone-900">
+          Meet the team behind Mahika
+        </h2>
+        <p className="mt-2 sm:mt-3 text-stone-500 text-sm sm:text-base max-w-xl font-light">
+          Trained hands, unhurried pace, and a genuine care for your comfort —
+          the same team standard across all 25 branches.
+        </p>
+      </div>
+
+      <div className="relative group">
+        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-10 sm:w-20 bg-gradient-to-r from-white to-transparent z-10" />
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-10 sm:w-20 bg-gradient-to-l from-white to-transparent z-10" />
+
+        <div className="flex gap-3 sm:gap-4 lg:gap-6 animate-team-scroll w-max">
+          {track.map((m, i) => (
+            <div key={m.name + i} className="flex-shrink-0 w-40 xs:w-44 sm:w-52 lg:w-64 group/card">
+              <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl aspect-[3/4] shadow-md hover:shadow-2xl transition-shadow duration-500">
+                <img src={m.img} alt={m.name} loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover/card:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-stone-900/70 via-transparent to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4">
+                  <p className="font-serif text-base sm:text-lg lg:text-xl text-white leading-tight">{m.name}</p>
+                  <p className="text-[10px] sm:text-xs text-emerald-200 tracking-wide mt-0.5 font-light">{m.role}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================
+   FLOATING BUTTONS — right-side Call Now + WhatsApp
+   ============================================================ */
+function FloatingButtons() {
+  const waHref =
+    "https://wa.me/" + WHATSAPP_NUMBER + "?text=" +
+    encodeURIComponent("Hello Mahika Russian Spa, I would like to know more about your services and availability.");
+
+  return (
+    <div className="fixed right-3 sm:right-5 bottom-4 sm:bottom-8 z-40 flex flex-col gap-2.5 sm:gap-3">
+      <a
+        href={waHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat on WhatsApp"
+        className="group relative flex items-center justify-center h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-[#25D366] text-white shadow-xl shadow-emerald-900/25 transition-all duration-300 hover:scale-110 active:scale-95"
+      >
+        <span className="absolute inset-0 rounded-full bg-[#25D366] opacity-60 animate-ping" aria-hidden="true" />
+        <MessageCircle size={22} className="sm:size-[26px] relative z-10" />
+        <span className="hidden sm:block absolute right-full mr-3 whitespace-nowrap rounded-lg bg-stone-900 text-white text-xs px-3 py-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+          Chat on WhatsApp
+        </span>
+      </a>
+      <a
+        href="tel:+918796910363"
+        aria-label="Call now"
+        className="group relative flex items-center justify-center h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-emerald-700 text-white shadow-xl shadow-emerald-900/25 transition-all duration-300 hover:scale-110 hover:bg-emerald-800 active:scale-95"
+      >
+        <Phone size={20} className="sm:size-[24px]" />
+        <span className="hidden sm:block absolute right-full mr-3 whitespace-nowrap rounded-lg bg-stone-900 text-white text-xs px-3 py-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+          Call Now
+        </span>
+      </a>
+    </div>
+  );
+}
+
+function HomePage({ setPage, selectedLocation }) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -668,127 +694,10 @@ function HomePage({ setPage }) {
 
   return (
     <div className={`transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-      {/* Hero Section — unchanged */}
-      <section className="relative min-h-screen flex items-center overflow-hidden bg-[#f5f0eb]">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#f5f0eb] via-white to-[#e8f0ed]" />
-        <div className="absolute -top-40 -right-40 h-[30rem] sm:h-[40rem] w-[30rem] sm:w-[40rem] rounded-full bg-emerald-100/30 blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 h-[30rem] sm:h-[40rem] w-[30rem] sm:w-[40rem] rounded-full bg-stone-100/40 blur-3xl" />
-
-        <div className="absolute bottom-4 right-4 sm:bottom-8 sm:right-8 lg:bottom-16 lg:right-16 opacity-[0.02] sm:opacity-[0.04] select-none pointer-events-none hidden sm:block">
-          <span className="font-serif text-[4rem] sm:text-[8rem] lg:text-[14rem] xl:text-[20rem] leading-none text-stone-900 whitespace-nowrap">
-            SPA
-          </span>
-        </div>
-        <div className="absolute top-20 left-0 opacity-[0.02] sm:opacity-[0.03] select-none pointer-events-none hidden lg:block">
-          <span className="font-serif text-[4rem] sm:text-[7rem] leading-none text-stone-900 tracking-[0.3em] sm:tracking-[0.5em]">
-            WELLNESS
-          </span>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 lg:pt-32 xl:pt-40 pb-10 sm:pb-16 lg:pb-20 xl:pb-28 grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 xl:gap-20 items-center w-full relative z-10">
-          <div className="relative order-2 lg:order-1">
-            <span className="inline-flex items-center gap-1.5 sm:gap-2 lg:gap-3 rounded-full border border-emerald-200/60 bg-white/80 px-2.5 sm:px-3 lg:px-5 py-1 sm:py-1.5 lg:py-2 text-[8px] xs:text-[9px] sm:text-[10px] lg:text-[11px] uppercase tracking-[0.15em] sm:tracking-[0.2em] lg:tracking-[0.25em] text-emerald-700 backdrop-blur-sm">
-              <Sparkles size={10} className="sm:size-[12px] lg:size-[14px]" /> 25 Locations · Delhi NCR
-            </span>
-
-            <h1 className="mt-4 sm:mt-6 lg:mt-8 font-serif text-[2.2rem] xs:text-[2.6rem] sm:text-[3.2rem] md:text-[3.8rem] lg:text-[4.5rem] xl:text-[5.5rem] leading-[1.05] text-stone-900">
-              <span className="block">Find Your</span>
-              <span className="block italic text-emerald-600">Inner Calm</span>
-              <span className="block">Today</span>
-            </h1>
-
-            <div className="mt-4 sm:mt-6 lg:mt-8 flex items-start gap-3 sm:gap-4 lg:gap-6">
-              <span className="mt-2 sm:mt-2.5 lg:mt-3 h-px w-8 sm:w-10 lg:w-16 flex-shrink-0 bg-emerald-400/60" />
-              <p className="text-sm xs:text-base sm:text-lg leading-relaxed text-stone-600 font-light max-w-sm">
-                Therapeutic massage, facials and body rituals across twenty-five
-                neighbourhoods — the same trained hands and unhurried pace,
-                wherever you find us.
-              </p>
-            </div>
-
-            <div className="mt-6 sm:mt-8 lg:mt-12 flex flex-wrap gap-2.5 sm:gap-3 lg:gap-4">
-              <button
-                onClick={() => setPage("services")}
-                className="group flex flex-1 sm:flex-none items-center justify-center gap-1.5 sm:gap-2 lg:gap-3 rounded-full bg-emerald-700 px-4 xs:px-5 sm:px-6 lg:px-8 py-2.5 xs:py-3 sm:py-3.5 lg:py-4 text-[11px] xs:text-xs sm:text-sm font-medium text-white shadow-xl shadow-emerald-700/25 transition-all duration-300 hover:bg-emerald-800 hover:shadow-2xl hover:shadow-emerald-700/30 active:scale-95"
-              >
-                View Services
-                <ChevronRight size={13} className="sm:size-[14px] lg:size-[16px] transition-transform duration-300 group-hover:translate-x-1" />
-              </button>
-              <a
-                href={"https://wa.me/" + WHATSAPP_NUMBER}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-1 sm:flex-none items-center justify-center gap-1.5 sm:gap-2 lg:gap-3 rounded-full border border-stone-200 bg-white/80 px-4 xs:px-5 sm:px-6 lg:px-8 py-2.5 xs:py-3 sm:py-3.5 lg:py-4 text-[11px] xs:text-xs sm:text-sm font-medium text-stone-700 backdrop-blur-sm transition-all duration-300 hover:bg-white hover:shadow-lg active:scale-95"
-              >
-                <MessageCircle size={13} className="sm:size-[14px] lg:size-[16px]" /> Book on WhatsApp
-              </a>
-            </div>
-
-            <div className="mt-6 sm:mt-8 lg:mt-12 flex flex-wrap items-center gap-3 sm:gap-4 lg:gap-8">
-              <div className="flex items-center gap-1 sm:gap-1.5 lg:gap-2">
-                <div className="flex gap-0.5">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={12} className="sm:size-[14px] lg:size-[16px] fill-emerald-600 text-emerald-600" />
-                  ))}
-                </div>
-                <span className="text-xs sm:text-sm font-medium text-stone-700">4.9</span>
-              </div>
-              <span className="text-stone-300">|</span>
-              <div className="flex items-center gap-1 sm:gap-1.5 lg:gap-2">
-                <Award size={12} className="sm:size-[14px] lg:size-[16px] text-emerald-600" />
-                <span className="text-[10px] xs:text-xs sm:text-sm text-stone-600">12k+ sessions a year</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="relative mx-auto w-full max-w-[280px] xs:max-w-sm sm:max-w-md lg:max-w-none order-1 lg:order-2">
-            <div className="absolute -right-2 -top-3 sm:-right-4 sm:-top-6 hidden md:block h-[105%] w-[88%] sm:w-[92%] lg:w-[95%] rounded-t-[8rem] sm:rounded-t-[10rem] lg:rounded-t-[14rem] rounded-b-3xl border border-emerald-200/50" />
-
-            <div className="relative aspect-[3/4] overflow-hidden rounded-t-[8rem] sm:rounded-t-[10rem] lg:rounded-t-[14rem] rounded-b-2xl sm:rounded-b-3xl shadow-2xl shadow-stone-900/10 ring-1 ring-stone-200/50">
-              <img
-                src="https://images.unsplash.com/photo-1620733723572-11c53f73a416?q=80&w=1200&auto=format&fit=crop"
-                alt="Candlelit spa treatment room"
-                className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
-                fetchPriority="high"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-stone-900/30 via-transparent to-transparent" />
-            </div>
-
-            <div className="absolute -left-3 sm:-left-4 lg:-left-8 top-16 sm:top-20 lg:top-28 hidden sm:block h-20 sm:h-28 lg:h-44 w-14 sm:w-20 lg:w-36 overflow-hidden rounded-xl sm:rounded-2xl ring-4 ring-white shadow-xl shadow-stone-900/15">
-              <img
-                src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=500&auto=format&fit=crop"
-                alt="Massage oils and fresh flowers"
-                loading="lazy"
-                className="h-full w-full object-cover"
-              />
-            </div>
-
-            <div className="absolute -right-2 sm:-right-3 lg:-right-6 bottom-16 sm:bottom-20 lg:bottom-28 hidden sm:block h-16 sm:h-20 lg:h-32 w-20 sm:w-24 lg:w-40 overflow-hidden rounded-xl sm:rounded-2xl ring-4 ring-white shadow-xl shadow-stone-900/15">
-              <img
-                src="https://images.unsplash.com/photo-1595871151608-bc7abd1caca3?q=80&w=500&auto=format&fit=crop"
-                alt="Vanity table with mirror"
-                loading="lazy"
-                className="h-full w-full object-cover"
-              />
-            </div>
-
-            <div className="absolute -left-1.5 sm:-left-2 lg:-left-5 bottom-4 sm:bottom-5 lg:bottom-8 rounded-xl sm:rounded-2xl bg-emerald-700 px-2.5 sm:px-3 lg:px-5 xl:px-7 py-2 sm:py-2.5 lg:py-4 xl:py-5 text-white shadow-2xl shadow-emerald-700/30">
-              <p className="text-[7px] xs:text-[8px] sm:text-[9px] lg:text-[10px] uppercase tracking-[0.1em] sm:tracking-[0.15em] lg:tracking-[0.2em] opacity-80 font-light">Sessions from</p>
-              <p className="mt-0.5 sm:mt-1 font-serif text-lg sm:text-xl lg:text-3xl leading-none">₹999</p>
-            </div>
-
-            <div className="absolute -top-1.5 sm:-top-2 lg:-top-4 right-1.5 sm:right-2 lg:right-4 xl:right-10 flex items-center gap-1 sm:gap-1.5 lg:gap-3 rounded-full bg-white/95 px-2 sm:px-2.5 lg:px-4 py-1 sm:py-1.5 lg:py-2.5 shadow-lg shadow-stone-900/8 backdrop-blur-sm">
-              <Clock size={10} className="sm:size-[12px] lg:size-[15px] text-emerald-600" />
-              <span className="text-[7px] xs:text-[8px] sm:text-[9px] lg:text-xs tracking-wide text-stone-600 whitespace-nowrap">10 AM – 10 PM</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* NEW: Hero Image Slider — directly after Hero, before testimonials */}
+      {/* HERO — full-screen slider only */}
       <HeroSlider />
 
-      {/* Testimonials Section — unchanged */}
+      {/* Testimonials Section */}
       <section className="py-10 sm:py-16 lg:py-20 xl:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6 sm:mb-8 lg:mb-10 xl:mb-14">
@@ -801,11 +710,9 @@ function HomePage({ setPage }) {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
             {TESTIMONIALS.map((testimonial, idx) => (
-              <div
-                key={idx}
+              <div key={idx}
                 className="group bg-stone-50/80 rounded-xl sm:rounded-2xl p-4 sm:p-5 lg:p-6 border border-stone-100 hover:border-emerald-200/50 transition-all duration-500 hover:shadow-xl hover:shadow-emerald-900/5 active:scale-[0.98]"
-                style={{ animationDelay: `${idx * 150}ms` }}
-              >
+                style={{ animationDelay: `${idx * 150}ms` }}>
                 <div className="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3 lg:mb-4">
                   <div className="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 font-serif text-xs sm:text-sm font-medium flex-shrink-0">
                     {testimonial.name.split(' ').map(n => n[0]).join('')}
@@ -815,28 +722,18 @@ function HomePage({ setPage }) {
                     <p className="text-[7px] xs:text-[8px] sm:text-[9px] lg:text-[10px] uppercase tracking-wide text-stone-400 truncate">{testimonial.location}</p>
                   </div>
                 </div>
-
                 <div className="flex gap-0.5 mb-2 sm:mb-2.5 lg:mb-3">
                   {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      size={10}
+                    <Star key={i} size={10}
                       className={`sm:size-[12px] lg:size-[14px] ${
-                        i < Math.floor(testimonial.rating)
-                          ? "fill-emerald-600 text-emerald-600"
-                          : "fill-stone-200 text-stone-200"
-                      }`}
-                    />
+                        i < Math.floor(testimonial.rating) ? "fill-emerald-600 text-emerald-600" : "fill-stone-200 text-stone-200"
+                      }`} />
                   ))}
                   {testimonial.rating % 1 !== 0 && (
                     <Star size={10} className="sm:size-[12px] lg:size-[14px] fill-emerald-600/50 text-emerald-600/50" />
                   )}
                 </div>
-
-                <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-light">
-                  "{testimonial.text}"
-                </p>
-
+                <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-light">"{testimonial.text}"</p>
                 <p className="mt-2 sm:mt-2.5 lg:mt-3 text-[7px] xs:text-[8px] sm:text-[9px] lg:text-[10px] uppercase tracking-wider text-emerald-600/60 font-light truncate">
                   {testimonial.treatment}
                 </p>
@@ -846,7 +743,10 @@ function HomePage({ setPage }) {
         </div>
       </section>
 
-      {/* Features Section — unchanged */}
+      {/* TEAM SLIDER */}
+      <TeamSection />
+
+      {/* Features Section */}
       <section className="py-10 sm:py-16 lg:py-20 border-y border-stone-200/60 bg-stone-50/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 text-center">
           <div className="group">
@@ -873,7 +773,7 @@ function HomePage({ setPage }) {
         </div>
       </section>
 
-      {/* Signature Treatments — unchanged */}
+      {/* Signature Treatments — NOW with Call Now + WhatsApp buttons */}
       <section className="py-10 sm:py-16 lg:py-20 xl:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 sm:mb-8 lg:mb-10 xl:mb-12">
@@ -888,7 +788,7 @@ function HomePage({ setPage }) {
 
           <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-8">
             {SERVICES.slice(0, 3).map((s) => (
-              <article key={s.name} className="group cursor-pointer">
+              <article key={s.name} className="group flex flex-col cursor-pointer">
                 <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl aspect-[4/5] shadow-md hover:shadow-2xl transition-shadow duration-500">
                   <img
                     src={s.img}
@@ -905,13 +805,31 @@ function HomePage({ setPage }) {
                     <p className="text-[9px] sm:text-xs text-stone-200/80 mt-1 sm:mt-1.5 lg:mt-2 tracking-wide font-light">{s.duration}</p>
                   </div>
                 </div>
+
+                {/* Call Now + WhatsApp buttons on home signature cards */}
+                <div className="mt-3 sm:mt-4 grid grid-cols-2 gap-2 lg:gap-3">
+                  <a
+                    href="tel:+918796910363"
+                    className="flex items-center justify-center gap-1.5 lg:gap-2 rounded-full border border-stone-200 bg-white px-3 py-2.5 lg:py-3 text-[11px] sm:text-xs lg:text-sm font-medium text-stone-700 transition-all duration-300 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-md active:scale-95 touch-manipulation"
+                  >
+                    <Phone size={13} className="sm:size-[14px] lg:size-[15px]" /> Call Now
+                  </a>
+                  <a
+                    href={buildServiceWhatsAppLink(s, selectedLocation || "Delhi NCR")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-1.5 lg:gap-2 rounded-full bg-emerald-700 px-3 py-2.5 lg:py-3 text-[11px] sm:text-xs lg:text-sm font-medium text-white transition-all duration-300 hover:bg-emerald-800 hover:shadow-lg hover:shadow-emerald-700/25 active:scale-95 touch-manipulation"
+                  >
+                    <MessageCircle size={13} className="sm:size-[14px] lg:size-[15px]" /> WhatsApp
+                  </a>
+                </div>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Gallery preview — unchanged */}
+      {/* Gallery preview */}
       <section className="pb-10 sm:pb-16 lg:pb-20 xl:pb-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-4 sm:mb-6 lg:mb-8 xl:mb-12">
@@ -923,21 +841,14 @@ function HomePage({ setPage }) {
               Full gallery <ChevronRight size={15} className="transition-transform group-hover:translate-x-0.5" />
             </button>
           </div>
-
           <div className="grid grid-cols-2 md:grid-cols-4 gap-1.5 sm:gap-2 lg:gap-4">
             {GALLERY.map((g, i) => (
-              <figure
-                key={g.src}
+              <figure key={g.src}
                 className={`group relative overflow-hidden rounded-lg sm:rounded-xl lg:rounded-2xl ${
                   i === 0 ? "col-span-2 md:row-span-2 aspect-[4/3] md:aspect-square" : "aspect-[4/5]"
-                }`}
-              >
-                <img
-                  src={g.src}
-                  alt={g.alt}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
+                }`}>
+                <img src={g.src} alt={g.alt} loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-stone-900/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <figcaption className="absolute bottom-0 left-0 right-0 p-2 sm:p-3 lg:p-5 text-[8px] xs:text-[9px] sm:text-xs lg:text-sm text-white translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 font-light">
                   {g.alt}
@@ -948,7 +859,7 @@ function HomePage({ setPage }) {
         </div>
       </section>
 
-      {/* Testimonial — unchanged */}
+      {/* Closing testimonial */}
       <section className="bg-stone-900 py-10 sm:py-16 lg:py-20 xl:py-28">
         <div className="max-w-3xl sm:max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Star className="mx-auto text-emerald-400/60 mb-3 sm:mb-4 lg:mb-6 sm:size-[24px] lg:size-[32px]" size={20} />
@@ -963,82 +874,37 @@ function HomePage({ setPage }) {
   );
 }
 
-const SERVICE_TAGS = ["All", "Massage", "Facial", "Express"];
-
-const RITUAL_STEPS = [
-  ["01", "A short consultation", "We ask where you hold tension and how much pressure you like before anything begins."],
-  ["02", "The treatment", "Warm oils, a private room and a therapist who works to your pace — never a clock."],
-  ["03", "Time to settle", "Tea, water and a few unhurried minutes before you step back outside."],
-];
-
-function ServicesPage({ setPage }) {
+/* ============================================================
+   SERVICES PAGE
+   ============================================================ */
+function ServicesPage({ setPage, selectedLocation }) {
   const [filter, setFilter] = useState("All");
 
   const services = [
-    {
-      name: "Russian Massage",
-      tag: "Signature",
-      duration: "60 min",
-      price: "₹3,500",
+    { name: "Russian Massage", tag: "Signature", duration: "60 min", price: "₹3,500",
       desc: "Experience the ultimate relaxation and rejuvenation with our Russian massage services. Our skilled and experienced massage therapists use traditional techniques to provide a personalized massage experience that meets your unique needs and preferences.",
-      img: "mbr-506x337.jpg",
-    },
-    {
-      name: "Body to Body Massage",
-      tag: "Signature",
-      duration: "60 min",
-      price: "₹4,000",
+      img: "mbr-506x337.jpg" },
+    { name: "Body to Body Massage", tag: "Signature", duration: "60 min", price: "₹4,000",
       desc: "Experience the ultimate pleasure and relaxation with our body to body massage services. Our skilled massage therapists use a full body approach to provide a unique and customized massage experience that is designed to meet your specific needs.",
-      img: "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=1200&auto=format&fit=crop",
-    },
-    {
-      name: "Swedish Massage",
-      tag: "Relaxation",
-      duration: "60 min",
-      price: "₹2,800",
+      img: "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=1200&auto=format&fit=crop" },
+    { name: "Swedish Massage", tag: "Relaxation", duration: "60 min", price: "₹2,800",
       desc: "Discover the ultimate relaxation and healing with our Swedish massage services. Our skilled massage therapists use long and smooth strokes, kneading, and circular movements to release tension and promote deep relaxation.",
-      img: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=1200&auto=format&fit=crop",
-    },
-    {
-      name: "Hot Stone Massage",
-      tag: "Therapeutic",
-      duration: "75 min",
-      price: "₹3,800",
+      img: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=1200&auto=format&fit=crop" },
+    { name: "Hot Stone Massage", tag: "Therapeutic", duration: "75 min", price: "₹3,800",
       desc: "Our skilled massage therapists use smooth, heated stones to apply pressure and promote deep relaxation. The heat from the stones can help to increase circulation, reduce muscle tension, and promote overall well-being.",
-      img: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=1200&auto=format&fit=crop",
-    },
-    {
-      name: "Hot Oil Massage",
-      tag: "Therapeutic",
-      duration: "60 min",
-      price: "₹3,200",
+      img: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=1200&auto=format&fit=crop" },
+    { name: "Hot Oil Massage", tag: "Therapeutic", duration: "60 min", price: "₹3,200",
       desc: "Looking for a massage experience that goes beyond relaxation? Our skilled massage therapists use warm, natural oils that are infused with essential oils to promote deep relaxation and nourish the skin.",
-      img: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=1200&auto=format&fit=crop",
-    },
-    {
-      name: "4 Hand Massage",
-      tag: "Signature",
-      duration: "60 min",
-      price: "₹5,500",
+      img: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=1200&auto=format&fit=crop" },
+    { name: "4 Hand Massage", tag: "Signature", duration: "60 min", price: "₹5,500",
       desc: "Experience the ultimate relaxation with our 4 hand massage services. Two skilled massage therapists work in harmony to provide a synchronized massage experience that is designed to melt away tension and leave you feeling rejuvenated.",
-      img: "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?q=80&w=1200&auto=format&fit=crop",
-    },
-    {
-      name: "Body Lotion Massage",
-      tag: "Relaxation",
-      duration: "60 min",
-      price: "₹2,500",
+      img: "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?q=80&w=1200&auto=format&fit=crop" },
+    { name: "Body Lotion Massage", tag: "Relaxation", duration: "60 min", price: "₹2,500",
       desc: "Indulge in the ultimate pampering experience with our body lotion massage services. Our skilled massage therapists use a specially-formulated lotion that is designed to nourish and hydrate the skin while providing a deeply relaxing massage experience.",
-      img: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=1200&auto=format&fit=crop",
-    },
-    {
-      name: "Deep Tissue Massage",
-      tag: "Therapeutic",
-      duration: "60 min",
-      price: "₹3,600",
+      img: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=1200&auto=format&fit=crop" },
+    { name: "Deep Tissue Massage", tag: "Therapeutic", duration: "60 min", price: "₹3,600",
       desc: "Looking for a massage that goes beyond relaxation? Our deep tissue massage services are designed to release deep-seated tension and muscle knots. Our skilled massage therapists use slow, deep strokes to target the underlying muscle tissue, promoting circulation and easing tension.",
-      img: "https://images.unsplash.com/photo-1639162906614-0603b0ae95fd?q=80&w=1200&auto=format&fit=crop",
-    },
+      img: "https://images.unsplash.com/photo-1639162906614-0603b0ae95fd?q=80&w=1200&auto=format&fit=crop" },
   ];
 
   const SERVICE_TAGS = ["All", "Signature", "Relaxation", "Therapeutic"];
@@ -1050,15 +916,13 @@ function ServicesPage({ setPage }) {
   ];
 
   const shown = filter === "All" ? services : services.filter((s) => s.tag === filter);
+  const location = selectedLocation || "Delhi NCR";
 
   return (
     <div className="animate-fadeIn">
       <section className="relative overflow-hidden min-h-[40vh] sm:min-h-[50vh] flex items-center">
-        <img
-          src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1800&auto=format&fit=crop"
-          alt="Massage oils and fresh flowers"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
+        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1800&auto=format&fit=crop"
+          alt="Massage oils and fresh flowers" className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-stone-950/92 via-stone-950/80 to-stone-900/50" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 lg:pt-32 xl:pt-40 pb-10 sm:pb-14 lg:pb-16 xl:pb-20">
           <span className="inline-flex items-center gap-1.5 sm:gap-2 lg:gap-3 rounded-full border border-stone-400/20 bg-white/5 px-2.5 sm:px-3 lg:px-5 py-1 sm:py-1.5 lg:py-2 text-[9px] sm:text-[10px] lg:text-[11px] uppercase tracking-[0.15em] sm:tracking-[0.2em] lg:tracking-[0.25em] text-stone-300 backdrop-blur-sm">
@@ -1078,15 +942,10 @@ function ServicesPage({ setPage }) {
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-4 flex items-center justify-between gap-3 sm:gap-4 lg:gap-6">
           <div className="flex gap-1 sm:gap-1.5 lg:gap-2 overflow-x-auto no-scrollbar -mx-2 px-2">
             {SERVICE_TAGS.map((t) => (
-              <button
-                key={t}
-                onClick={() => setFilter(t)}
+              <button key={t} onClick={() => setFilter(t)}
                 className={`whitespace-nowrap rounded-full px-2.5 sm:px-3 lg:px-5 py-1.5 sm:py-2 lg:py-2.5 text-[10px] sm:text-xs lg:text-sm transition-all duration-300 touch-manipulation ${
-                  filter === t
-                    ? "bg-emerald-700 text-white shadow-lg shadow-emerald-700/20"
-                    : "border border-stone-200 text-stone-500 hover:border-stone-300 hover:text-stone-700"
-                }`}
-              >
+                  filter === t ? "bg-emerald-700 text-white shadow-lg shadow-emerald-700/20" : "border border-stone-200 text-stone-500 hover:border-stone-300 hover:text-stone-700"
+                }`}>
                 {t}
               </button>
             ))}
@@ -1103,12 +962,8 @@ function ServicesPage({ setPage }) {
             {shown.map((s) => (
               <article key={s.name} className="group flex flex-col">
                 <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl aspect-[4/3] shadow-md hover:shadow-2xl transition-shadow duration-500">
-                  <img
-                    src={s.img}
-                    alt={s.name}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
+                  <img src={s.img} alt={s.name} loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-stone-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <span className="absolute left-2.5 sm:left-3 lg:left-5 top-2.5 sm:top-3 lg:top-5 rounded-full bg-white/90 backdrop-blur-sm px-2 sm:px-2.5 lg:px-4 py-0.5 sm:py-1 lg:py-1.5 text-[8px] sm:text-[9px] lg:text-[11px] uppercase tracking-wider text-emerald-700 font-medium">
                     {s.tag}
@@ -1125,12 +980,22 @@ function ServicesPage({ setPage }) {
                 <h2 className="mt-3 sm:mt-4 lg:mt-5 xl:mt-6 font-serif text-lg sm:text-xl lg:text-2xl text-stone-900 leading-snug">{s.name}</h2>
                 <p className="mt-1 sm:mt-1.5 lg:mt-2 text-xs sm:text-sm text-stone-500 leading-relaxed flex-1 font-light">{s.desc}</p>
 
-                <button
-                  onClick={() => { setPage("locations"); window.scrollTo(0, 0); }}
-                  className="mt-3 sm:mt-4 lg:mt-5 xl:mt-6 inline-flex items-center gap-1 sm:gap-1.5 lg:gap-2 text-xs sm:text-sm text-stone-500 hover:text-emerald-700 transition-colors group w-fit touch-manipulation"
-                >
-                  Book this treatment <ChevronRight size={13} className="sm:size-[14px] lg:size-[15px] transition-transform group-hover:translate-x-0.5" />
-                </button>
+                <div className="mt-4 lg:mt-5 grid grid-cols-2 gap-2 lg:gap-3">
+                  <a
+                    href="tel:+918796910363"
+                    className="flex items-center justify-center gap-1.5 lg:gap-2 rounded-full border border-stone-200 bg-white px-3 py-2.5 lg:py-3 text-[11px] sm:text-xs lg:text-sm font-medium text-stone-700 transition-all duration-300 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-md active:scale-95 touch-manipulation"
+                  >
+                    <Phone size={13} className="sm:size-[14px] lg:size-[15px]" /> Call Now
+                  </a>
+                  <a
+                    href={buildServiceWhatsAppLink(s, location)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-1.5 lg:gap-2 rounded-full bg-emerald-700 px-3 py-2.5 lg:py-3 text-[11px] sm:text-xs lg:text-sm font-medium text-white transition-all duration-300 hover:bg-emerald-800 hover:shadow-lg hover:shadow-emerald-700/25 active:scale-95 touch-manipulation"
+                  >
+                    <MessageCircle size={13} className="sm:size-[14px] lg:size-[15px]" /> WhatsApp
+                  </a>
+                </div>
               </article>
             ))}
           </div>
@@ -1141,7 +1006,6 @@ function ServicesPage({ setPage }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-emerald-600 text-[9px] xs:text-[10px] sm:text-xs lg:text-sm tracking-[0.15em] sm:tracking-[0.2em] lg:tracking-[0.25em] uppercase font-light mb-1.5 sm:mb-2 lg:mb-3">The Ritual</p>
           <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-stone-900 mb-5 sm:mb-6 lg:mb-8 xl:mb-12">How a session goes</h2>
-
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12">
             {RITUAL_STEPS.map(([n, title, body]) => (
               <div key={n} className="group">
@@ -1159,7 +1023,6 @@ function ServicesPage({ setPage }) {
           <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-stone-900 px-5 sm:px-6 lg:px-12 xl:px-16 py-8 sm:py-10 lg:py-14 xl:py-20">
             <div className="absolute -top-16 -right-12 sm:-top-20 sm:-right-16 h-48 sm:h-60 lg:h-80 w-48 sm:w-60 lg:w-80 rounded-full bg-emerald-600/15 blur-3xl" />
             <div className="absolute -bottom-12 -left-12 sm:-bottom-16 sm:-left-16 h-48 sm:h-60 lg:h-80 w-48 sm:w-60 lg:w-80 rounded-full bg-emerald-700/10 blur-3xl" />
-
             <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-5 sm:gap-6 lg:gap-10">
               <div>
                 <h2 className="font-serif text-xl sm:text-2xl lg:text-3xl xl:text-4xl text-white">Not sure what you need?</h2>
@@ -1168,16 +1031,12 @@ function ServicesPage({ setPage }) {
                 </p>
               </div>
               <div className="flex flex-wrap gap-2.5 sm:gap-3 lg:gap-4">
-                <a
-                  href="tel:+911140001234"
-                  className="flex flex-1 sm:flex-none items-center justify-center gap-1.5 sm:gap-2 lg:gap-3 whitespace-nowrap rounded-full bg-emerald-600 px-4 sm:px-5 lg:px-8 py-2.5 sm:py-3 lg:py-4 text-xs sm:text-sm font-medium text-white transition-all duration-300 hover:bg-emerald-500 hover:shadow-lg hover:shadow-emerald-600/25 active:scale-95"
-                >
+                <a href="tel:+911140001234"
+                  className="flex flex-1 sm:flex-none items-center justify-center gap-1.5 sm:gap-2 lg:gap-3 whitespace-nowrap rounded-full bg-emerald-600 px-4 sm:px-5 lg:px-8 py-2.5 sm:py-3 lg:py-4 text-xs sm:text-sm font-medium text-white transition-all duration-300 hover:bg-emerald-500 hover:shadow-lg hover:shadow-emerald-600/25 active:scale-95">
                   <Phone size={13} className="sm:size-[14px] lg:size-[15px]" /> <span className="hidden xs:inline">+91 11 4000 1234</span>
                 </a>
-                <button
-                  onClick={() => { setPage("locations"); window.scrollTo(0, 0); }}
-                  className="flex flex-1 sm:flex-none items-center justify-center whitespace-nowrap rounded-full border border-white/20 bg-white/5 px-4 sm:px-5 lg:px-8 py-2.5 sm:py-3 lg:py-4 text-xs sm:text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/15 active:scale-95"
-                >
+                <button onClick={() => { setPage("locations"); window.scrollTo(0, 0); }}
+                  className="flex flex-1 sm:flex-none items-center justify-center whitespace-nowrap rounded-full border border-white/20 bg-white/5 px-4 sm:px-5 lg:px-8 py-2.5 sm:py-3 lg:py-4 text-xs sm:text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/15 active:scale-95">
                   Find a branch
                 </button>
               </div>
@@ -1189,19 +1048,12 @@ function ServicesPage({ setPage }) {
   );
 }
 
-/* ============================================================
-   ABOUT PAGE — new
-   ============================================================ */
 function AboutPage({ setPage }) {
   return (
     <div className="animate-fadeIn">
-      {/* Hero */}
       <section className="relative overflow-hidden min-h-[45vh] sm:min-h-[55vh] flex items-center">
-        <img
-          src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=1800&auto=format&fit=crop"
-          alt="Spa treatment room with warm light"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
+        <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=1800&auto=format&fit=crop"
+          alt="Spa treatment room with warm light" className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-stone-950/92 via-stone-950/75 to-stone-900/40" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 lg:pt-32 xl:pt-40 pb-10 sm:pb-14 lg:pb-20">
           <span className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-stone-400/20 bg-white/5 px-2.5 sm:px-4 py-1 sm:py-1.5 text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-stone-300 backdrop-blur-sm">
@@ -1218,29 +1070,16 @@ function AboutPage({ setPage }) {
         </div>
       </section>
 
-      {/* Intro / Philosophy */}
       <section className="py-10 sm:py-16 lg:py-20 xl:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16 items-center">
           <div className="order-2 lg:order-1">
             <p className="text-emerald-600 text-[9px] sm:text-xs lg:text-sm tracking-[0.2em] lg:tracking-[0.25em] uppercase font-light mb-2 lg:mb-3">Our Philosophy</p>
-            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-stone-900 leading-tight">
-              Twenty-five locations, one standard of care
-            </h2>
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-stone-900 leading-tight">Twenty-five locations, one standard of care</h2>
             <div className="mt-4 lg:mt-6 flex items-start gap-3 lg:gap-5">
               <span className="mt-2 h-px w-10 lg:w-16 flex-shrink-0 bg-emerald-400/60" />
               <div className="space-y-4 text-sm sm:text-base text-stone-600 font-light leading-relaxed">
-                <p>
-                  We do not treat our branches as separate businesses. Every therapist
-                  is trained in the same protocols, every room is held to the same
-                  cleanliness standard, and every guest receives the same unhurried
-                  attention — whether you walk into Aerocity or Punjabi Bagh.
-                </p>
-                <p>
-                  Our oils are pure, warmed before use, and chosen for your skin.
-                  Our rooms are private and sound-treated. Our therapists work to
-                  your pace, not a clock. These are small things individually, but
-                  together they are the difference between a massage and a ritual.
-                </p>
+                <p>We do not treat our branches as separate businesses. Every therapist is trained in the same protocols, every room is held to the same cleanliness standard, and every guest receives the same unhurried attention — whether you walk into Aerocity or Punjabi Bagh.</p>
+                <p>Our oils are pure, warmed before use, and chosen for your skin. Our rooms are private and sound-treated. Our therapists work to your pace, not a clock. These are small things individually, but together they are the difference between a massage and a ritual.</p>
               </div>
             </div>
           </div>
@@ -1251,7 +1090,6 @@ function AboutPage({ setPage }) {
         </div>
       </section>
 
-      {/* Premium experience */}
       <section className="py-10 sm:py-16 lg:py-20 bg-stone-50/70 border-y border-stone-200/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
@@ -1279,7 +1117,6 @@ function AboutPage({ setPage }) {
         </div>
       </section>
 
-      {/* Visual section */}
       <section className="py-10 sm:py-16 lg:py-20 xl:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-4">
@@ -1290,12 +1127,8 @@ function AboutPage({ setPage }) {
               "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=800&auto=format&fit=crop",
             ].map((src, i) => (
               <div key={src} className="group relative overflow-hidden rounded-2xl lg:rounded-3xl aspect-[4/5]">
-                <img
-                  src={src}
-                  alt={`Mahika Russian Spa interior ${i + 1}`}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
+                <img src={src} alt={`Mahika Russian Spa interior ${i + 1}`} loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-stone-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
             ))}
@@ -1303,29 +1136,22 @@ function AboutPage({ setPage }) {
         </div>
       </section>
 
-      {/* Why choose us */}
       <section className="bg-stone-900 py-10 sm:py-16 lg:py-20 xl:py-28">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-emerald-400/80 text-[9px] sm:text-xs tracking-[0.2em] lg:tracking-[0.25em] uppercase font-light mb-2 lg:mb-3">Why Choose Us</p>
-          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-stone-100 leading-tight">
-            The same quiet ritual, wherever you are in the city
-          </h2>
+          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-stone-100 leading-tight">The same quiet ritual, wherever you are in the city</h2>
           <p className="mt-4 lg:mt-6 text-stone-400 text-sm sm:text-base font-light leading-relaxed max-w-2xl mx-auto">
             Twenty-five branches across Delhi NCR means there is always a Mahika
             near you — at the airport, near your office, or a short drive from home.
             Choose a location and we will hold a slot for you today.
           </p>
           <div className="mt-6 lg:mt-10 flex flex-wrap justify-center gap-3">
-            <button
-              onClick={() => setPage("locations")}
-              className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:bg-emerald-500 hover:shadow-lg hover:shadow-emerald-600/25 active:scale-95"
-            >
+            <button onClick={() => setPage("locations")}
+              className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:bg-emerald-500 hover:shadow-lg hover:shadow-emerald-600/25 active:scale-95">
               <MapPin size={15} /> Find your branch
             </button>
-            <button
-              onClick={() => setPage("services")}
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/15 active:scale-95"
-            >
+            <button onClick={() => setPage("services")}
+              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/15 active:scale-95">
               View all services <ChevronRight size={15} />
             </button>
           </div>
@@ -1335,11 +1161,7 @@ function AboutPage({ setPage }) {
   );
 }
 
-/* ============================================================
-   GALLERY PAGE — new
-   ============================================================ */
 function GalleryPage({ setPage }) {
-  // Masonry-style layout using CSS columns for tighter, less-gappy grid.
   return (
     <div className="animate-fadeIn">
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 lg:pt-32 xl:pt-40 pb-6 sm:pb-8 lg:pb-10">
@@ -1353,23 +1175,16 @@ function GalleryPage({ setPage }) {
         </p>
       </section>
 
-      {/* Masonry grid using CSS columns — tight gaps, no empty space */}
       <section className="pb-14 sm:pb-20 lg:pb-28">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
           <div className="columns-2 sm:columns-3 lg:columns-4 gap-2 sm:gap-3 lg:gap-4 [column-fill:_balance]">
             {FULL_GALLERY.map((g, i) => (
-              <figure
-                key={g.src + i}
-                className="group relative mb-2 sm:mb-3 lg:mb-4 break-inside-avoid overflow-hidden rounded-xl sm:rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-500"
-              >
-                <img
-                  src={g.src}
-                  alt={g.alt}
-                  loading="lazy"
+              <figure key={g.src + i}
+                className="group relative mb-2 sm:mb-3 lg:mb-4 break-inside-avoid overflow-hidden rounded-xl sm:rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-500">
+                <img src={g.src} alt={g.alt} loading="lazy"
                   className={`w-full object-cover transition-transform duration-700 group-hover:scale-[1.04] ${
                     i % 5 === 0 ? "aspect-[4/5]" : i % 3 === 0 ? "aspect-square" : "aspect-[4/3]"
-                  }`}
-                />
+                  }`} />
                 <div className="absolute inset-0 bg-gradient-to-t from-stone-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <figcaption className="absolute bottom-0 left-0 right-0 p-2.5 sm:p-3 lg:p-4 text-[9px] sm:text-[11px] lg:text-xs text-white translate-y-3 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 font-light">
                   {g.alt}
@@ -1382,23 +1197,17 @@ function GalleryPage({ setPage }) {
 
       <section className="bg-stone-50/70 border-t border-stone-200/60 py-10 sm:py-14 lg:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-stone-900">
-            Ready to step in?
-          </h2>
+          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-stone-900">Ready to step in?</h2>
           <p className="mt-3 text-stone-500 text-sm sm:text-base font-light max-w-xl mx-auto">
             Pick your nearest branch and we'll hold a slot for you today.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <button
-              onClick={() => setPage("locations")}
-              className="inline-flex items-center gap-2 rounded-full bg-emerald-700 px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:bg-emerald-800 hover:shadow-lg active:scale-95"
-            >
+            <button onClick={() => setPage("locations")}
+              className="inline-flex items-center gap-2 rounded-full bg-emerald-700 px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:bg-emerald-800 hover:shadow-lg active:scale-95">
               <MapPin size={15} /> Choose a location
             </button>
-            <button
-              onClick={() => setPage("services")}
-              className="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-white px-6 py-3 text-sm font-medium text-stone-700 transition-all duration-300 hover:shadow-md active:scale-95"
-            >
+            <button onClick={() => setPage("services")}
+              className="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-white px-6 py-3 text-sm font-medium text-stone-700 transition-all duration-300 hover:shadow-md active:scale-95">
               View services <ChevronRight size={15} />
             </button>
           </div>
@@ -1408,24 +1217,15 @@ function GalleryPage({ setPage }) {
   );
 }
 
-/* ============================================================
-   REUSABLE BOOKING / CONTACT FORM
-   Extracted from the original LocationsPage form so the location
-   page and the locations directory share one implementation.
-   ============================================================ */
 function BookingForm({ location, services, compact = false }) {
   const serviceOptions = services && services.length ? services : ALL_TREATMENTS;
   const [form, setForm] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    service: serviceOptions[0]?.name || "",
-    message: "",
+    name: "", phone: "", email: "",
+    service: serviceOptions[0]?.name || "", message: "",
   });
   const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
 
-  // Keep service field valid if location/services change while mounted
   useEffect(() => {
     setForm((f) => {
       const valid = serviceOptions.some((s) => s.name === f.service);
@@ -1445,9 +1245,7 @@ function BookingForm({ location, services, compact = false }) {
       "Branch: " + location + " (Delhi NCR)",
       form.message.trim() ? "Message: " + form.message.trim() : "",
       "Preferred timing: any slot between 10 AM - 10 PM",
-    ]
-      .filter(Boolean)
-      .join("\n");
+    ].filter(Boolean).join("\n");
     return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
   };
 
@@ -1455,9 +1253,7 @@ function BookingForm({ location, services, compact = false }) {
     e.preventDefault();
     if (!form.name.trim()) return setError("Please enter your name.");
     if (form.phone.replace(/\D/g, "").length < 10) return setError("Please enter a 10-digit mobile number.");
-    if (form.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
-      return setError("Please enter a valid email address.");
-    }
+    if (form.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) return setError("Please enter a valid email address.");
     setError("");
     const url = waLink();
     const win = window.open(url, "_blank", "noopener,noreferrer");
@@ -1465,8 +1261,7 @@ function BookingForm({ location, services, compact = false }) {
     setSent(true);
   };
 
-  const inputCls =
-    "w-full mt-1 lg:mt-1.5 px-3 sm:px-4 lg:px-5 py-2.5 sm:py-3 lg:py-3.5 rounded-lg sm:rounded-xl border border-stone-200 bg-stone-50/50 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:border-transparent transition-all text-sm sm:text-base touch-manipulation";
+  const inputCls = "w-full mt-1 lg:mt-1.5 px-3 sm:px-4 lg:px-5 py-2.5 sm:py-3 lg:py-3.5 rounded-lg sm:rounded-xl border border-stone-200 bg-stone-50/50 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:border-transparent transition-all text-sm sm:text-base touch-manipulation";
   const labelCls = "text-[10px] sm:text-xs text-stone-400 tracking-wide uppercase font-light";
 
   if (sent) {
@@ -1477,21 +1272,14 @@ function BookingForm({ location, services, compact = false }) {
         </span>
         <p className="font-serif text-lg sm:text-xl text-emerald-700 mb-1 lg:mb-2">WhatsApp opened</p>
         <p className="text-xs sm:text-sm text-stone-500 leading-relaxed font-light max-w-sm mx-auto">
-          Your details for the {location} branch are ready in WhatsApp — just hit
-          send and we'll confirm your slot.
+          Your details for the {location} branch are ready in WhatsApp — just hit send and we'll confirm your slot.
         </p>
-        <a
-          href={waLink()}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-4 lg:mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-600 px-4 lg:px-6 py-2.5 lg:py-3 text-xs sm:text-sm font-medium text-white transition-all duration-300 hover:bg-emerald-700 hover:shadow-lg active:scale-95"
-        >
+        <a href={waLink()} target="_blank" rel="noopener noreferrer"
+          className="mt-4 lg:mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-600 px-4 lg:px-6 py-2.5 lg:py-3 text-xs sm:text-sm font-medium text-white transition-all duration-300 hover:bg-emerald-700 hover:shadow-lg active:scale-95">
           <MessageCircle size={14} className="lg:size-[16px]" /> Open WhatsApp again
         </a>
-        <button
-          onClick={() => setSent(false)}
-          className="mt-4 lg:mt-5 block mx-auto text-xs sm:text-sm text-emerald-700 border-b border-emerald-200 pb-0.5 hover:border-emerald-600 transition-colors touch-manipulation"
-        >
+        <button onClick={() => setSent(false)}
+          className="mt-4 lg:mt-5 block mx-auto text-xs sm:text-sm text-emerald-700 border-b border-emerald-200 pb-0.5 hover:border-emerald-600 transition-colors touch-manipulation">
           Send another request
         </button>
       </div>
@@ -1503,56 +1291,29 @@ function BookingForm({ location, services, compact = false }) {
       <div className="grid sm:grid-cols-2 gap-3 sm:gap-4 lg:gap-5">
         <div>
           <label className={labelCls}>Full name</label>
-          <input
-            value={form.name}
-            onChange={(e) => { setForm({ ...form, name: e.target.value }); setError(""); }}
-            className={inputCls}
-            placeholder="Enter your name"
-          />
+          <input value={form.name} onChange={(e) => { setForm({ ...form, name: e.target.value }); setError(""); }} className={inputCls} placeholder="Enter your name" />
         </div>
         <div>
           <label className={labelCls}>Phone number</label>
-          <input
-            value={form.phone}
-            onChange={(e) => { setForm({ ...form, phone: e.target.value }); setError(""); }}
-            className={inputCls}
-            placeholder="10-digit mobile number"
-            inputMode="tel"
-          />
+          <input value={form.phone} onChange={(e) => { setForm({ ...form, phone: e.target.value }); setError(""); }} className={inputCls} placeholder="10-digit mobile number" inputMode="tel" />
         </div>
       </div>
 
       <div>
         <label className={labelCls}>Email</label>
-        <input
-          type="email"
-          value={form.email}
-          onChange={(e) => { setForm({ ...form, email: e.target.value }); setError(""); }}
-          className={inputCls}
-          placeholder="you@example.com"
-        />
+        <input type="email" value={form.email} onChange={(e) => { setForm({ ...form, email: e.target.value }); setError(""); }} className={inputCls} placeholder="you@example.com" />
       </div>
 
       <div className="grid sm:grid-cols-2 gap-3 sm:gap-4 lg:gap-5">
         <div>
           <label className={labelCls}>Location</label>
-          <input
-            value={location}
-            readOnly
-            className={`${inputCls} bg-emerald-50/50 text-emerald-800 cursor-default`}
-          />
+          <input value={location} readOnly className={`${inputCls} bg-emerald-50/50 text-emerald-800 cursor-default`} />
         </div>
         <div>
           <label className={labelCls}>Service</label>
-          <select
-            value={form.service}
-            onChange={(e) => setForm({ ...form, service: e.target.value })}
-            className={`${inputCls} appearance-none`}
-          >
+          <select value={form.service} onChange={(e) => setForm({ ...form, service: e.target.value })} className={`${inputCls} appearance-none`}>
             {serviceOptions.map((s) => (
-              <option key={s.name} value={s.name}>
-                {s.name} · {s.price}
-              </option>
+              <option key={s.name} value={s.name}>{s.name} · {s.price}</option>
             ))}
           </select>
         </div>
@@ -1560,21 +1321,13 @@ function BookingForm({ location, services, compact = false }) {
 
       <div>
         <label className={labelCls}>Message</label>
-        <textarea
-          value={form.message}
-          onChange={(e) => setForm({ ...form, message: e.target.value })}
-          rows={3}
-          className={inputCls}
-          placeholder="Any preferences or timing notes (optional)"
-        />
+        <textarea value={form.message} onChange={(e) => { setForm({ ...form, message: e.target.value }); setError(""); }} rows={3} className={inputCls} placeholder="Any preferences or timing notes (optional)" />
       </div>
 
       {error && <p className="text-[11px] sm:text-xs text-rose-600 -mt-1">{error}</p>}
 
-      <button
-        type="submit"
-        className="mt-1 flex items-center justify-center gap-2 bg-emerald-600 text-white py-3 lg:py-4 rounded-lg sm:rounded-xl text-sm font-medium transition-all duration-300 hover:bg-emerald-700 hover:shadow-lg hover:shadow-emerald-600/20 active:scale-95 touch-manipulation"
-      >
+      <button type="submit"
+        className="mt-1 flex items-center justify-center gap-2 bg-emerald-600 text-white py-3 lg:py-4 rounded-lg sm:rounded-xl text-sm font-medium transition-all duration-300 hover:bg-emerald-700 hover:shadow-lg hover:shadow-emerald-600/20 active:scale-95 touch-manipulation">
         <MessageCircle size={16} className="lg:size-[18px]" /> Send booking request
       </button>
       <p className="text-[10px] sm:text-[11px] text-stone-400 text-center leading-relaxed font-light">
@@ -1584,13 +1337,10 @@ function BookingForm({ location, services, compact = false }) {
   );
 }
 
-/* ============================================================
-   LOCATION-SPECIFIC PAGE — dynamic, reuses selectedLocation
-   ============================================================ */
 function LocationPage({ location, setPage, setSelectedLocation }) {
+  // All 8 treatments shown for every branch
   const services = getServicesForLocation(location);
 
-  // If no location selected (e.g. deep-link edge case), send to directory
   useEffect(() => {
     if (!location) {
       setPage("locations");
@@ -1602,19 +1352,13 @@ function LocationPage({ location, setPage, setSelectedLocation }) {
 
   return (
     <div className="animate-fadeIn">
-      {/* Header / Hero */}
       <section className="relative overflow-hidden min-h-[42vh] sm:min-h-[52vh] flex items-center">
-        <img
-          src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=1800&auto=format&fit=crop"
-          alt={`Spa treatment room in ${location}`}
-          className="absolute inset-0 h-full w-full object-cover"
-        />
+        <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=1800&auto=format&fit=crop"
+          alt={`Spa treatment room in ${location}`} className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-stone-950/92 via-stone-950/78 to-stone-900/45" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 lg:pt-32 xl:pt-40 pb-10 sm:pb-14 lg:pb-20">
-          <button
-            onClick={() => { setPage("locations"); window.scrollTo(0, 0); }}
-            className="inline-flex items-center gap-1.5 text-stone-300 hover:text-white text-xs sm:text-sm transition-colors mb-3"
-          >
+          <button onClick={() => { setPage("locations"); window.scrollTo(0, 0); }}
+            className="inline-flex items-center gap-1.5 text-stone-300 hover:text-white text-xs sm:text-sm transition-colors mb-3">
             <ChevronLeft size={14} /> All locations
           </button>
           <span className="flex items-center gap-2 text-emerald-300/90 text-[10px] sm:text-xs uppercase tracking-[0.25em] font-light mb-2">
@@ -1624,34 +1368,26 @@ function LocationPage({ location, setPage, setSelectedLocation }) {
             Mahika Russian Spa — <span className="italic text-emerald-300">{location}</span>
           </h1>
           <p className="mt-3 sm:mt-4 text-stone-300 text-sm sm:text-base lg:text-lg max-w-xl font-light">
-            {services.length} signature treatments available at our {location} branch,
-            open daily from 10 AM to 10 PM.
+            {services.length} signature treatments available at our {location} branch, open daily from 10 AM to 10 PM.
           </p>
         </div>
       </section>
 
-      {/* Services available at this location */}
       <section className="py-10 sm:py-16 lg:py-20 xl:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-6 sm:mb-8 lg:mb-10">
             <p className="text-emerald-600 text-[9px] sm:text-xs lg:text-sm tracking-[0.2em] lg:tracking-[0.25em] uppercase font-light mb-2 lg:mb-3">
               Services at {location}
             </p>
-            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-stone-900">
-              Available treatments
-            </h2>
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-stone-900">Available treatments</h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
             {services.map((s) => (
               <article key={s.name} className="group flex flex-col">
                 <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl aspect-[4/3] shadow-md hover:shadow-2xl transition-shadow duration-500">
-                  <img
-                    src={s.img}
-                    alt={s.name}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
+                  <img src={s.img} alt={s.name} loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-stone-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <span className="absolute left-3 lg:left-5 top-3 lg:top-5 rounded-full bg-white/90 backdrop-blur-sm px-2.5 lg:px-4 py-1 lg:py-1.5 text-[9px] lg:text-[11px] uppercase tracking-wider text-emerald-700 font-medium">
                     {s.tag}
@@ -1667,25 +1403,30 @@ function LocationPage({ location, setPage, setSelectedLocation }) {
 
                 <h3 className="mt-4 lg:mt-6 font-serif text-lg lg:text-2xl text-stone-900 leading-snug">{s.name}</h3>
                 <p className="mt-1.5 lg:mt-2 text-xs sm:text-sm text-stone-500 leading-relaxed flex-1 font-light">{s.desc}</p>
+
+                <div className="mt-4 lg:mt-5 grid grid-cols-2 gap-2 lg:gap-3">
+                  <a href="tel:+918796910363"
+                    className="flex items-center justify-center gap-1.5 lg:gap-2 rounded-full border border-stone-200 bg-white px-3 py-2.5 lg:py-3 text-[11px] sm:text-xs lg:text-sm font-medium text-stone-700 transition-all duration-300 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-md active:scale-95 touch-manipulation">
+                    <Phone size={13} className="sm:size-[14px] lg:size-[15px]" /> Call Now
+                  </a>
+                  <a href={buildServiceWhatsAppLink(s, location)} target="_blank" rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-1.5 lg:gap-2 rounded-full bg-emerald-700 px-3 py-2.5 lg:py-3 text-[11px] sm:text-xs lg:text-sm font-medium text-white transition-all duration-300 hover:bg-emerald-800 hover:shadow-lg hover:shadow-emerald-700/25 active:scale-95 touch-manipulation">
+                    <MessageCircle size={13} className="sm:size-[14px] lg:size-[15px]" /> WhatsApp
+                  </a>
+                </div>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Contact / Booking form at bottom of location page */}
       <section className="bg-stone-50/80 border-t border-stone-200/60 py-10 sm:py-16 lg:py-20 xl:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-5 gap-6 sm:gap-8 lg:gap-12">
           <div className="lg:col-span-2">
-            <p className="text-emerald-600 text-[9px] sm:text-xs tracking-[0.2em] uppercase font-light mb-2 lg:mb-3">
-              Book at {location}
-            </p>
-            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-stone-900">
-              Reserve your slot
-            </h2>
+            <p className="text-emerald-600 text-[9px] sm:text-xs tracking-[0.2em] uppercase font-light mb-2 lg:mb-3">Book at {location}</p>
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-stone-900">Reserve your slot</h2>
             <p className="mt-3 lg:mt-4 text-stone-500 text-sm sm:text-base font-light leading-relaxed max-w-md">
-              Fill in your details and we'll open WhatsApp with your booking
-              request ready to send. We confirm slots within the hour.
+              Fill in your details and we'll open WhatsApp with your booking request ready to send. We confirm slots within the hour.
             </p>
             <div className="mt-6 lg:mt-8 space-y-3 text-sm text-stone-600">
               <p className="flex items-center gap-2"><Clock size={15} className="text-emerald-600" /> Open daily, 10 AM – 10 PM</p>
@@ -1707,12 +1448,8 @@ function LocationPage({ location, setPage, setSelectedLocation }) {
   );
 }
 
-/* ============================================================
-   LOCATIONS DIRECTORY PAGE — original, kept intact.
-   Selecting a location now also navigates to the location page.
-   ============================================================ */
 function LocationsPage({ selectedLocation, setSelectedLocation, setPage }) {
-  const [form, setForm] = useState({ name: "", phone: "", service: SERVICES[0].name });
+  const [form, setForm] = useState({ name: "", phone: "", service: ALL_TREATMENTS[0].name });
   const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
 
@@ -1743,7 +1480,6 @@ function LocationsPage({ selectedLocation, setSelectedLocation, setPage }) {
     setSent(true);
   };
 
-  // Select a location and route to its dedicated page.
   const chooseLocation = (loc) => {
     setSelected(loc);
     setPage("location");
@@ -1756,8 +1492,7 @@ function LocationsPage({ selectedLocation, setSelectedLocation, setPage }) {
         <p className="text-emerald-600 text-[9px] xs:text-[10px] sm:text-xs lg:text-sm tracking-[0.15em] sm:tracking-[0.2em] lg:tracking-[0.25em] uppercase font-light mb-1.5 sm:mb-2 lg:mb-3">Find Us</p>
         <h1 className="font-serif text-2xl sm:text-[2.2rem] lg:text-[3.5rem] xl:text-[4.5rem] leading-tight text-stone-900 mb-2 sm:mb-3 lg:mb-4">25 branches across Delhi NCR</h1>
         <p className="text-stone-500 text-sm sm:text-base max-w-xl font-light">
-          Tap a neighbourhood to open its branch page, view available treatments
-          and send us your booking request.
+          Tap a neighbourhood to open its branch page, view available treatments and send us your booking request.
         </p>
       </section>
 
@@ -1765,12 +1500,8 @@ function LocationsPage({ selectedLocation, setSelectedLocation, setPage }) {
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-4 flex items-center justify-between gap-3 sm:gap-4 lg:gap-6">
           <div className="flex items-center gap-2 sm:gap-3 min-w-0">
             <MapPin size={14} className="sm:size-[15px] lg:size-[16px] text-emerald-700 flex-shrink-0" />
-            <span className="text-[10px] sm:text-xs lg:text-sm uppercase tracking-[0.12em] sm:tracking-[0.15em] text-stone-400 font-light flex-shrink-0 hidden xs:inline">
-              Selected
-            </span>
-            <span className="font-serif text-sm sm:text-base lg:text-lg text-emerald-700 truncate">
-              {selected} is selected
-            </span>
+            <span className="text-[10px] sm:text-xs lg:text-sm uppercase tracking-[0.12em] sm:tracking-[0.15em] text-stone-400 font-light flex-shrink-0 hidden xs:inline">Selected</span>
+            <span className="font-serif text-sm sm:text-base lg:text-lg text-emerald-700 truncate">{selected} is selected</span>
           </div>
           <span className="text-[10px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] text-stone-400 font-light flex-shrink-0">
             {LOCATIONS.length} branches
@@ -1782,25 +1513,18 @@ function LocationsPage({ selectedLocation, setSelectedLocation, setPage }) {
         <div className="lg:col-span-3">
           <div className="flex flex-wrap gap-1 sm:gap-1.5 lg:gap-3">
             {LOCATIONS.map((loc) => (
-              <button
-                key={loc}
-                onClick={() => chooseLocation(loc)}
+              <button key={loc} onClick={() => chooseLocation(loc)}
                 className={`rounded-full border px-2 sm:px-2.5 lg:px-4 py-1 sm:py-1.5 lg:py-2.5 text-[10px] sm:text-xs lg:text-sm transition-all duration-300 touch-manipulation ${
-                  selected === loc
-                    ? "bg-emerald-700 text-white border-emerald-700 shadow-lg shadow-emerald-700/15"
-                    : "border-stone-200 text-stone-600 hover:border-stone-300 hover:text-stone-800"
-                }`}
-              >
+                  selected === loc ? "bg-emerald-700 text-white border-emerald-700 shadow-lg shadow-emerald-700/15" : "border-stone-200 text-stone-600 hover:border-stone-300 hover:text-stone-800"
+                }`}>
                 {loc}
               </button>
             ))}
           </div>
 
-          <img
-            src="https://images.unsplash.com/photo-1583417657209-d3dd44dc9c09?q=80&w=1200&auto=format&fit=crop"
+          <img src="https://images.unsplash.com/photo-1583417657209-d3dd44dc9c09?q=80&w=1200&auto=format&fit=crop"
             alt="Spa reception ambience"
-            className="mt-4 sm:mt-6 lg:mt-8 xl:mt-10 w-full rounded-xl sm:rounded-2xl object-cover h-32 sm:h-40 lg:h-48 xl:h-72 shadow-md"
-          />
+            className="mt-4 sm:mt-6 lg:mt-8 xl:mt-10 w-full rounded-xl sm:rounded-2xl object-cover h-32 sm:h-40 lg:h-48 xl:h-72 shadow-md" />
 
           <div className="mt-2.5 sm:mt-3 lg:mt-4 grid grid-cols-3 gap-1.5 sm:gap-2 lg:gap-4">
             <img src="https://images.unsplash.com/photo-1611920630418-f587fdc3bf94?q=80&w=500&auto=format&fit=crop" alt="Spa room decor" className="w-full rounded-lg sm:rounded-xl object-cover h-14 sm:h-16 lg:h-20 xl:h-28" />
@@ -1823,18 +1547,12 @@ function LocationsPage({ selectedLocation, setSelectedLocation, setPage }) {
                 <p className="text-xs sm:text-sm text-stone-500 leading-relaxed font-light">
                   Your details for the {selected} branch are ready in WhatsApp — just hit send and we'll confirm your slot.
                 </p>
-                <a
-                  href={waLink()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-3 sm:mt-4 lg:mt-6 inline-flex items-center justify-center gap-1.5 sm:gap-2 lg:gap-2.5 rounded-lg bg-emerald-600 px-3.5 sm:px-4 lg:px-6 py-2 sm:py-2.5 lg:py-3 text-xs sm:text-sm font-medium text-white transition-all duration-300 hover:bg-emerald-700 hover:shadow-lg active:scale-95"
-                >
+                <a href={waLink()} target="_blank" rel="noopener noreferrer"
+                  className="mt-3 sm:mt-4 lg:mt-6 inline-flex items-center justify-center gap-1.5 sm:gap-2 lg:gap-2.5 rounded-lg bg-emerald-600 px-3.5 sm:px-4 lg:px-6 py-2 sm:py-2.5 lg:py-3 text-xs sm:text-sm font-medium text-white transition-all duration-300 hover:bg-emerald-700 hover:shadow-lg active:scale-95">
                   <MessageCircle size={12} className="sm:size-[14px] lg:size-[16px]" /> Open WhatsApp again
                 </a>
-                <button
-                  onClick={() => setSent(false)}
-                  className="mt-3 sm:mt-4 lg:mt-5 block mx-auto text-xs sm:text-sm text-emerald-700 border-b border-emerald-200 pb-0.5 hover:border-emerald-600 transition-colors touch-manipulation"
-                >
+                <button onClick={() => setSent(false)}
+                  className="mt-3 sm:mt-4 lg:mt-5 block mx-auto text-xs sm:text-sm text-emerald-700 border-b border-emerald-200 pb-0.5 hover:border-emerald-600 transition-colors touch-manipulation">
                   Send another request
                 </button>
               </div>
@@ -1842,42 +1560,28 @@ function LocationsPage({ selectedLocation, setSelectedLocation, setPage }) {
               <form onSubmit={submit} className="flex flex-col gap-3 sm:gap-4 lg:gap-5">
                 <div>
                   <label className="text-[9px] xs:text-[10px] sm:text-xs text-stone-400 tracking-wide uppercase font-light">Your name</label>
-                  <input
-                    value={form.name}
-                    onChange={(e) => { setForm({ ...form, name: e.target.value }); setError(""); }}
+                  <input value={form.name} onChange={(e) => { setForm({ ...form, name: e.target.value }); setError(""); }}
                     className="w-full mt-0.5 sm:mt-1 lg:mt-1.5 px-3 sm:px-4 lg:px-5 py-2 sm:py-2.5 lg:py-3.5 rounded-lg sm:rounded-xl border border-stone-200 bg-stone-50/50 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:border-transparent transition-all text-sm sm:text-base touch-manipulation"
-                    placeholder="Enter your name"
-                  />
+                    placeholder="Enter your name" />
                 </div>
                 <div>
                   <label className="text-[9px] xs:text-[10px] sm:text-xs text-stone-400 tracking-wide uppercase font-light">Phone number</label>
-                  <input
-                    value={form.phone}
-                    onChange={(e) => { setForm({ ...form, phone: e.target.value }); setError(""); }}
+                  <input value={form.phone} onChange={(e) => { setForm({ ...form, phone: e.target.value }); setError(""); }}
                     className="w-full mt-0.5 sm:mt-1 lg:mt-1.5 px-3 sm:px-4 lg:px-5 py-2 sm:py-2.5 lg:py-3.5 rounded-lg sm:rounded-xl border border-stone-200 bg-stone-50/50 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:border-transparent transition-all text-sm sm:text-base touch-manipulation"
-                    placeholder="10-digit mobile number"
-                    inputMode="tel"
-                  />
+                    placeholder="10-digit mobile number" inputMode="tel" />
                 </div>
                 <div>
                   <label className="text-[9px] xs:text-[10px] sm:text-xs text-stone-400 tracking-wide uppercase font-light">Treatment</label>
-                  <select
-                    value={form.service}
-                    onChange={(e) => setForm({ ...form, service: e.target.value })}
-                    className="w-full mt-0.5 sm:mt-1 lg:mt-1.5 px-3 sm:px-4 lg:px-5 py-2 sm:py-2.5 lg:py-3.5 rounded-lg sm:rounded-xl border border-stone-200 bg-stone-50/50 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:border-transparent transition-all text-sm sm:text-base appearance-none touch-manipulation"
-                  >
+                  <select value={form.service} onChange={(e) => setForm({ ...form, service: e.target.value })}
+                    className="w-full mt-0.5 sm:mt-1 lg:mt-1.5 px-3 sm:px-4 lg:px-5 py-2 sm:py-2.5 lg:py-3.5 rounded-lg sm:rounded-xl border border-stone-200 bg-stone-50/50 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:border-transparent transition-all text-sm sm:text-base appearance-none touch-manipulation">
                     {getServicesForLocation(selected).map((s) => (
-                      <option key={s.name} value={s.name}>
-                        {s.name} · {s.price}
-                      </option>
+                      <option key={s.name} value={s.name}>{s.name} · {s.price}</option>
                     ))}
                   </select>
                 </div>
                 {error && <p className="text-[10px] sm:text-xs text-rose-600 -mt-1.5 sm:-mt-2 lg:-mt-2.5">{error}</p>}
-                <button
-                  type="submit"
-                  className="mt-0.5 sm:mt-1 lg:mt-2 flex items-center justify-center gap-1.5 sm:gap-2 lg:gap-2.5 bg-emerald-600 text-white py-2.5 sm:py-3 lg:py-4 rounded-lg sm:rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 hover:bg-emerald-700 hover:shadow-lg active:scale-95 touch-manipulation"
-                >
+                <button type="submit"
+                  className="mt-0.5 sm:mt-1 lg:mt-2 flex items-center justify-center gap-1.5 sm:gap-2 lg:gap-2.5 bg-emerald-600 text-white py-2.5 sm:py-3 lg:py-4 rounded-lg sm:rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 hover:bg-emerald-700 hover:shadow-lg active:scale-95 touch-manipulation">
                   <MessageCircle size={13} className="sm:size-[15px] lg:size-[17px]" /> Send on WhatsApp
                 </button>
                 <p className="text-[9px] xs:text-[10px] sm:text-[11px] text-stone-400 text-center leading-relaxed font-light">
@@ -1892,16 +1596,11 @@ function LocationsPage({ selectedLocation, setSelectedLocation, setPage }) {
   );
 }
 
-/* ============================================================
-   ROOT APP
-   ============================================================ */
 export default function MahikaRussianSpaWebsite() {
   const [page, setPage] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
   const [showLoading, setShowLoading] = useState(true);
 
-  // Reuse the existing selectedLocation state, but persist it in
-  // localStorage so it survives navigation and reloads.
   const [selectedLocation, setSelectedLocation] = useState(() => {
     if (typeof window === "undefined") return LOCATIONS[0];
     try {
@@ -1912,18 +1611,12 @@ export default function MahikaRussianSpaWebsite() {
     }
   });
 
-  // Persist location whenever it changes.
   useEffect(() => {
     try {
-      if (selectedLocation) {
-        window.localStorage.setItem("mahika_selected_location", selectedLocation);
-      }
-    } catch {
-      /* ignore storage errors */
-    }
+      if (selectedLocation) window.localStorage.setItem("mahika_selected_location", selectedLocation);
+    } catch { /* ignore */ }
   }, [selectedLocation]);
 
-  // Scroll to top on page change (existing behaviour kept consistent).
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [page]);
@@ -1943,26 +1636,22 @@ export default function MahikaRussianSpaWebsite() {
           from { transform: scaleX(0); }
           to { transform: scaleX(1); }
         }
-        .animate-fadeIn {
-          animation: fadeIn 0.8s ease-out forwards;
+        @keyframes teamScroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
         }
-        .no-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .no-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
+        .animate-fadeIn { animation: fadeIn 0.8s ease-out forwards; }
+        .animate-team-scroll { animation: teamScroll 45s linear infinite; }
+        .animate-team-scroll:hover { animation-play-state: paused; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         @media (min-width: 480px) {
           .xs\\:inline { display: inline; }
         }
         @media (max-width: 479px) {
           .xs\\:inline { display: none; }
         }
-        .touch-manipulation {
-          touch-action: manipulation;
-        }
-        /* Prevent horizontal overflow on tiny screens */
+        .touch-manipulation { touch-action: manipulation; }
         html, body { max-width: 100%; overflow-x: hidden; }
       `}</style>
 
@@ -1978,8 +1667,12 @@ export default function MahikaRussianSpaWebsite() {
           setSelectedLocation={setSelectedLocation}
         />
 
-        {page === "home" && <HomePage setPage={setPage} />}
-        {page === "services" && <ServicesPage setPage={setPage} />}
+        {page === "home" && (
+          <HomePage setPage={setPage} selectedLocation={selectedLocation} />
+        )}
+        {page === "services" && (
+          <ServicesPage setPage={setPage} selectedLocation={selectedLocation} />
+        )}
         {page === "about" && <AboutPage setPage={setPage} />}
         {page === "gallery" && <GalleryPage setPage={setPage} />}
         {page === "locations" && (
@@ -1998,6 +1691,8 @@ export default function MahikaRussianSpaWebsite() {
         )}
 
         <Footer setPage={setPage} />
+
+        <FloatingButtons />
       </div>
     </div>
   );
