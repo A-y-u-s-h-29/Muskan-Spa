@@ -135,15 +135,12 @@ const getServicesForLocation = (loc) => {
 const GALLERY = [
   { src: "https://images.unsplash.com/photo-1620733723572-11c53f73a416?q=80&w=800&auto=format&fit=crop", alt: "Candles and towel spa ambience" },
   { src: "https://images.unsplash.com/photo-1583416750470-965b2707b355?q=80&w=800&auto=format&fit=crop", alt: "Spa treatment room table" },
+  { src: "divine-glam-anna-nagar-pondicherry-body-massage-centres-wprq7tpllq.avif", alt: "Elegant vanity and mirror" },
   { src: "https://images.unsplash.com/photo-1595871151608-bc7abd1caca3?q=80&w=800&auto=format&fit=crop", alt: "Vanity table with mirror" },
-  { src: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=800&auto=format&fit=crop", alt: "Oils and fresh flowers" },
+  { src: "portrait-beautiful-russian-woman-getting-recreation-body-massage-close-up-portrait-beautiful-russian-girl-blue-eyes-120352860.webp", alt: "Massage oils and fresh flowers" },
+  { src: "masseuse-makes-massage-to-a-charming-brunette-photo.jpg", alt: "Relaxing back massage" },
   { src: "https://images.unsplash.com/photo-1761470575018-135c213340eb?q=80&w=800&auto=format&fit=crop", alt: "Candlelit steam room" },
 { src: "body-to-body-massage-628.jpg", alt: "Massage oils and fresh flowers" },
-  { src: "https://images.unsplash.com/photo-1761470575018-135c213340eb?q=80&w=800&auto=format&fit=crop", alt: "Candlelit steam room" },
-  { src: "https://images.unsplash.com/photo-1761470575018-135c213340eb?q=80&w=800&auto=format&fit=crop", alt: "Candlelit steam room" },
-  { src: "https://images.unsplash.com/photo-1761470575018-135c213340eb?q=80&w=800&auto=format&fit=crop", alt: "Candlelit steam room" },
-  { src: "https://images.unsplash.com/photo-1761470575018-135c213340eb?q=80&w=800&auto=format&fit=crop", alt: "Candlelit steam room" },
-  { src: "https://images.unsplash.com/photo-1761470575018-135c213340eb?q=80&w=800&auto=format&fit=crop", alt: "Candlelit steam room" },
 
 ];
 
@@ -205,7 +202,7 @@ const TESTIMONIALS = [
 // Hero slider slides — premium spa imagery with short captions.
 const HERO_SLIDES = [
   {
-    src: "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=1800&auto=format&fit=crop",
+    src: "Deep-Tissue-Massage.webp",
     title: "The Signature Ritual",
     subtitle: "Warm oils, unhurried hands, complete stillness.",
   },
@@ -215,7 +212,7 @@ const HERO_SLIDES = [
     subtitle: "Pure, warmed oils chosen for your skin and mood.",
   },
   {
-    src: "https://images.unsplash.com/photo-1583416750470-965b2707b355?q=80&w=1800&auto=format&fit=crop",
+    src: "COUPLE-MASSAGE-3.jpg",
     title: "Private Treatment Rooms",
     subtitle: "Every branch, the same quiet standard of care.",
   },
