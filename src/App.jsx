@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Phone, MapPin, Clock, ChevronRight, Menu, X, Sparkles, Flower2, Droplets, MessageCircle, Star, Calendar, Leaf, ChevronLeft, Award, Quote, Heart, Users, ShieldCheck } from "lucide-react";
 
-// Digits only, with country code - what wa.me expects.
 const WHATSAPP_NUMBER = "918796910363";
 
 const LOCATIONS = [
@@ -13,54 +12,24 @@ const LOCATIONS = [
 ];
 
 const SERVICES = [
-  {
-    name: "Balinese Body Massage",
-    tag: "Massage",
-    duration: "60 / 90 min",
-    price: "₹1,999",
+  { name: "Balinese Body Massage", tag: "Massage", duration: "60 / 90 min", price: "₹1,999",
     desc: "Long, flowing strokes with warm aromatic oils to release deep tension and restore circulation.",
-    img: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=900&auto=format&fit=crop",
-  },
-  {
-    name: "Deep Tissue Therapy",
-    tag: "Massage",
-    duration: "60 min",
-    price: "₹2,299",
+    img: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=900&auto=format&fit=crop" },
+  { name: "Deep Tissue Therapy", tag: "Massage", duration: "60 min", price: "₹2,299",
     desc: "Firm, targeted pressure that works into stiff shoulders, backs and legs after a long week.",
-    img: "https://images.unsplash.com/photo-1639162906614-0603b0ae95fd?q=80&w=900&auto=format&fit=crop",
-  },
-  {
-    name: "Aroma Hot Stone Ritual",
-    tag: "Massage",
-    duration: "75 min",
-    price: "₹2,799",
+    img: "https://images.unsplash.com/photo-1639162906614-0603b0ae95fd?q=80&w=900&auto=format&fit=crop" },
+  { name: "Aroma Hot Stone Ritual", tag: "Massage", duration: "75 min", price: "₹2,799",
     desc: "Heated basalt stones paired with essential oils to melt away muscle knots and quiet the mind.",
-    img: "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=900&auto=format&fit=crop",
-  },
-  {
-    name: "Signature Radiance Facial",
-    tag: "Facial",
-    duration: "45 min",
-    price: "₹1,599",
+    img: "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=900&auto=format&fit=crop" },
+  { name: "Signature Radiance Facial", tag: "Facial", duration: "45 min", price: "₹1,599",
     desc: "A gentle cleanse, exfoliation and hydration routine that leaves skin visibly brighter.",
-    img: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=900&auto=format&fit=crop",
-  },
-  {
-    name: "Head, Neck & Shoulder Release",
-    tag: "Express",
-    duration: "30 min",
-    price: "₹999",
+    img: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=900&auto=format&fit=crop" },
+  { name: "Head, Neck & Shoulder Release", tag: "Express", duration: "30 min", price: "₹999",
     desc: "A fast, focused session for anyone carrying stress in the upper back and scalp.",
-    img: "https://images.unsplash.com/photo-1598901986949-f593ff2a31a6?q=80&w=900&auto=format&fit=crop",
-  },
-  {
-    name: "Foot Reflexology",
-    tag: "Express",
-    duration: "40 min",
-    price: "₹1,199",
+    img: "https://images.unsplash.com/photo-1598901986949-f593ff2a31a6?q=80&w=900&auto=format&fit=crop" },
+  { name: "Foot Reflexology", tag: "Express", duration: "40 min", price: "₹1,199",
     desc: "Pressure-point work on the feet believed to ease fatigue through the whole body.",
-    img: "https://images.unsplash.com/photo-1700522924565-9fad1c05469e?q=80&w=900&auto=format&fit=crop",
-  },
+    img: "https://images.unsplash.com/photo-1700522924565-9fad1c05469e?q=80&w=900&auto=format&fit=crop" },
 ];
 
 const ALL_TREATMENTS = [
@@ -91,10 +60,8 @@ const ALL_TREATMENTS = [
 ];
 
 // Every Mahika Russian Spa branch offers the complete treatment menu.
-// No per-location filtering — all 8 treatments shown for every location.
 const getServicesForLocation = () => ALL_TREATMENTS;
 
-// Build a pre-filled WhatsApp link for a specific service at a specific location.
 const buildServiceWhatsAppLink = (service, location) => {
   const message = [
     "Hello Mahika Russian Spa, I'd like to book the following service:",
@@ -158,30 +125,19 @@ const TESTIMONIALS = [
 ];
 
 const HERO_SLIDES = [
-  { src: "Deep-Tissue-Massage.webp",
-    title: "The Signature Ritual",
-    subtitle: "Warm oils, unhurried hands, complete stillness." },
-  { src: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1800&auto=format&fit=crop",
-    title: "Oils & Botanicals",
-    subtitle: "Pure, warmed oils chosen for your skin and mood." },
-  { src: "COUPLE-MASSAGE-3.jpg",
-    title: "Private Treatment Rooms",
-    subtitle: "Every branch, the same quiet standard of care." },
-  { src: "https://images.unsplash.com/photo-1620733723572-11c53f73a416?q=80&w=1800&auto=format&fit=crop",
-    title: "Candlelit Calm",
-    subtitle: "Step in from the city. Step out lighter." },
+  { src: "Deep-Tissue-Massage.webp", title: "The Signature Ritual", subtitle: "Warm oils, unhurried hands, complete stillness." },
+  { src: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1800&auto=format&fit=crop", title: "Oils & Botanicals", subtitle: "Pure, warmed oils chosen for your skin and mood." },
+  { src: "COUPLE-MASSAGE-3.jpg", title: "Private Treatment Rooms", subtitle: "Every branch, the same quiet standard of care." },
+  { src: "https://images.unsplash.com/photo-1620733723572-11c53f73a416?q=80&w=1800&auto=format&fit=crop", title: "Candlelit Calm", subtitle: "Step in from the city. Step out lighter." },
 ];
 
-// Team members shown in the sliding team section on the home page.
 const TEAM_MEMBERS = [
-  { name: "Anastasia", role: "Senior Therapist", img: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?q=80&w=700&auto=format&fit=crop" },
-  { name: "Ekaterina", role: "Signature Specialist", img: "https://images.unsplash.com/photo-1594381898411-846e7d193883?q=80&w=700&auto=format&fit=crop" },
-  { name: "Olga", role: "Deep Tissue Expert", img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=700&auto=format&fit=crop" },
-  { name: "Natalia", role: "Aroma Therapist", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=700&auto=format&fit=crop" },
-  { name: "Irina", role: "Facial Specialist", img: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=700&auto=format&fit=crop" },
-  { name: "Svetlana", role: "Hot Stone Expert", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=700&auto=format&fit=crop" },
-  { name: "Yulia", role: "Reflexology Expert", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=700&auto=format&fit=crop" },
-  { name: "Viktoria", role: "Body Ritual Specialist", img: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=700&auto=format&fit=crop" },
+  { name: "Anastasia", role: "Senior Therapist", img: "staff-7.webp" },
+  { name: "Olga", role: "Deep Tissue Expert", img: "staff-5.webp" },
+  { name: "Natalia", role: "Aroma Therapist", img: "staff-2-1.webp" },
+  { name: "Irina", role: "Facial Specialist", img: "samante-rose.webp" },
+  { name: "Svetlana", role: "Hot Stone Expert", img: "images.jpg" },
+  { name: "Yulia", role: "Reflexology Expert", img: "images (1).jpg" }
 ];
 
 function LoadingScreen({ onComplete }) {
@@ -228,10 +184,16 @@ function LoadingScreen({ onComplete }) {
   );
 }
 
+/* ============================================================
+   HEADER
+   ============================================================ */
 function Header({ page, setPage, menuOpen, setMenuOpen, selectedLocation, setSelectedLocation }) {
   const [scrolled, setScrolled] = useState(false);
   const [locationOpen, setLocationOpen] = useState(false);
   const locationRef = React.useRef(null);
+  const mobileLocationRef = React.useRef(null);
+  // Used to make sure a single tap never fires twice (pointerup + click).
+  const tapGuardRef = React.useRef(0);
 
   const nav = [
     ["home", "Home"],
@@ -247,20 +209,33 @@ function Header({ page, setPage, menuOpen, setMenuOpen, selectedLocation, setSel
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  /* ------------------------------------------------------------
+     Close the location dropdown when tapping outside.
+
+     IMPORTANT FIX:
+     We listen for "click" — NOT "mousedown" / "touchstart".
+     Previously the dropdown was closed on touchstart, which unmounted
+     the location button before the browser could deliver its "click"
+     event. On phones that meant the tap was swallowed and you were
+     never taken to the branch page (desktop was unaffected because a
+     mouse click fires immediately). Listening for "click" removes that
+     race completely, and the refs still let clicks inside the dropdown
+     through untouched.
+     ------------------------------------------------------------ */
   useEffect(() => {
     if (!locationOpen) return;
-    const onClick = (e) => {
-      if (locationRef.current && !locationRef.current.contains(e.target)) {
-        setLocationOpen(false);
-      }
+    const onDocClick = (e) => {
+      const insideDesktop = locationRef.current && locationRef.current.contains(e.target);
+      const insideMobile = mobileLocationRef.current && mobileLocationRef.current.contains(e.target);
+      if (!insideDesktop && !insideMobile) setLocationOpen(false);
     };
     const onKey = (e) => {
       if (e.key === "Escape") setLocationOpen(false);
     };
-    document.addEventListener("mousedown", onClick);
+    document.addEventListener("click", onDocClick);
     document.addEventListener("keydown", onKey);
     return () => {
-      document.removeEventListener("mousedown", onClick);
+      document.removeEventListener("click", onDocClick);
       document.removeEventListener("keydown", onKey);
     };
   }, [locationOpen]);
@@ -271,21 +246,56 @@ function Header({ page, setPage, menuOpen, setMenuOpen, selectedLocation, setSel
 
   const overlay = page === "home" && !scrolled && !menuOpen;
 
+  /* Runs a handler at most once per 500 ms, so a touch that fires both
+     pointerup and click only navigates a single time. */
+  const tapOnce = (fn) => {
+    const now = Date.now();
+    if (now - tapGuardRef.current < 500) return;
+    tapGuardRef.current = now;
+    fn();
+  };
+
+  /* Props shared by every tappable element in the menus:
+     - onClick  → mouse, keyboard and assistive tech
+     - onPointerUp → touch/pen, which still fires on iOS inside
+       scrollable containers where a synthetic click can be dropped */
+  const tapHandlers = (fn) => ({
+    onClick: () => tapOnce(fn),
+    onPointerUp: (e) => {
+      if (e.pointerType === "mouse") return;
+      tapOnce(fn);
+    },
+  });
+
+  const goToPage = (key) => {
+    setPage(key);
+    setMenuOpen(false);
+    setLocationOpen(false);
+    window.scrollTo(0, 0);
+  };
+
   const pickLocation = (loc) => {
     if (setSelectedLocation) setSelectedLocation(loc);
     setLocationOpen(false);
     setMenuOpen(false);
     setPage("location");
-    window.scrollTo(0, 0);
+    // Give the browser a tick so scroll doesn't jump during state updates on mobile
+    setTimeout(() => window.scrollTo({ top: 0, behavior: "auto" }), 0);
   };
 
   const toggleLocation = () => setLocationOpen((v) => !v);
 
-  // Overlay-aware colors so the header stays readable over the dark hero slider.
+  const viewAllBranches = () => {
+    setPage("locations");
+    setLocationOpen(false);
+    setMenuOpen(false);
+    window.scrollTo(0, 0);
+  };
+
   const logoPrimary = overlay ? "text-white" : "text-emerald-800";
   const logoSecondary = overlay ? "text-white" : "text-stone-800";
   const logoTagline = overlay ? "text-stone-300" : "text-stone-400";
-  const navBase = overlay ? "text-white/80 hover:text-white" : "text-stone-500 hover:text-stone-800";
+  const navBase = overlay ? "text-white/85 hover:text-white" : "text-stone-500 hover:text-stone-800";
   const navActive = overlay ? "text-emerald-300" : "text-emerald-700";
 
   return (
@@ -296,7 +306,7 @@ function Header({ page, setPage, menuOpen, setMenuOpen, selectedLocation, setSel
     >
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between h-14 sm:h-20 lg:h-24">
         <button
-          onClick={() => { setPage("home"); setMenuOpen(false); window.scrollTo(0, 0); }}
+          {...tapHandlers(() => goToPage("home"))}
           className="text-left group flex-shrink-0 min-w-0"
         >
           <span className={`font-serif text-sm xs:text-base sm:text-xl lg:text-2xl xl:text-3xl tracking-tight ${logoPrimary}`}>Mahika</span>
@@ -304,6 +314,7 @@ function Header({ page, setPage, menuOpen, setMenuOpen, selectedLocation, setSel
           <span className={`block text-[7px] xs:text-[8px] sm:text-[9px] lg:text-[10px] xl:text-[11px] uppercase tracking-[0.2em] xs:tracking-[0.25em] sm:tracking-[0.3em] lg:tracking-[0.35em] mt-0.5 font-light ${logoTagline}`}>Aerocity · Delhi NCR</span>
         </button>
 
+        {/* DESKTOP NAV */}
         <nav className="hidden md:flex items-center gap-4 lg:gap-8 xl:gap-10">
           {nav.map(([key, label]) => (
             <button
@@ -320,6 +331,7 @@ function Header({ page, setPage, menuOpen, setMenuOpen, selectedLocation, setSel
             </button>
           ))}
 
+          {/* Desktop location dropdown */}
           <div className="relative" ref={locationRef}>
             <button
               onClick={toggleLocation}
@@ -350,10 +362,11 @@ function Header({ page, setPage, menuOpen, setMenuOpen, selectedLocation, setSel
                     return (
                       <button
                         key={loc}
+                        type="button"
                         role="option"
                         aria-selected={isSelected}
-                        onClick={() => pickLocation(loc)}
-                        className={`text-left rounded-lg px-3 py-2 text-xs lg:text-sm transition-colors duration-200 truncate ${
+                        {...tapHandlers(() => pickLocation(loc))}
+                        className={`text-left rounded-lg px-3 py-2 text-xs lg:text-sm transition-colors duration-200 truncate cursor-pointer ${
                           isSelected ? "bg-emerald-50 text-emerald-700 font-medium" : "text-stone-600 hover:bg-stone-50 hover:text-stone-900"
                         }`}
                       >
@@ -363,8 +376,9 @@ function Header({ page, setPage, menuOpen, setMenuOpen, selectedLocation, setSel
                   })}
                 </div>
                 <button
-                  onClick={() => { setPage("locations"); setLocationOpen(false); window.scrollTo(0, 0); }}
-                  className="mt-1 w-full text-left rounded-lg px-3 py-2 text-[11px] uppercase tracking-[0.15em] text-stone-400 hover:text-emerald-700 hover:bg-stone-50 transition-colors"
+                  type="button"
+                  {...tapHandlers(viewAllBranches)}
+                  className="mt-1 w-full text-left rounded-lg px-3 py-2 text-[11px] uppercase tracking-[0.15em] text-stone-400 hover:text-emerald-700 hover:bg-stone-50 transition-colors cursor-pointer"
                 >
                   View all branches →
                 </button>
@@ -372,30 +386,30 @@ function Header({ page, setPage, menuOpen, setMenuOpen, selectedLocation, setSel
             )}
           </div>
 
-          <a
-            href="tel:+911140001234"
-            className="flex items-center gap-2 rounded-full bg-emerald-700 px-4 sm:px-5 lg:px-6 py-2 sm:py-2.5 lg:py-3 text-xs sm:text-sm text-white transition-all duration-300 hover:bg-emerald-800 hover:shadow-lg hover:shadow-emerald-700/20"
-          >
+          <a href="tel:+911140001234"
+             className="flex items-center gap-2 rounded-full bg-emerald-700 px-4 sm:px-5 lg:px-6 py-2 sm:py-2.5 lg:py-3 text-xs sm:text-sm text-white transition-all duration-300 hover:bg-emerald-800 hover:shadow-lg hover:shadow-emerald-700/20">
             <Phone size={14} className="sm:size-[15px]" /> <span className="hidden sm:inline">Call Now</span>
           </a>
         </nav>
 
         <button
-          className={`md:hidden transition-colors p-1 -mr-1 ${overlay ? "text-white hover:text-emerald-300" : "text-stone-700 hover:text-emerald-700"}`}
+          className={`md:hidden transition-colors p-2 -mr-2 cursor-pointer ${overlay ? "text-white hover:text-emerald-300" : "text-stone-700 hover:text-emerald-700"}`}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
-          {menuOpen ? <X size={22} /> : <Menu size={22} />}
+          {menuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
+      {/* MOBILE MENU */}
       {menuOpen && (
-        <div className="md:hidden max-h-[calc(100vh-3.5rem)] overflow-y-auto bg-white/98 backdrop-blur-xl border-t border-stone-100 px-4 sm:px-6 py-4 sm:py-6 flex flex-col gap-3 sm:gap-5">
+        <div className="md:hidden max-h-[calc(100vh-3.5rem)] overflow-y-auto bg-white/98 backdrop-blur-xl border-t border-stone-100 px-4 sm:px-6 py-4 sm:py-6 flex flex-col gap-1">
           {nav.map(([key, label]) => (
             <button
               key={key}
-              onClick={() => { setPage(key); setMenuOpen(false); window.scrollTo(0, 0); }}
-              className={`text-left text-base sm:text-lg tracking-wide font-light py-1 ${
+              type="button"
+              {...tapHandlers(() => goToPage(key))}
+              className={`text-left text-base sm:text-lg tracking-wide font-light py-3 border-b border-stone-100 cursor-pointer ${
                 page === key ? "text-emerald-700" : "text-stone-600"
               }`}
             >
@@ -403,34 +417,43 @@ function Header({ page, setPage, menuOpen, setMenuOpen, selectedLocation, setSel
             </button>
           ))}
 
-          <div>
+          {/* Mobile location section — wrapped with mobileLocationRef */}
+          <div ref={mobileLocationRef} className="pt-3">
             <button
-              onClick={() => setLocationOpen((v) => !v)}
+              type="button"
+              {...tapHandlers(toggleLocation)}
               aria-expanded={locationOpen}
-              className={`w-full flex items-center justify-between gap-2 text-left text-base sm:text-lg tracking-wide font-light py-1 ${
+              className={`w-full flex items-center justify-between gap-2 text-left text-base sm:text-lg tracking-wide font-light py-3 cursor-pointer ${
                 page === "locations" || page === "location" ? "text-emerald-700" : "text-stone-600"
               }`}
             >
-              <span className="flex items-center gap-2">
-                <MapPin size={16} /> {selectedLocation || "Locations"}
+              <span className="flex items-center gap-2 min-w-0">
+                <MapPin size={18} className="flex-shrink-0" />
+                <span className="truncate">{selectedLocation || "Locations"}</span>
               </span>
-              <ChevronRight size={16} className={`transition-transform duration-300 ${locationOpen ? "rotate-90" : ""}`} />
+              <ChevronRight
+                size={18}
+                className={`flex-shrink-0 transition-transform duration-300 ${locationOpen ? "rotate-90" : ""}`}
+              />
             </button>
 
             {locationOpen && (
-              <div className="mt-2 rounded-2xl border border-stone-200 bg-white p-2 max-h-[45vh] overflow-y-auto">
-                <p className="px-3 pt-1 pb-1.5 text-[10px] uppercase tracking-[0.2em] text-stone-400 font-light">
+              <div className="mt-1 mb-2 rounded-2xl border border-stone-200 bg-white p-2.5 max-h-[50vh] overflow-y-auto">
+                <p className="px-3 pt-1 pb-2 text-[10px] uppercase tracking-[0.2em] text-stone-400 font-light">
                   Choose your location
                 </p>
-                <div className="grid grid-cols-2 gap-1">
+                <div className="grid grid-cols-2 xs:grid-cols-3 gap-1.5">
                   {LOCATIONS.map((loc) => {
                     const isSelected = loc === selectedLocation;
                     return (
                       <button
                         key={loc}
-                        onClick={() => pickLocation(loc)}
-                        className={`text-left rounded-lg px-3 py-2 text-sm transition-colors duration-200 truncate ${
-                          isSelected ? "bg-emerald-50 text-emerald-700 font-medium" : "text-stone-600 hover:bg-stone-50 hover:text-stone-900"
+                        type="button"
+                        {...tapHandlers(() => pickLocation(loc))}
+                        className={`text-left rounded-lg px-3 py-2.5 text-[13px] sm:text-sm transition-colors duration-200 truncate cursor-pointer ${
+                          isSelected
+                            ? "bg-emerald-50 text-emerald-700 font-medium"
+                            : "text-stone-600 hover:bg-stone-50 hover:text-stone-900 active:bg-stone-100"
                         }`}
                       >
                         {loc}
@@ -439,8 +462,9 @@ function Header({ page, setPage, menuOpen, setMenuOpen, selectedLocation, setSel
                   })}
                 </div>
                 <button
-                  onClick={() => { setPage("locations"); setLocationOpen(false); setMenuOpen(false); window.scrollTo(0, 0); }}
-                  className="mt-1 w-full text-left rounded-lg px-3 py-2 text-[11px] uppercase tracking-[0.15em] text-stone-400 hover:text-emerald-700 hover:bg-stone-50 transition-colors"
+                  type="button"
+                  {...tapHandlers(viewAllBranches)}
+                  className="mt-2 w-full text-left rounded-lg px-3 py-2.5 text-[11px] uppercase tracking-[0.15em] text-stone-400 hover:text-emerald-700 hover:bg-stone-50 transition-colors cursor-pointer"
                 >
                   View all branches →
                 </button>
@@ -448,7 +472,8 @@ function Header({ page, setPage, menuOpen, setMenuOpen, selectedLocation, setSel
             )}
           </div>
 
-          <a href="tel:+911140001234" className="text-center bg-emerald-700 text-white text-sm sm:text-base px-6 py-3.5 rounded-full hover:bg-emerald-800 transition-colors mt-2">
+          <a href="tel:+911140001234"
+             className="text-center bg-emerald-700 text-white text-sm sm:text-base px-6 py-3.5 rounded-full hover:bg-emerald-800 transition-colors mt-3">
             Call Now
           </a>
         </div>
@@ -507,7 +532,7 @@ function Footer({ setPage }) {
 }
 
 /* ============================================================
-   HERO SLIDER — full-screen Home hero
+   HERO SLIDER
    ============================================================ */
 function HeroSlider() {
   const [index, setIndex] = useState(0);
@@ -528,7 +553,8 @@ function HeroSlider() {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="relative h-screen min-h-[600px] w-full overflow-hidden">
+      {/* Use small viewport height so mobile address bar doesn't crop the slider */}
+      <div className="relative w-full h-screen min-h-[540px] sm:min-h-[600px] overflow-hidden">
         {HERO_SLIDES.map((slide, i) => (
           <div
             key={slide.src}
@@ -545,42 +571,41 @@ function HeroSlider() {
                 i === index ? "scale-105" : "scale-100"
               }`}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-900/35 to-stone-950/45" />
+            <div className="absolute inset-0 bg-gradient-to-t from-stone-950/85 via-stone-900/40 to-stone-950/50" />
           </div>
         ))}
 
         <div className="absolute inset-0 flex items-center">
-          <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 lg:pt-32">
+          <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-16 sm:pt-24 lg:pt-28">
             <div key={index} className="max-w-2xl animate-[fadeIn_0.9s_ease-out_forwards]">
               <span className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-white/25 bg-white/10 px-2.5 sm:px-4 py-1 sm:py-1.5 text-[9px] sm:text-[10px] lg:text-[11px] uppercase tracking-[0.2em] sm:tracking-[0.25em] text-white/90 backdrop-blur-sm">
                 <Sparkles size={10} className="sm:size-[12px]" /> Mahika Russian Spa
               </span>
-              <h1 className="mt-4 sm:mt-6 lg:mt-8 font-serif text-[2.2rem] xs:text-[2.6rem] sm:text-[3.5rem] lg:text-[4.5rem] xl:text-[5.5rem] leading-[1.05] text-white">
+              <h1 className="mt-4 sm:mt-6 lg:mt-8 font-serif text-[1.9rem] xs:text-[2.3rem] sm:text-[3rem] md:text-[3.6rem] lg:text-[4.5rem] xl:text-[5.5rem] leading-[1.08] text-white">
                 {HERO_SLIDES[index].title}
               </h1>
-              <p className="mt-3 sm:mt-4 lg:mt-5 text-stone-200/90 text-sm sm:text-lg lg:text-xl font-light max-w-lg">
+              <p className="mt-3 sm:mt-4 lg:mt-5 text-stone-200/90 text-[13px] xs:text-sm sm:text-lg lg:text-xl font-light max-w-lg">
                 {HERO_SLIDES[index].subtitle}
               </p>
-              <div className="mt-6 sm:mt-8 lg:mt-10 flex flex-wrap gap-2.5 sm:gap-3 lg:gap-4">
+              <div className="mt-5 sm:mt-7 lg:mt-9 flex flex-wrap gap-2 sm:gap-3">
                 <a
                   href={"https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent("Hello Mahika Russian Spa, I would like to book a session.")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-center gap-2 rounded-full bg-emerald-600 px-5 sm:px-7 py-3 sm:py-3.5 text-xs sm:text-sm font-medium text-white shadow-xl shadow-emerald-900/30 transition-all duration-300 hover:bg-emerald-500 active:scale-95"
+                  className="flex items-center justify-center gap-2 rounded-full bg-emerald-600 px-4 sm:px-7 py-2.5 sm:py-3.5 text-[12px] sm:text-sm font-medium text-white shadow-xl shadow-emerald-900/30 transition-all duration-300 hover:bg-emerald-500 active:scale-95"
                 >
-                  <MessageCircle size={15} /> Book on WhatsApp
+                  <MessageCircle size={14} className="sm:size-[15px]" /> Book on WhatsApp
                 </a>
-                <a
-                  href="tel:+911140001234"
-                  className="flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-5 sm:px-7 py-3 sm:py-3.5 text-xs sm:text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 active:scale-95"
-                >
-                  <Phone size={15} /> Call Now
+                <a href="tel:+911140001234"
+                  className="flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 sm:px-7 py-2.5 sm:py-3.5 text-[12px] sm:text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 active:scale-95">
+                  <Phone size={14} className="sm:size-[15px]" /> Call Now
                 </a>
               </div>
             </div>
           </div>
         </div>
 
+        {/* Arrows — smaller on mobile, positioned more inside */}
         <button onClick={prev} aria-label="Previous slide"
           className="absolute left-2 sm:left-4 lg:left-8 top-1/2 -translate-y-1/2 z-10 flex h-9 w-9 sm:h-11 sm:w-11 lg:h-12 lg:w-12 items-center justify-center rounded-full bg-white/85 text-stone-700 backdrop-blur-sm shadow-lg transition-all duration-300 hover:bg-white hover:text-emerald-700 hover:shadow-xl active:scale-95">
           <ChevronLeft size={18} className="sm:size-[20px] lg:size-[22px]" />
@@ -604,39 +629,39 @@ function HeroSlider() {
 }
 
 /* ============================================================
-   TEAM SECTION — sliding carousel of therapists
+   TEAM SECTION
    ============================================================ */
 function TeamSection() {
   const track = [...TEAM_MEMBERS, ...TEAM_MEMBERS];
   return (
-    <section className="py-12 sm:py-16 lg:py-24 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 sm:mb-8 lg:mb-12">
+    <section className="py-10 sm:py-16 lg:py-24 bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-5 sm:mb-8 lg:mb-12">
         <p className="text-emerald-600 text-[9px] xs:text-[10px] sm:text-xs lg:text-sm tracking-[0.15em] sm:tracking-[0.2em] lg:tracking-[0.25em] uppercase font-light mb-1.5 sm:mb-2 lg:mb-3">
           Our Therapists
         </p>
-        <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-stone-900">
+        <h2 className="font-serif text-[1.5rem] xs:text-2xl sm:text-3xl lg:text-4xl text-stone-900">
           Meet the team behind Mahika
         </h2>
-        <p className="mt-2 sm:mt-3 text-stone-500 text-sm sm:text-base max-w-xl font-light">
+        <p className="mt-2 sm:mt-3 text-stone-500 text-[13px] sm:text-base max-w-xl font-light">
           Trained hands, unhurried pace, and a genuine care for your comfort —
           the same team standard across all 25 branches.
         </p>
       </div>
 
       <div className="relative group">
-        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-10 sm:w-20 bg-gradient-to-r from-white to-transparent z-10" />
-        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-10 sm:w-20 bg-gradient-to-l from-white to-transparent z-10" />
+        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-8 sm:w-20 bg-gradient-to-r from-white to-transparent z-10" />
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 sm:w-20 bg-gradient-to-l from-white to-transparent z-10" />
 
-        <div className="flex gap-3 sm:gap-4 lg:gap-6 animate-team-scroll w-max">
+        <div className="flex gap-2.5 sm:gap-4 lg:gap-6 animate-team-scroll w-max">
           {track.map((m, i) => (
-            <div key={m.name + i} className="flex-shrink-0 w-40 xs:w-44 sm:w-52 lg:w-64 group/card">
+            <div key={m.name + i} className="flex-shrink-0 w-32 xs:w-40 sm:w-52 lg:w-64 group/card">
               <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl aspect-[3/4] shadow-md hover:shadow-2xl transition-shadow duration-500">
                 <img src={m.img} alt={m.name} loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover/card:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-stone-900/70 via-transparent to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4">
-                  <p className="font-serif text-base sm:text-lg lg:text-xl text-white leading-tight">{m.name}</p>
-                  <p className="text-[10px] sm:text-xs text-emerald-200 tracking-wide mt-0.5 font-light">{m.role}</p>
+                <div className="absolute inset-0 bg-gradient-to-t from-stone-900/75 via-transparent to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-2.5 sm:p-4">
+                  <p className="font-serif text-sm xs:text-base sm:text-lg lg:text-xl text-white leading-tight">{m.name}</p>
+                  <p className="text-[9px] sm:text-xs text-emerald-200 tracking-wide mt-0.5 font-light">{m.role}</p>
                 </div>
               </div>
             </div>
@@ -648,7 +673,7 @@ function TeamSection() {
 }
 
 /* ============================================================
-   FLOATING BUTTONS — right-side Call Now + WhatsApp
+   FLOATING BUTTONS
    ============================================================ */
 function FloatingButtons() {
   const waHref =
@@ -656,26 +681,18 @@ function FloatingButtons() {
     encodeURIComponent("Hello Mahika Russian Spa, I would like to know more about your services and availability.");
 
   return (
-    <div className="fixed right-3 sm:right-5 bottom-4 sm:bottom-8 z-40 flex flex-col gap-2.5 sm:gap-3">
-      <a
-        href={waHref}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Chat on WhatsApp"
-        className="group relative flex items-center justify-center h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-[#25D366] text-white shadow-xl shadow-emerald-900/25 transition-all duration-300 hover:scale-110 active:scale-95"
-      >
+    <div className="fixed right-3 sm:right-5 bottom-3 sm:bottom-8 z-40 flex flex-col gap-2 sm:gap-3">
+      <a href={waHref} target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp"
+        className="group relative flex items-center justify-center h-11 w-11 sm:h-14 sm:w-14 rounded-full bg-[#25D366] text-white shadow-xl shadow-emerald-900/25 transition-all duration-300 hover:scale-110 active:scale-95">
         <span className="absolute inset-0 rounded-full bg-[#25D366] opacity-60 animate-ping" aria-hidden="true" />
-        <MessageCircle size={22} className="sm:size-[26px] relative z-10" />
+        <MessageCircle size={20} className="sm:size-[26px] relative z-10" />
         <span className="hidden sm:block absolute right-full mr-3 whitespace-nowrap rounded-lg bg-stone-900 text-white text-xs px-3 py-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
           Chat on WhatsApp
         </span>
       </a>
-      <a
-        href="tel:+918796910363"
-        aria-label="Call now"
-        className="group relative flex items-center justify-center h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-emerald-700 text-white shadow-xl shadow-emerald-900/25 transition-all duration-300 hover:scale-110 hover:bg-emerald-800 active:scale-95"
-      >
-        <Phone size={20} className="sm:size-[24px]" />
+      <a href="tel:+918796910363" aria-label="Call now"
+        className="group relative flex items-center justify-center h-11 w-11 sm:h-14 sm:w-14 rounded-full bg-emerald-700 text-white shadow-xl shadow-emerald-900/25 transition-all duration-300 hover:scale-110 hover:bg-emerald-800 active:scale-95">
+        <Phone size={18} className="sm:size-[24px]" />
         <span className="hidden sm:block absolute right-full mr-3 whitespace-nowrap rounded-lg bg-stone-900 text-white text-xs px-3 py-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
           Call Now
         </span>
@@ -694,15 +711,14 @@ function HomePage({ setPage, selectedLocation }) {
 
   return (
     <div className={`transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-      {/* HERO — full-screen slider only */}
       <HeroSlider />
 
-      {/* Testimonials Section */}
+      {/* Testimonials */}
       <section className="py-10 sm:py-16 lg:py-20 xl:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6 sm:mb-8 lg:mb-10 xl:mb-14">
             <p className="text-emerald-600 text-[9px] xs:text-[10px] sm:text-xs lg:text-sm tracking-[0.15em] sm:tracking-[0.2em] lg:tracking-[0.25em] uppercase font-light mb-1.5 sm:mb-2 lg:mb-3">What Our Guests Say</p>
-            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-stone-900">Experiences worth sharing</h2>
+            <h2 className="font-serif text-[1.5rem] xs:text-2xl sm:text-3xl lg:text-4xl text-stone-900">Experiences worth sharing</h2>
             <div className="mt-2 sm:mt-3 lg:mt-4 flex justify-center">
               <div className="w-8 sm:w-10 lg:w-12 h-px bg-emerald-200" />
             </div>
@@ -743,10 +759,9 @@ function HomePage({ setPage, selectedLocation }) {
         </div>
       </section>
 
-      {/* TEAM SLIDER */}
       <TeamSection />
 
-      {/* Features Section */}
+      {/* Features */}
       <section className="py-10 sm:py-16 lg:py-20 border-y border-stone-200/60 bg-stone-50/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 text-center">
           <div className="group">
@@ -773,13 +788,13 @@ function HomePage({ setPage, selectedLocation }) {
         </div>
       </section>
 
-      {/* Signature Treatments — NOW with Call Now + WhatsApp buttons */}
+      {/* Signature Treatments */}
       <section className="py-10 sm:py-16 lg:py-20 xl:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 sm:mb-8 lg:mb-10 xl:mb-12">
             <div>
               <p className="text-emerald-600 text-[9px] xs:text-[10px] sm:text-xs lg:text-sm tracking-[0.15em] sm:tracking-[0.2em] lg:tracking-[0.25em] uppercase font-light mb-1.5 sm:mb-2 lg:mb-3">Signature Treatments</p>
-              <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-stone-900">A few favourites to start with</h2>
+              <h2 className="font-serif text-[1.5rem] xs:text-2xl sm:text-3xl lg:text-4xl text-stone-900">A few favourites to start with</h2>
             </div>
             <button onClick={() => setPage("services")} className="hidden sm:flex items-center gap-2 text-sm text-stone-500 hover:text-emerald-700 transition-colors group mt-3 sm:mt-0">
               See all services <ChevronRight size={15} className="transition-transform group-hover:translate-x-0.5" />
@@ -790,12 +805,8 @@ function HomePage({ setPage, selectedLocation }) {
             {SERVICES.slice(0, 3).map((s) => (
               <article key={s.name} className="group flex flex-col cursor-pointer">
                 <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl aspect-[4/5] shadow-md hover:shadow-2xl transition-shadow duration-500">
-                  <img
-                    src={s.img}
-                    alt={s.name}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
+                  <img src={s.img} alt={s.name} loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-stone-900/70 via-stone-900/20 to-transparent" />
                   <span className="absolute top-3 sm:top-4 lg:top-5 right-3 sm:right-4 lg:right-5 rounded-full bg-white/95 backdrop-blur-sm px-2.5 sm:px-3 lg:px-4 py-1 sm:py-1.5 lg:py-2 text-sm sm:text-base lg:text-lg font-serif text-emerald-700 shadow-lg">
                     {s.price}
@@ -806,20 +817,14 @@ function HomePage({ setPage, selectedLocation }) {
                   </div>
                 </div>
 
-                {/* Call Now + WhatsApp buttons on home signature cards */}
                 <div className="mt-3 sm:mt-4 grid grid-cols-2 gap-2 lg:gap-3">
-                  <a
-                    href="tel:+918796910363"
-                    className="flex items-center justify-center gap-1.5 lg:gap-2 rounded-full border border-stone-200 bg-white px-3 py-2.5 lg:py-3 text-[11px] sm:text-xs lg:text-sm font-medium text-stone-700 transition-all duration-300 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-md active:scale-95 touch-manipulation"
-                  >
+                  <a href="tel:+918796910363"
+                    className="flex items-center justify-center gap-1.5 lg:gap-2 rounded-full border border-stone-200 bg-white px-2.5 sm:px-3 py-2.5 lg:py-3 text-[11px] sm:text-xs lg:text-sm font-medium text-stone-700 transition-all duration-300 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-md active:scale-95 touch-manipulation">
                     <Phone size={13} className="sm:size-[14px] lg:size-[15px]" /> Call Now
                   </a>
-                  <a
-                    href={buildServiceWhatsAppLink(s, selectedLocation || "Delhi NCR")}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-1.5 lg:gap-2 rounded-full bg-emerald-700 px-3 py-2.5 lg:py-3 text-[11px] sm:text-xs lg:text-sm font-medium text-white transition-all duration-300 hover:bg-emerald-800 hover:shadow-lg hover:shadow-emerald-700/25 active:scale-95 touch-manipulation"
-                  >
+                  <a href={buildServiceWhatsAppLink(s, selectedLocation || "Delhi NCR")}
+                    target="_blank" rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-1.5 lg:gap-2 rounded-full bg-emerald-700 px-2.5 sm:px-3 py-2.5 lg:py-3 text-[11px] sm:text-xs lg:text-sm font-medium text-white transition-all duration-300 hover:bg-emerald-800 hover:shadow-lg hover:shadow-emerald-700/25 active:scale-95 touch-manipulation">
                     <MessageCircle size={13} className="sm:size-[14px] lg:size-[15px]" /> WhatsApp
                   </a>
                 </div>
@@ -835,7 +840,7 @@ function HomePage({ setPage, selectedLocation }) {
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-4 sm:mb-6 lg:mb-8 xl:mb-12">
             <div>
               <p className="text-emerald-600 text-[9px] xs:text-[10px] sm:text-xs lg:text-sm tracking-[0.15em] sm:tracking-[0.2em] lg:tracking-[0.25em] uppercase font-light mb-1.5 sm:mb-2 lg:mb-3">Inside Mahika</p>
-              <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-stone-900">A look around our rooms</h2>
+              <h2 className="font-serif text-[1.5rem] xs:text-2xl sm:text-3xl lg:text-4xl text-stone-900">A look around our rooms</h2>
             </div>
             <button onClick={() => setPage("gallery")} className="hidden sm:flex items-center gap-2 text-sm text-stone-500 hover:text-emerald-700 transition-colors group mt-3 sm:mt-0">
               Full gallery <ChevronRight size={15} className="transition-transform group-hover:translate-x-0.5" />
@@ -863,7 +868,7 @@ function HomePage({ setPage, selectedLocation }) {
       <section className="bg-stone-900 py-10 sm:py-16 lg:py-20 xl:py-28">
         <div className="max-w-3xl sm:max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Star className="mx-auto text-emerald-400/60 mb-3 sm:mb-4 lg:mb-6 sm:size-[24px] lg:size-[32px]" size={20} />
-          <p className="font-serif text-lg sm:text-2xl lg:text-3xl xl:text-4xl text-stone-100 leading-relaxed">
+          <p className="font-serif text-base xs:text-lg sm:text-2xl lg:text-3xl xl:text-4xl text-stone-100 leading-relaxed">
             "I stopped in during a work trip through Aerocity, expecting nothing
             more than a quick massage. Left an hour later completely unwound."
           </p>
@@ -908,7 +913,6 @@ function ServicesPage({ setPage, selectedLocation }) {
   ];
 
   const SERVICE_TAGS = ["All", "Signature", "Relaxation", "Therapeutic"];
-
   const RITUAL_STEPS = [
     ["01", "Consultation", "We begin with a brief conversation about your needs, preferences, and any areas of tension."],
     ["02", "The Treatment", "Your therapist tailors the pressure, oils, and techniques to your body and goals."],
@@ -928,10 +932,10 @@ function ServicesPage({ setPage, selectedLocation }) {
           <span className="inline-flex items-center gap-1.5 sm:gap-2 lg:gap-3 rounded-full border border-stone-400/20 bg-white/5 px-2.5 sm:px-3 lg:px-5 py-1 sm:py-1.5 lg:py-2 text-[9px] sm:text-[10px] lg:text-[11px] uppercase tracking-[0.15em] sm:tracking-[0.2em] lg:tracking-[0.25em] text-stone-300 backdrop-blur-sm">
             <Sparkles size={10} className="sm:size-[12px] lg:size-[13px]" /> Our Menu
           </span>
-          <h1 className="mt-4 sm:mt-5 lg:mt-6 xl:mt-8 font-serif text-[2rem] sm:text-[2.8rem] lg:text-[4rem] xl:text-[5rem] leading-[1.05] text-white max-w-2xl lg:max-w-3xl">
+          <h1 className="mt-4 sm:mt-5 lg:mt-6 xl:mt-8 font-serif text-[1.8rem] xs:text-[2.2rem] sm:text-[2.8rem] lg:text-[4rem] xl:text-[5rem] leading-[1.05] text-white max-w-2xl lg:max-w-3xl">
             Treatments, <span className="italic text-emerald-300">priced simply.</span>
           </h1>
-          <p className="mt-3 sm:mt-4 lg:mt-5 xl:mt-6 text-stone-300 text-sm sm:text-base lg:text-lg leading-relaxed max-w-lg lg:max-w-xl font-light">
+          <p className="mt-3 sm:mt-4 lg:mt-5 xl:mt-6 text-stone-300 text-[13px] sm:text-base lg:text-lg leading-relaxed max-w-lg lg:max-w-xl font-light">
             Every treatment below is available at all twenty-five branches. Prices
             are per session and include a short consultation before we begin.
           </p>
@@ -981,18 +985,12 @@ function ServicesPage({ setPage, selectedLocation }) {
                 <p className="mt-1 sm:mt-1.5 lg:mt-2 text-xs sm:text-sm text-stone-500 leading-relaxed flex-1 font-light">{s.desc}</p>
 
                 <div className="mt-4 lg:mt-5 grid grid-cols-2 gap-2 lg:gap-3">
-                  <a
-                    href="tel:+918796910363"
-                    className="flex items-center justify-center gap-1.5 lg:gap-2 rounded-full border border-stone-200 bg-white px-3 py-2.5 lg:py-3 text-[11px] sm:text-xs lg:text-sm font-medium text-stone-700 transition-all duration-300 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-md active:scale-95 touch-manipulation"
-                  >
+                  <a href="tel:+918796910363"
+                    className="flex items-center justify-center gap-1.5 lg:gap-2 rounded-full border border-stone-200 bg-white px-2.5 sm:px-3 py-2.5 lg:py-3 text-[11px] sm:text-xs lg:text-sm font-medium text-stone-700 transition-all duration-300 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-md active:scale-95 touch-manipulation">
                     <Phone size={13} className="sm:size-[14px] lg:size-[15px]" /> Call Now
                   </a>
-                  <a
-                    href={buildServiceWhatsAppLink(s, location)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-1.5 lg:gap-2 rounded-full bg-emerald-700 px-3 py-2.5 lg:py-3 text-[11px] sm:text-xs lg:text-sm font-medium text-white transition-all duration-300 hover:bg-emerald-800 hover:shadow-lg hover:shadow-emerald-700/25 active:scale-95 touch-manipulation"
-                  >
+                  <a href={buildServiceWhatsAppLink(s, location)} target="_blank" rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-1.5 lg:gap-2 rounded-full bg-emerald-700 px-2.5 sm:px-3 py-2.5 lg:py-3 text-[11px] sm:text-xs lg:text-sm font-medium text-white transition-all duration-300 hover:bg-emerald-800 hover:shadow-lg hover:shadow-emerald-700/25 active:scale-95 touch-manipulation">
                     <MessageCircle size={13} className="sm:size-[14px] lg:size-[15px]" /> WhatsApp
                   </a>
                 </div>
@@ -1005,7 +1003,7 @@ function ServicesPage({ setPage, selectedLocation }) {
       <section className="bg-stone-50/80 border-y border-stone-200/60 py-10 sm:py-16 lg:py-20 xl:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-emerald-600 text-[9px] xs:text-[10px] sm:text-xs lg:text-sm tracking-[0.15em] sm:tracking-[0.2em] lg:tracking-[0.25em] uppercase font-light mb-1.5 sm:mb-2 lg:mb-3">The Ritual</p>
-          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-stone-900 mb-5 sm:mb-6 lg:mb-8 xl:mb-12">How a session goes</h2>
+          <h2 className="font-serif text-[1.5rem] xs:text-2xl sm:text-3xl lg:text-4xl text-stone-900 mb-5 sm:mb-6 lg:mb-8 xl:mb-12">How a session goes</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12">
             {RITUAL_STEPS.map(([n, title, body]) => (
               <div key={n} className="group">
@@ -1059,10 +1057,10 @@ function AboutPage({ setPage }) {
           <span className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-stone-400/20 bg-white/5 px-2.5 sm:px-4 py-1 sm:py-1.5 text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-stone-300 backdrop-blur-sm">
             <Heart size={11} /> About Us
           </span>
-          <h1 className="mt-4 sm:mt-5 lg:mt-6 font-serif text-[2rem] sm:text-[2.8rem] lg:text-[4rem] xl:text-[4.5rem] leading-[1.05] text-white max-w-2xl">
+          <h1 className="mt-4 sm:mt-5 lg:mt-6 font-serif text-[1.8rem] xs:text-[2.2rem] sm:text-[2.8rem] lg:text-[4rem] xl:text-[4.5rem] leading-[1.05] text-white max-w-2xl">
             A quieter kind of <span className="italic text-emerald-300">luxury.</span>
           </h1>
-          <p className="mt-3 sm:mt-4 lg:mt-5 text-stone-300 text-sm sm:text-base lg:text-lg leading-relaxed max-w-xl font-light">
+          <p className="mt-3 sm:mt-4 lg:mt-5 text-stone-300 text-[13px] sm:text-base lg:text-lg leading-relaxed max-w-xl font-light">
             Mahika Russian Spa was built on one belief — that genuine relaxation
             cannot be rushed. Since opening our first room in Aerocity, that
             belief has shaped every branch we've opened across Delhi NCR.
@@ -1074,7 +1072,7 @@ function AboutPage({ setPage }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16 items-center">
           <div className="order-2 lg:order-1">
             <p className="text-emerald-600 text-[9px] sm:text-xs lg:text-sm tracking-[0.2em] lg:tracking-[0.25em] uppercase font-light mb-2 lg:mb-3">Our Philosophy</p>
-            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-stone-900 leading-tight">Twenty-five locations, one standard of care</h2>
+            <h2 className="font-serif text-[1.5rem] xs:text-2xl sm:text-3xl lg:text-4xl text-stone-900 leading-tight">Twenty-five locations, one standard of care</h2>
             <div className="mt-4 lg:mt-6 flex items-start gap-3 lg:gap-5">
               <span className="mt-2 h-px w-10 lg:w-16 flex-shrink-0 bg-emerald-400/60" />
               <div className="space-y-4 text-sm sm:text-base text-stone-600 font-light leading-relaxed">
@@ -1094,7 +1092,7 @@ function AboutPage({ setPage }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <p className="text-emerald-600 text-[9px] sm:text-xs lg:text-sm tracking-[0.2em] lg:tracking-[0.25em] uppercase font-light mb-2 lg:mb-3">The Experience</p>
-            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-stone-900">What premium means here</h2>
+            <h2 className="font-serif text-[1.5rem] xs:text-2xl sm:text-3xl lg:text-4xl text-stone-900">What premium means here</h2>
           </div>
           <div className="mt-6 sm:mt-8 lg:mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
             {[
@@ -1139,7 +1137,7 @@ function AboutPage({ setPage }) {
       <section className="bg-stone-900 py-10 sm:py-16 lg:py-20 xl:py-28">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-emerald-400/80 text-[9px] sm:text-xs tracking-[0.2em] lg:tracking-[0.25em] uppercase font-light mb-2 lg:mb-3">Why Choose Us</p>
-          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-stone-100 leading-tight">The same quiet ritual, wherever you are in the city</h2>
+          <h2 className="font-serif text-[1.5rem] xs:text-2xl sm:text-3xl lg:text-4xl text-stone-100 leading-tight">The same quiet ritual, wherever you are in the city</h2>
           <p className="mt-4 lg:mt-6 text-stone-400 text-sm sm:text-base font-light leading-relaxed max-w-2xl mx-auto">
             Twenty-five branches across Delhi NCR means there is always a Mahika
             near you — at the airport, near your office, or a short drive from home.
@@ -1166,10 +1164,10 @@ function GalleryPage({ setPage }) {
     <div className="animate-fadeIn">
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 lg:pt-32 xl:pt-40 pb-6 sm:pb-8 lg:pb-10">
         <p className="text-emerald-600 text-[9px] sm:text-xs lg:text-sm tracking-[0.2em] lg:tracking-[0.25em] uppercase font-light mb-2 lg:mb-3">Gallery</p>
-        <h1 className="font-serif text-2xl sm:text-[2.2rem] lg:text-[3.5rem] xl:text-[4.5rem] leading-tight text-stone-900">
+        <h1 className="font-serif text-[1.6rem] xs:text-[2rem] sm:text-[2.2rem] lg:text-[3.5rem] xl:text-[4.5rem] leading-tight text-stone-900">
           A look inside <span className="italic text-emerald-600">Mahika.</span>
         </h1>
-        <p className="mt-3 sm:mt-4 text-stone-500 text-sm sm:text-base max-w-2xl font-light">
+        <p className="mt-3 sm:mt-4 text-stone-500 text-[13px] sm:text-base max-w-2xl font-light">
           Treatment rooms, warm oils, and the quiet details that make every
           session feel like an escape — captured across our Delhi NCR branches.
         </p>
@@ -1197,7 +1195,7 @@ function GalleryPage({ setPage }) {
 
       <section className="bg-stone-50/70 border-t border-stone-200/60 py-10 sm:py-14 lg:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-stone-900">Ready to step in?</h2>
+          <h2 className="font-serif text-[1.5rem] xs:text-2xl sm:text-3xl lg:text-4xl text-stone-900">Ready to step in?</h2>
           <p className="mt-3 text-stone-500 text-sm sm:text-base font-light max-w-xl mx-auto">
             Pick your nearest branch and we'll hold a slot for you today.
           </p>
@@ -1337,8 +1335,7 @@ function BookingForm({ location, services, compact = false }) {
   );
 }
 
-function LocationPage({ location, setPage, setSelectedLocation }) {
-  // All 8 treatments shown for every branch
+function LocationPage({ location, setPage }) {
   const services = getServicesForLocation(location);
 
   useEffect(() => {
@@ -1364,10 +1361,10 @@ function LocationPage({ location, setPage, setSelectedLocation }) {
           <span className="flex items-center gap-2 text-emerald-300/90 text-[10px] sm:text-xs uppercase tracking-[0.25em] font-light mb-2">
             <MapPin size={12} /> Branch · Delhi NCR
           </span>
-          <h1 className="font-serif text-[1.8rem] sm:text-[2.6rem] lg:text-[3.8rem] xl:text-[4.4rem] leading-[1.05] text-white">
+          <h1 className="font-serif text-[1.5rem] xs:text-[1.9rem] sm:text-[2.6rem] lg:text-[3.8rem] xl:text-[4.4rem] leading-[1.08] text-white">
             Mahika Russian Spa — <span className="italic text-emerald-300">{location}</span>
           </h1>
-          <p className="mt-3 sm:mt-4 text-stone-300 text-sm sm:text-base lg:text-lg max-w-xl font-light">
+          <p className="mt-3 sm:mt-4 text-stone-300 text-[13px] sm:text-base lg:text-lg max-w-xl font-light">
             {services.length} signature treatments available at our {location} branch, open daily from 10 AM to 10 PM.
           </p>
         </div>
@@ -1379,7 +1376,7 @@ function LocationPage({ location, setPage, setSelectedLocation }) {
             <p className="text-emerald-600 text-[9px] sm:text-xs lg:text-sm tracking-[0.2em] lg:tracking-[0.25em] uppercase font-light mb-2 lg:mb-3">
               Services at {location}
             </p>
-            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-stone-900">Available treatments</h2>
+            <h2 className="font-serif text-[1.5rem] xs:text-2xl sm:text-3xl lg:text-4xl text-stone-900">Available treatments</h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
@@ -1406,11 +1403,11 @@ function LocationPage({ location, setPage, setSelectedLocation }) {
 
                 <div className="mt-4 lg:mt-5 grid grid-cols-2 gap-2 lg:gap-3">
                   <a href="tel:+918796910363"
-                    className="flex items-center justify-center gap-1.5 lg:gap-2 rounded-full border border-stone-200 bg-white px-3 py-2.5 lg:py-3 text-[11px] sm:text-xs lg:text-sm font-medium text-stone-700 transition-all duration-300 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-md active:scale-95 touch-manipulation">
+                    className="flex items-center justify-center gap-1.5 lg:gap-2 rounded-full border border-stone-200 bg-white px-2.5 sm:px-3 py-2.5 lg:py-3 text-[11px] sm:text-xs lg:text-sm font-medium text-stone-700 transition-all duration-300 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-md active:scale-95 touch-manipulation">
                     <Phone size={13} className="sm:size-[14px] lg:size-[15px]" /> Call Now
                   </a>
                   <a href={buildServiceWhatsAppLink(s, location)} target="_blank" rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-1.5 lg:gap-2 rounded-full bg-emerald-700 px-3 py-2.5 lg:py-3 text-[11px] sm:text-xs lg:text-sm font-medium text-white transition-all duration-300 hover:bg-emerald-800 hover:shadow-lg hover:shadow-emerald-700/25 active:scale-95 touch-manipulation">
+                    className="flex items-center justify-center gap-1.5 lg:gap-2 rounded-full bg-emerald-700 px-2.5 sm:px-3 py-2.5 lg:py-3 text-[11px] sm:text-xs lg:text-sm font-medium text-white transition-all duration-300 hover:bg-emerald-800 hover:shadow-lg hover:shadow-emerald-700/25 active:scale-95 touch-manipulation">
                     <MessageCircle size={13} className="sm:size-[14px] lg:size-[15px]" /> WhatsApp
                   </a>
                 </div>
@@ -1424,7 +1421,7 @@ function LocationPage({ location, setPage, setSelectedLocation }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-5 gap-6 sm:gap-8 lg:gap-12">
           <div className="lg:col-span-2">
             <p className="text-emerald-600 text-[9px] sm:text-xs tracking-[0.2em] uppercase font-light mb-2 lg:mb-3">Book at {location}</p>
-            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-stone-900">Reserve your slot</h2>
+            <h2 className="font-serif text-[1.5rem] xs:text-2xl sm:text-3xl lg:text-4xl text-stone-900">Reserve your slot</h2>
             <p className="mt-3 lg:mt-4 text-stone-500 text-sm sm:text-base font-light leading-relaxed max-w-md">
               Fill in your details and we'll open WhatsApp with your booking request ready to send. We confirm slots within the hour.
             </p>
@@ -1438,7 +1435,7 @@ function LocationPage({ location, setPage, setSelectedLocation }) {
           </div>
 
           <div className="lg:col-span-3">
-            <div className="rounded-2xl sm:rounded-3xl border border-stone-200 bg-white p-5 sm:p-6 lg:p-8 shadow-lg shadow-stone-900/5">
+            <div className="rounded-2xl sm:rounded-3xl border border-stone-200 bg-white p-4 sm:p-6 lg:p-8 shadow-lg shadow-stone-900/5">
               <BookingForm location={location} services={services} />
             </div>
           </div>
@@ -1483,15 +1480,15 @@ function LocationsPage({ selectedLocation, setSelectedLocation, setPage }) {
   const chooseLocation = (loc) => {
     setSelected(loc);
     setPage("location");
-    window.scrollTo(0, 0);
+    setTimeout(() => window.scrollTo({ top: 0, behavior: "auto" }), 0);
   };
 
   return (
     <div className="animate-fadeIn">
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 lg:pt-32 xl:pt-40 pb-5 sm:pb-6 lg:pb-8 xl:pb-10">
         <p className="text-emerald-600 text-[9px] xs:text-[10px] sm:text-xs lg:text-sm tracking-[0.15em] sm:tracking-[0.2em] lg:tracking-[0.25em] uppercase font-light mb-1.5 sm:mb-2 lg:mb-3">Find Us</p>
-        <h1 className="font-serif text-2xl sm:text-[2.2rem] lg:text-[3.5rem] xl:text-[4.5rem] leading-tight text-stone-900 mb-2 sm:mb-3 lg:mb-4">25 branches across Delhi NCR</h1>
-        <p className="text-stone-500 text-sm sm:text-base max-w-xl font-light">
+        <h1 className="font-serif text-[1.6rem] xs:text-2xl sm:text-[2.2rem] lg:text-[3.5rem] xl:text-[4.5rem] leading-tight text-stone-900 mb-2 sm:mb-3 lg:mb-4">25 branches across Delhi NCR</h1>
+        <p className="text-stone-500 text-[13px] sm:text-base max-w-xl font-light">
           Tap a neighbourhood to open its branch page, view available treatments and send us your booking request.
         </p>
       </section>
@@ -1514,7 +1511,7 @@ function LocationsPage({ selectedLocation, setSelectedLocation, setPage }) {
           <div className="flex flex-wrap gap-1 sm:gap-1.5 lg:gap-3">
             {LOCATIONS.map((loc) => (
               <button key={loc} onClick={() => chooseLocation(loc)}
-                className={`rounded-full border px-2 sm:px-2.5 lg:px-4 py-1 sm:py-1.5 lg:py-2.5 text-[10px] sm:text-xs lg:text-sm transition-all duration-300 touch-manipulation ${
+                className={`rounded-full border px-2.5 sm:px-2.5 lg:px-4 py-1.5 sm:py-1.5 lg:py-2.5 text-[11px] sm:text-xs lg:text-sm transition-all duration-300 touch-manipulation ${
                   selected === loc ? "bg-emerald-700 text-white border-emerald-700 shadow-lg shadow-emerald-700/15" : "border-stone-200 text-stone-600 hover:border-stone-300 hover:text-stone-800"
                 }`}>
                 {loc}
@@ -1559,21 +1556,21 @@ function LocationsPage({ selectedLocation, setSelectedLocation, setPage }) {
             ) : (
               <form onSubmit={submit} className="flex flex-col gap-3 sm:gap-4 lg:gap-5">
                 <div>
-                  <label className="text-[9px] xs:text-[10px] sm:text-xs text-stone-400 tracking-wide uppercase font-light">Your name</label>
+                  <label className="text-[10px] sm:text-xs text-stone-400 tracking-wide uppercase font-light">Your name</label>
                   <input value={form.name} onChange={(e) => { setForm({ ...form, name: e.target.value }); setError(""); }}
-                    className="w-full mt-0.5 sm:mt-1 lg:mt-1.5 px-3 sm:px-4 lg:px-5 py-2 sm:py-2.5 lg:py-3.5 rounded-lg sm:rounded-xl border border-stone-200 bg-stone-50/50 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:border-transparent transition-all text-sm sm:text-base touch-manipulation"
+                    className="w-full mt-1 lg:mt-1.5 px-3 sm:px-4 lg:px-5 py-2.5 sm:py-3 lg:py-3.5 rounded-lg sm:rounded-xl border border-stone-200 bg-stone-50/50 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:border-transparent transition-all text-sm sm:text-base touch-manipulation"
                     placeholder="Enter your name" />
                 </div>
                 <div>
-                  <label className="text-[9px] xs:text-[10px] sm:text-xs text-stone-400 tracking-wide uppercase font-light">Phone number</label>
+                  <label className="text-[10px] sm:text-xs text-stone-400 tracking-wide uppercase font-light">Phone number</label>
                   <input value={form.phone} onChange={(e) => { setForm({ ...form, phone: e.target.value }); setError(""); }}
-                    className="w-full mt-0.5 sm:mt-1 lg:mt-1.5 px-3 sm:px-4 lg:px-5 py-2 sm:py-2.5 lg:py-3.5 rounded-lg sm:rounded-xl border border-stone-200 bg-stone-50/50 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:border-transparent transition-all text-sm sm:text-base touch-manipulation"
+                    className="w-full mt-1 lg:mt-1.5 px-3 sm:px-4 lg:px-5 py-2.5 sm:py-3 lg:py-3.5 rounded-lg sm:rounded-xl border border-stone-200 bg-stone-50/50 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:border-transparent transition-all text-sm sm:text-base touch-manipulation"
                     placeholder="10-digit mobile number" inputMode="tel" />
                 </div>
                 <div>
-                  <label className="text-[9px] xs:text-[10px] sm:text-xs text-stone-400 tracking-wide uppercase font-light">Treatment</label>
+                  <label className="text-[10px] sm:text-xs text-stone-400 tracking-wide uppercase font-light">Treatment</label>
                   <select value={form.service} onChange={(e) => setForm({ ...form, service: e.target.value })}
-                    className="w-full mt-0.5 sm:mt-1 lg:mt-1.5 px-3 sm:px-4 lg:px-5 py-2 sm:py-2.5 lg:py-3.5 rounded-lg sm:rounded-xl border border-stone-200 bg-stone-50/50 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:border-transparent transition-all text-sm sm:text-base appearance-none touch-manipulation">
+                    className="w-full mt-1 lg:mt-1.5 px-3 sm:px-4 lg:px-5 py-2.5 sm:py-3 lg:py-3.5 rounded-lg sm:rounded-xl border border-stone-200 bg-stone-50/50 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:border-transparent transition-all text-sm sm:text-base appearance-none touch-manipulation">
                     {getServicesForLocation(selected).map((s) => (
                       <option key={s.name} value={s.name}>{s.name} · {s.price}</option>
                     ))}
@@ -1584,7 +1581,7 @@ function LocationsPage({ selectedLocation, setSelectedLocation, setPage }) {
                   className="mt-0.5 sm:mt-1 lg:mt-2 flex items-center justify-center gap-1.5 sm:gap-2 lg:gap-2.5 bg-emerald-600 text-white py-2.5 sm:py-3 lg:py-4 rounded-lg sm:rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 hover:bg-emerald-700 hover:shadow-lg active:scale-95 touch-manipulation">
                   <MessageCircle size={13} className="sm:size-[15px] lg:size-[17px]" /> Send on WhatsApp
                 </button>
-                <p className="text-[9px] xs:text-[10px] sm:text-[11px] text-stone-400 text-center leading-relaxed font-light">
+                <p className="text-[10px] sm:text-[11px] text-stone-400 text-center leading-relaxed font-light">
                   Opens WhatsApp with your name, number and branch already filled in.
                 </p>
               </form>
@@ -1653,6 +1650,17 @@ export default function MahikaRussianSpaWebsite() {
         }
         .touch-manipulation { touch-action: manipulation; }
         html, body { max-width: 100%; overflow-x: hidden; }
+
+        /* iOS Safari can drop synthesized "click" events for buttons that
+           live inside a scrollable container within a fixed element.
+           A real cursor value restores them — and it also means every
+           tappable element in the menus behaves like a link/button. */
+        button, a, [role="option"] { cursor: pointer; }
+
+        /* Better tap targets on touch devices */
+        @media (hover: none) and (pointer: coarse) {
+          button, a { -webkit-tap-highlight-color: transparent; }
+        }
       `}</style>
 
       <LoadingScreen onComplete={() => setShowLoading(false)} />
@@ -1683,11 +1691,7 @@ export default function MahikaRussianSpaWebsite() {
           />
         )}
         {page === "location" && (
-          <LocationPage
-            location={selectedLocation}
-            setPage={setPage}
-            setSelectedLocation={setSelectedLocation}
-          />
+          <LocationPage location={selectedLocation} setPage={setPage} />
         )}
 
         <Footer setPage={setPage} />
