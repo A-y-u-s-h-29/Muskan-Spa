@@ -50,7 +50,7 @@ const ALL_TREATMENTS = [
     img: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=1200&auto=format&fit=crop" },
   { name: "4 Hand Massage", price: "₹5,500", duration: "60 min", tag: "Signature",
     desc: "Two therapists working in synchrony for a truly immersive experience.",
-    img: "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?q=80&w=1200&auto=format&fit=crop" },
+    img: "1.webp" },
   { name: "Body Lotion Massage", price: "₹2,500", duration: "60 min", tag: "Relaxation",
     desc: "A nourishing lotion-based massage that hydrates while it relaxes.",
     img: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=1200&auto=format&fit=crop" },
@@ -386,7 +386,7 @@ function Header({ page, setPage, menuOpen, setMenuOpen, selectedLocation, setSel
             )}
           </div>
 
-          <a href="tel:+911140001234"
+          <a href="tel:+918796910363"
              className="flex items-center gap-2 rounded-full bg-emerald-700 px-4 sm:px-5 lg:px-6 py-2 sm:py-2.5 lg:py-3 text-xs sm:text-sm text-white transition-all duration-300 hover:bg-emerald-800 hover:shadow-lg hover:shadow-emerald-700/20">
             <Phone size={14} className="sm:size-[15px]" /> <span className="hidden sm:inline">Call Now</span>
           </a>
@@ -472,7 +472,7 @@ function Header({ page, setPage, menuOpen, setMenuOpen, selectedLocation, setSel
             )}
           </div>
 
-          <a href="tel:+911140001234"
+          <a href="tel:+918796910363"
              className="text-center bg-emerald-700 text-white text-sm sm:text-base px-6 py-3.5 rounded-full hover:bg-emerald-800 transition-colors mt-3">
             Call Now
           </a>
@@ -596,7 +596,7 @@ function HeroSlider() {
                 >
                   <MessageCircle size={14} className="sm:size-[15px]" /> Book on WhatsApp
                 </a>
-                <a href="tel:+911140001234"
+                <a href="tel:+918796910363"
                   className="flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 sm:px-7 py-2.5 sm:py-3.5 text-[12px] sm:text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 active:scale-95">
                   <Phone size={14} className="sm:size-[15px]" /> Call Now
                 </a>
@@ -903,7 +903,7 @@ function ServicesPage({ setPage, selectedLocation }) {
       img: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=1200&auto=format&fit=crop" },
     { name: "4 Hand Massage", tag: "Signature", duration: "60 min", price: "₹5,500",
       desc: "Experience the ultimate relaxation with our 4 hand massage services. Two skilled massage therapists work in harmony to provide a synchronized massage experience that is designed to melt away tension and leave you feeling rejuvenated.",
-      img: "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?q=80&w=1200&auto=format&fit=crop" },
+      img: "1.webp" },
     { name: "Body Lotion Massage", tag: "Relaxation", duration: "60 min", price: "₹2,500",
       desc: "Indulge in the ultimate pampering experience with our body lotion massage services. Our skilled massage therapists use a specially-formulated lotion that is designed to nourish and hydrate the skin while providing a deeply relaxing massage experience.",
       img: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=1200&auto=format&fit=crop" },
@@ -1029,9 +1029,9 @@ function ServicesPage({ setPage, selectedLocation }) {
                 </p>
               </div>
               <div className="flex flex-wrap gap-2.5 sm:gap-3 lg:gap-4">
-                <a href="tel:+911140001234"
+                <a href="tel:+918796910363"
                   className="flex flex-1 sm:flex-none items-center justify-center gap-1.5 sm:gap-2 lg:gap-3 whitespace-nowrap rounded-full bg-emerald-600 px-4 sm:px-5 lg:px-8 py-2.5 sm:py-3 lg:py-4 text-xs sm:text-sm font-medium text-white transition-all duration-300 hover:bg-emerald-500 hover:shadow-lg hover:shadow-emerald-600/25 active:scale-95">
-                  <Phone size={13} className="sm:size-[14px] lg:size-[15px]" /> <span className="hidden xs:inline">+91 11 4000 1234</span>
+                  <Phone size={13} className="sm:size-[14px] lg:size-[15px]" /> <span className="hidden xs:inline">+91 87969 10363</span>
                 </a>
                 <button onClick={() => { setPage("locations"); window.scrollTo(0, 0); }}
                   className="flex flex-1 sm:flex-none items-center justify-center whitespace-nowrap rounded-full border border-white/20 bg-white/5 px-4 sm:px-5 lg:px-8 py-2.5 sm:py-3 lg:py-4 text-xs sm:text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/15 active:scale-95">
