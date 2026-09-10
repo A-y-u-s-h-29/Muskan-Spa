@@ -534,12 +534,14 @@ function Footer({ setPage }) {
 /* ============================================================
    HERO SLIDER
    ============================================================ */
+/* ============================================================
+   HERO SLIDER
+   ============================================================ */
 function HeroSlider() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
 
   const next = useCallback(() => setIndex((i) => (i + 1) % HERO_SLIDES.length), []);
-  const prev = useCallback(() => setIndex((i) => (i - 1 + HERO_SLIDES.length) % HERO_SLIDES.length), []);
 
   useEffect(() => {
     if (paused) return;
@@ -578,42 +580,32 @@ function HeroSlider() {
         <div className="absolute inset-0 flex items-center">
           <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-16 sm:pt-24 lg:pt-28">
             <div key={index} className="max-w-2xl animate-[fadeIn_0.9s_ease-out_forwards]">
-              <span className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-white/25 bg-white/10 px-2.5 sm:px-4 py-1 sm:py-1.5 text-[9px] sm:text-[10px] lg:text-[11px] uppercase tracking-[0.2em] sm:tracking-[0.25em] text-white/90 backdrop-blur-sm">
-                <Sparkles size={10} className="sm:size-[12px]" /> Mahika Russian Spa
+              <span className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-white/25 bg-white/10 px-3 sm:px-4 py-1.5 sm:py-1.5 text-[11px] sm:text-[10px] lg:text-[11px] uppercase tracking-[0.2em] sm:tracking-[0.25em] text-white/90 backdrop-blur-sm">
+                <Sparkles size={12} className="sm:size-[12px]" /> Mahika Russian Spa
               </span>
-              <h1 className="mt-4 sm:mt-6 lg:mt-8 font-serif text-[1.9rem] xs:text-[2.3rem] sm:text-[3rem] md:text-[3.6rem] lg:text-[4.5rem] xl:text-[5.5rem] leading-[1.08] text-white">
+              <h1 className="mt-5 sm:mt-6 lg:mt-8 font-serif text-[2.5rem] xs:text-[3rem] sm:text-[3rem] md:text-[3.6rem] lg:text-[4.5rem] xl:text-[5.5rem] leading-[1.08] text-white">
                 {HERO_SLIDES[index].title}
               </h1>
-              <p className="mt-3 sm:mt-4 lg:mt-5 text-stone-200/90 text-[13px] xs:text-sm sm:text-lg lg:text-xl font-light max-w-lg">
+              <p className="mt-4 sm:mt-4 lg:mt-5 text-stone-200/90 text-base xs:text-lg sm:text-lg lg:text-xl font-light max-w-lg">
                 {HERO_SLIDES[index].subtitle}
               </p>
-              <div className="mt-5 sm:mt-7 lg:mt-9 flex flex-wrap gap-2 sm:gap-3">
+              <div className="mt-6 sm:mt-7 lg:mt-9 flex flex-wrap gap-3 sm:gap-3">
                 <a
                   href={"https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent("Hello Mahika Russian Spa, I would like to book a session.")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 rounded-full bg-emerald-600 px-4 sm:px-7 py-2.5 sm:py-3.5 text-[12px] sm:text-sm font-medium text-white shadow-xl shadow-emerald-900/30 transition-all duration-300 hover:bg-emerald-500 active:scale-95"
+                  className="flex items-center justify-center gap-2 rounded-full bg-emerald-600 px-5 sm:px-7 py-3 sm:py-3.5 text-sm sm:text-sm font-medium text-white shadow-xl shadow-emerald-900/30 transition-all duration-300 hover:bg-emerald-500 active:scale-95"
                 >
-                  <MessageCircle size={14} className="sm:size-[15px]" /> Book on WhatsApp
+                  <MessageCircle size={16} className="sm:size-[15px]" /> Book on WhatsApp
                 </a>
                 <a href="tel:+918796910363"
-                  className="flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 sm:px-7 py-2.5 sm:py-3.5 text-[12px] sm:text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 active:scale-95">
-                  <Phone size={14} className="sm:size-[15px]" /> Call Now
+                  className="flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-5 sm:px-7 py-3 sm:py-3.5 text-sm sm:text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 active:scale-95">
+                  <Phone size={16} className="sm:size-[15px]" /> Call Now
                 </a>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Arrows — smaller on mobile, positioned more inside */}
-        <button onClick={prev} aria-label="Previous slide"
-          className="absolute left-2 sm:left-4 lg:left-8 top-1/2 -translate-y-1/2 z-10 flex h-9 w-9 sm:h-11 sm:w-11 lg:h-12 lg:w-12 items-center justify-center rounded-full bg-white/85 text-stone-700 backdrop-blur-sm shadow-lg transition-all duration-300 hover:bg-white hover:text-emerald-700 hover:shadow-xl active:scale-95">
-          <ChevronLeft size={18} className="sm:size-[20px] lg:size-[22px]" />
-        </button>
-        <button onClick={next} aria-label="Next slide"
-          className="absolute right-2 sm:right-4 lg:right-8 top-1/2 -translate-y-1/2 z-10 flex h-9 w-9 sm:h-11 sm:w-11 lg:h-12 lg:w-12 items-center justify-center rounded-full bg-white/85 text-stone-700 backdrop-blur-sm shadow-lg transition-all duration-300 hover:bg-white hover:text-emerald-700 hover:shadow-xl active:scale-95">
-          <ChevronRight size={18} className="sm:size-[20px] lg:size-[22px]" />
-        </button>
 
         <div className="absolute bottom-6 sm:bottom-8 lg:bottom-10 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5 sm:gap-2">
           {HERO_SLIDES.map((_, i) => (
