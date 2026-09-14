@@ -5,14 +5,28 @@ import { WHATSAPP_NUMBER } from "../data/locations";
 
 /* ---------------------------------------------------------------
    Location background images — one is picked per location.
+   Desktop / tablet images (landscape crop).
    --------------------------------------------------------------- */
 export const LOCATION_BG = [
-  { img: "rl1.jpg" },
-  { img: "rl2.jpg" },
-  { img: "rl3.jpg" },
-  { img: "rl4.jpg" },
-  { img: "rl5.jpg" },
-  { img: "rl6.jpg" },
+  {img:"rl1.jpg"},
+    {img:"rl3.webp"},
+    {img:"rl4.jpg"},
+    {img:"rl6.jpg"},
+    {img:"COUPLE-MASSAGE-3.jpg"}
+];
+
+/* ---------------------------------------------------------------
+   Location background images — mobile (portrait crop).
+   Used only for the location hero on phones.
+   --------------------------------------------------------------- */
+export const LOCATION_BG_MOBILE = [
+  { img: "r1.webp" },
+  { img: "r2.jpg" },
+  { img: "r3.jpg" },
+  { img: "r4.webp" },
+  { img: "r5.webp" },
+  { img: "r6.webp" },
+  { img: "r7.webp" },
 ];
 
 /* ---------------------------------------------------------------
@@ -56,7 +70,7 @@ function getHeroMessage(location) {
 
 /* ---------------------------------------------------------------
    Pick a background image for a location (deterministic).
-   Changes when location changes.
+   Changes when location changes. Returns { desktop, mobile }.
    --------------------------------------------------------------- */
 export function pickHeroImage(location) {
   if (!LOCATION_BG.length) return null;
@@ -70,6 +84,21 @@ export function pickHeroImage(location) {
   }
   const index = hash % LOCATION_BG.length;
   return LOCATION_BG[index].img;
+}
+
+/* Same hash → matching mobile image for that location. */
+function pickHeroImageMobile(location) {
+  if (!LOCATION_BG_MOBILE.length) return null;
+
+  const key = String(location || "").trim().toLowerCase();
+  if (!key) return LOCATION_BG_MOBILE[0].img;
+
+  let hash = 0;
+  for (let i = 0; i < key.length; i++) {
+    hash = (hash * 31 + key.charCodeAt(i)) >>> 0;
+  }
+  const index = hash % LOCATION_BG_MOBILE.length;
+  return LOCATION_BG_MOBILE[index].img;
 }
 
 export default function HeroSlider({ location }) {
@@ -91,25 +120,31 @@ export default function HeroSlider({ location }) {
 
   if (isLocationMode) {
     const heroImage = pickHeroImage(location);
+    const heroImageMobile = pickHeroImageMobile(location);
     const heroMessage = getHeroMessage(location);
 
     return (
       <>
         <section className="relative bg-stone-900">
           <div className="relative w-full h-[100svh] min-h-[560px] sm:min-h-[620px] overflow-hidden">
-            <img
-              src={
-                heroImage ||
-                "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=1800&auto=format&fit=crop"
-              }
-              alt={`${location} — Mahika Russian Spa`}
-              loading="eager"
-              className="absolute inset-0 h-full w-full object-cover object-center"
-              onError={(e) => {
-                e.currentTarget.src =
-                  "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=1800&auto=format&fit=crop";
-              }}
-            />
+            {/* Mobile gets a portrait-crop image via <source>; desktop gets the landscape one. */}
+            <picture>
+              <source media="(max-width: 639px)" srcSet={heroImageMobile} />
+              <img
+                src={
+                  heroImage ||
+                  "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=1800&auto=format&fit=crop"
+                }
+                alt={`${location} — Mahika Russian Spa`}
+                loading="eager"
+                className="absolute inset-0 h-full w-full object-cover object-center"
+                onError={(e) => {
+                  e.currentTarget.src =
+                    "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=1800&auto=format&fit=crop";
+                }}
+              />
+            </picture>
+
             {/* Same single gradient used by home slides */}
             <div className="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-900/45 to-stone-950/55" />
 

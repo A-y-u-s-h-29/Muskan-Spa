@@ -154,7 +154,7 @@ function FaqItem({ q, a, isOpen, onToggle }) {
         onClick={onToggle}
         className="w-full flex items-start justify-between gap-3 sm:gap-4 py-4 sm:py-5 text-left group"
       >
-        <span className="font-serif text-sm sm:text-base lg:text-lg text-stone-900 leading-snug group-hover:text-emerald-700 transition-colors">
+        <span className="font-serif text-sm sm:text-base lg:text-lg text-stone-900 leading-snug group-hover:text-emerald-700 transition-colors pr-2">
           {q}
         </span>
         <ChevronDown
@@ -166,7 +166,7 @@ function FaqItem({ q, a, isOpen, onToggle }) {
       </button>
       <div
         className={`overflow-hidden transition-all duration-300 ${
-          isOpen ? "max-h-60 pb-4 sm:pb-5" : "max-h-0"
+          isOpen ? "max-h-[500px] pb-4 sm:pb-5" : "max-h-0"
         }`}
       >
         <p className="text-sm text-stone-500 font-light leading-relaxed pr-6 sm:pr-8">
@@ -216,21 +216,21 @@ export default function HomePage({ setPage, selectedLocation }) {
       <section className="py-10 sm:py-16 lg:py-20 border-y border-stone-200/60 bg-stone-50/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 text-center">
           <div className="group flex flex-col items-center text-center">
-            <div className="w-12 h-12 sm:w-13 sm:h-13 lg:w-14 lg:h-14 rounded-full bg-emerald-100/60 flex items-center justify-center mb-2 sm:mb-3 lg:mb-4 group-hover:bg-emerald-100 transition-colors">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-emerald-100/60 flex items-center justify-center mb-2 sm:mb-3 lg:mb-4 group-hover:bg-emerald-100 transition-colors">
               <Sparkles className="text-emerald-600 sm:size-[22px] lg:size-[26px]" size={20} />
             </div>
             <p className="font-serif text-base sm:text-lg lg:text-xl text-stone-800">Certified therapists</p>
             <p className="text-xs sm:text-sm text-stone-400 mt-0.5 sm:mt-1 lg:mt-1.5 font-light">Trained in classical and modern technique</p>
           </div>
           <div className="group flex flex-col items-center text-center">
-            <div className="w-12 h-12 sm:w-13 sm:h-13 lg:w-14 lg:h-14 rounded-full bg-emerald-100/60 flex items-center justify-center mb-2 sm:mb-3 lg:mb-4 group-hover:bg-emerald-100 transition-colors">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-emerald-100/60 flex items-center justify-center mb-2 sm:mb-3 lg:mb-4 group-hover:bg-emerald-100 transition-colors">
               <Droplets className="text-emerald-600 sm:size-[22px] lg:size-[26px]" size={20} />
             </div>
             <p className="font-serif text-base sm:text-lg lg:text-xl text-stone-800">Pure, warmed oils</p>
             <p className="text-xs sm:text-sm text-stone-400 mt-0.5 sm:mt-1 lg:mt-1.5 font-light">No synthetic fragrance, ever</p>
           </div>
           <div className="group flex flex-col items-center text-center">
-            <div className="w-12 h-12 sm:w-13 sm:h-13 lg:w-14 lg:h-14 rounded-full bg-emerald-100/60 flex items-center justify-center mb-2 sm:mb-3 lg:mb-4 group-hover:bg-emerald-100 transition-colors">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-emerald-100/60 flex items-center justify-center mb-2 sm:mb-3 lg:mb-4 group-hover:bg-emerald-100 transition-colors">
               <Flower2 className="text-emerald-600 sm:size-[22px] lg:size-[26px]" size={20} />
             </div>
             <p className="font-serif text-base sm:text-lg lg:text-xl text-stone-800">Private, calm rooms</p>
@@ -459,7 +459,7 @@ export default function HomePage({ setPage, selectedLocation }) {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2.5 sm:gap-3 lg:gap-4">
+          <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2.5 sm:gap-3 lg:gap-4">
             {LOCATIONS.map((loc) => (
               <button
                 key={loc}
@@ -655,7 +655,6 @@ export default function HomePage({ setPage, selectedLocation }) {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 sm:pb-16 lg:pb-20">
           <div className="space-y-5 sm:space-y-6 lg:space-y-7">
             {TRAVELER_GUIDES.map((g, idx) => {
-              // 4-color soft cycle: emerald, stone, amber, sky
               const palette = [
                 {
                   bg: "bg-emerald-50/60",
@@ -697,16 +696,13 @@ export default function HomePage({ setPage, selectedLocation }) {
                   key={g.title}
                   className={`relative rounded-2xl border ${c.border} ${c.bg} p-5 sm:p-7 lg:p-8 overflow-hidden transition-all duration-300 hover:shadow-md`}
                 >
-                  {/* Left accent bar */}
                   <span className={`absolute top-0 left-0 h-full w-[3px] ${c.accent}`} />
 
-                  {/* Eyebrow */}
                   <p className={`text-[10px] sm:text-xs tracking-[0.18em] sm:tracking-[0.2em] uppercase font-light mb-2 flex items-center gap-2 ${c.eyebrow}`}>
                     <span className={`text-base leading-none ${c.dot}`}>●</span>
                     {g.eyebrow}
                   </p>
 
-                  {/* Title */}
                   <h3 className="font-serif text-lg xs:text-xl sm:text-2xl lg:text-3xl text-stone-900 leading-tight">
                     {g.title}
                   </h3>
@@ -714,7 +710,6 @@ export default function HomePage({ setPage, selectedLocation }) {
                     <div className={`w-10 sm:w-12 h-px ${c.accent}`} />
                   </div>
 
-                  {/* Intro paragraphs */}
                   {g.intro && (
                     <div className="mt-4 sm:mt-5 space-y-3 sm:space-y-4">
                       {g.intro.map((p, i) => (
@@ -728,7 +723,6 @@ export default function HomePage({ setPage, selectedLocation }) {
                     </div>
                   )}
 
-                  {/* Bulleted list */}
                   {g.list && (
                     <ul className="mt-4 sm:mt-5 space-y-2 sm:space-y-2.5">
                       {g.list.map((item, i) => (
@@ -749,7 +743,6 @@ export default function HomePage({ setPage, selectedLocation }) {
                     </ul>
                   )}
 
-                  {/* Outro */}
                   {g.outro && (
                     <p className="mt-4 sm:mt-5 text-stone-600 text-sm sm:text-[15px] font-light leading-relaxed italic">
                       {g.outro}

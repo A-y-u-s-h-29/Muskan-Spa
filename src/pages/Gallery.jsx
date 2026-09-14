@@ -103,7 +103,7 @@ function TherapistCard({ therapist }) {
   )}`;
 
   return (
-    <div className="group relative rounded-2xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-2xl transition-all duration-500 aspect-[4/5]">
+    <div className="group relative rounded-2xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col min-h-[300px] xs:min-h-[340px] sm:min-h-[380px] lg:min-h-[420px]">
       <img
         src={img}
         alt={name}
@@ -115,42 +115,50 @@ function TherapistCard({ therapist }) {
       />
       <div className="absolute inset-0 bg-gradient-to-t from-stone-950/95 via-stone-950/55 to-stone-950/10" />
 
+      {/* Top-right: certified */}
       {certified && (
-        <span className="absolute top-3 right-3 inline-flex items-center gap-1 rounded-full bg-emerald-600/90 backdrop-blur px-2.5 py-1 text-[10px] uppercase tracking-[0.12em] text-white font-light">
-          <BadgeCheck size={11} /> Certified
+        <span className="absolute top-2 sm:top-3 right-2 sm:right-3 inline-flex items-center gap-1 rounded-full bg-emerald-600/90 backdrop-blur px-1.5 sm:px-2.5 py-0.5 sm:py-1 text-[8px] sm:text-[10px] uppercase tracking-[0.08em] sm:tracking-[0.12em] text-white font-light">
+          <BadgeCheck size={9} className="sm:w-[11px] sm:h-[11px] flex-shrink-0" />
+          <span className="hidden xs:inline">Certified</span>
         </span>
       )}
 
-      <span className="absolute top-3 left-3 rounded-full bg-white/90 backdrop-blur px-2.5 py-1 text-[11px] font-medium text-emerald-800">
+      {/* Top-left: price */}
+      <span className="absolute top-2 sm:top-3 left-2 sm:left-3 rounded-full bg-white/90 backdrop-blur px-2 sm:px-2.5 py-0.5 sm:py-1 text-[10px] sm:text-[11px] font-medium text-emerald-800">
         {price}
       </span>
 
-      <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 text-white">
-        <h3 className="font-serif text-lg sm:text-xl leading-tight">{name}</h3>
-        <p className="text-[11px] uppercase tracking-[0.15em] text-emerald-300 mt-0.5">
+      {/* Bottom content — flex column, buttons pushed to bottom */}
+      <div className="relative mt-auto p-3 sm:p-4 lg:p-5 text-white flex flex-col">
+        <h3 className="font-serif text-sm xs:text-base sm:text-lg lg:text-xl leading-tight">
+          {name}
+        </h3>
+        <p className="text-[9px] xs:text-[10px] sm:text-[11px] uppercase tracking-[0.1em] sm:tracking-[0.15em] text-emerald-300 mt-0.5">
           {role} · {experience}
         </p>
-        <p className="mt-2 text-[12px] sm:text-[13px] text-stone-200 font-light leading-snug line-clamp-2">
+        <p className="mt-1.5 sm:mt-2 text-[10px] xs:text-[11px] sm:text-[12px] lg:text-[13px] text-stone-200 font-light leading-snug line-clamp-2">
           {desc}
         </p>
 
         {/* Call + WhatsApp buttons */}
-        <div className="mt-3 flex items-center gap-2">
+        <div className="mt-2 sm:mt-3 flex items-center gap-1 sm:gap-2">
           <a
             href={callLink}
             aria-label={`Call to book ${name}`}
-            className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-full bg-white/95 hover:bg-white text-stone-900 px-2.5 py-1.5 text-[11px] sm:text-xs font-medium transition-colors duration-300 active:scale-95"
+            className="flex-1 min-w-0 inline-flex items-center justify-center gap-1 sm:gap-1.5 rounded-full bg-white/95 hover:bg-white text-stone-900 px-1.5 sm:px-2.5 py-1.5 text-[9px] xs:text-[10px] sm:text-[11px] lg:text-xs font-medium transition-colors duration-300 active:scale-95"
           >
-            <Phone size={12} /> Call Now
+            <Phone size={10} className="sm:w-3 sm:h-3 flex-shrink-0" />
+            <span className="truncate">Call Now</span>
           </a>
           <a
             href={waLink}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`WhatsApp to book ${name}`}
-            className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white px-2.5 py-1.5 text-[11px] sm:text-xs font-medium transition-colors duration-300 active:scale-95"
+            className="flex-1 min-w-0 inline-flex items-center justify-center gap-1 sm:gap-1.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white px-1.5 sm:px-2.5 py-1.5 text-[9px] xs:text-[10px] sm:text-[11px] lg:text-xs font-medium transition-colors duration-300 active:scale-95"
           >
-            <MessageCircle size={12} /> WhatsApp
+            <MessageCircle size={10} className="sm:w-3 sm:h-3 flex-shrink-0" />
+            <span className="truncate">WhatsApp</span>
           </a>
         </div>
       </div>
@@ -227,24 +235,24 @@ function FaqItem({ q, a, isOpen, onToggle }) {
       <button
         type="button"
         onClick={onToggle}
-        className="w-full flex items-center justify-between gap-4 cursor-pointer list-none px-5 sm:px-6 py-4 sm:py-5 text-left group"
+        className="w-full flex items-start justify-between gap-3 sm:gap-4 cursor-pointer list-none px-4 sm:px-6 py-4 sm:py-5 text-left group"
       >
-        <span className="font-serif text-[15px] sm:text-base lg:text-lg text-stone-900 group-hover:text-emerald-800 transition-colors">
+        <span className="font-serif text-[14px] sm:text-base lg:text-lg text-stone-900 group-hover:text-emerald-800 transition-colors leading-snug pr-2">
           {q}
         </span>
         <ChevronDown
           size={18}
-          className={`flex-shrink-0 text-emerald-600 transition-transform duration-300 ${
+          className={`flex-shrink-0 mt-0.5 text-emerald-600 transition-transform duration-300 ${
             isOpen ? "rotate-180" : ""
           }`}
         />
       </button>
       <div
         className={`overflow-hidden transition-all duration-300 ${
-          isOpen ? "max-h-60" : "max-h-0"
+          isOpen ? "max-h-[500px]" : "max-h-0"
         }`}
       >
-        <p className="px-5 sm:px-6 pb-4 sm:pb-5 -mt-1 text-stone-600 font-light text-[13px] sm:text-sm leading-relaxed">
+        <p className="px-4 sm:px-6 pb-4 sm:pb-5 -mt-1 text-stone-600 font-light text-[13px] sm:text-sm leading-relaxed">
           {a}
         </p>
       </div>
@@ -263,11 +271,11 @@ export default function GalleryPage({ setPage }) {
   return (
     <div className="animate-fadeIn">
       {/* ── HERO / INTRO ─────────────────────────────────────── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 lg:pt-32 xl:pt-40 pb-6 sm:pb-8 lg:pb-10">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 xs:pt-24 sm:pt-28 lg:pt-32 xl:pt-40 pb-6 sm:pb-8 lg:pb-10">
         <p className="text-emerald-600 text-[9px] sm:text-xs lg:text-sm tracking-[0.2em] lg:tracking-[0.25em] uppercase font-light mb-2 lg:mb-3">
           Gallery
         </p>
-        <h1 className="font-serif text-[1.6rem] xs:text-[2rem] sm:text-[2.2rem] lg:text-[3.5rem] xl:text-[4.5rem] leading-tight text-stone-900">
+        <h1 className="font-serif text-[1.6rem] xs:text-[1.9rem] sm:text-[2.2rem] md:text-[2.6rem] lg:text-[3.5rem] xl:text-[4.5rem] leading-tight text-stone-900">
           A look inside <span className="italic text-emerald-600">Mahika.</span>
         </h1>
         <p className="mt-3 sm:mt-4 text-stone-500 text-[13px] sm:text-base max-w-2xl font-light">
@@ -279,7 +287,7 @@ export default function GalleryPage({ setPage }) {
       {/* ── GALLERY MASONRY ──────────────────────────────────── */}
       <section className="pb-14 sm:pb-20 lg:pb-28">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-          <div className="columns-2 sm:columns-3 lg:columns-4 gap-2 sm:gap-3 lg:gap-4 [column-fill:_balance]">
+          <div className="columns-2 xs:columns-2 sm:columns-3 lg:columns-4 gap-2 sm:gap-3 lg:gap-4 [column-fill:_balance]">
             {FULL_GALLERY.map((g, i) => (
               <figure
                 key={g.src + i}
@@ -314,22 +322,22 @@ export default function GalleryPage({ setPage }) {
             <p className="text-emerald-600 text-[9px] sm:text-xs lg:text-sm tracking-[0.2em] lg:tracking-[0.25em] uppercase font-light mb-2 lg:mb-3">
               Our Therapists
             </p>
-            <h2 className="font-serif text-[1.5rem] xs:text-2xl sm:text-3xl lg:text-4xl text-stone-900">
+            <h2 className="font-serif text-[1.4rem] xs:text-[1.6rem] sm:text-[1.85rem] md:text-[2.1rem] lg:text-4xl text-stone-900">
               Trained hands from{" "}
               <span className="italic text-emerald-700">Russia & India</span>
             </h2>
-            <p className="mt-3 text-stone-500 text-sm sm:text-base font-light italic">
+            <p className="mt-3 text-stone-500 text-[13px] sm:text-sm md:text-base font-light italic">
               Every therapist on our team is certified, background-verified and
               chosen for genuine skill — not just a friendly face.
             </p>
           </div>
 
           <div className="mb-12 sm:mb-16">
-            <h3 className="font-serif text-xl sm:text-2xl text-stone-800 mb-4 sm:mb-6 flex items-center gap-2">
-              <span className="w-8 h-[1px] bg-emerald-600 inline-block" />
+            <h3 className="font-serif text-base xs:text-lg sm:text-xl md:text-2xl text-stone-800 mb-4 sm:mb-6 flex items-center gap-2">
+              <span className="w-6 sm:w-8 h-[1px] bg-emerald-600 inline-block" />
               Russian Therapists
             </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 xs:gap-4 sm:gap-5 md:gap-6">
               {russianTherapists.map((t) => (
                 <TherapistCard key={t.name} therapist={t} />
               ))}
@@ -337,11 +345,11 @@ export default function GalleryPage({ setPage }) {
           </div>
 
           <div>
-            <h3 className="font-serif text-xl sm:text-2xl text-stone-800 mb-4 sm:mb-6 flex items-center gap-2">
-              <span className="w-8 h-[1px] bg-emerald-600 inline-block" />
+            <h3 className="font-serif text-base xs:text-lg sm:text-xl md:text-2xl text-stone-800 mb-4 sm:mb-6 flex items-center gap-2">
+              <span className="w-6 sm:w-8 h-[1px] bg-emerald-600 inline-block" />
               Indian Therapists
             </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 xs:gap-4 sm:gap-5 md:gap-6">
               {indianTherapists.map((t) => (
                 <TherapistCard key={t.name} therapist={t} />
               ))}
@@ -357,7 +365,7 @@ export default function GalleryPage({ setPage }) {
             <p className="text-emerald-600 text-[10px] sm:text-xs tracking-[0.18em] sm:tracking-[0.2em] uppercase font-light mb-2 flex items-center gap-2">
               <Star size={12} /> 5-Star Hotel Partnerships
             </p>
-            <h2 className="font-serif text-[1.5rem] xs:text-2xl sm:text-3xl lg:text-4xl text-stone-900">
+            <h2 className="font-serif text-[1.4rem] xs:text-[1.6rem] sm:text-[1.85rem] md:text-[2.1rem] lg:text-4xl text-stone-900">
               Our Hotel Outlets
             </h2>
           </div>
@@ -377,7 +385,7 @@ export default function GalleryPage({ setPage }) {
             <p className="text-emerald-400 text-[10px] sm:text-xs tracking-[0.18em] sm:tracking-[0.2em] uppercase font-light mb-2 lg:mb-3">
               Why Clients Choose Us
             </p>
-            <h2 className="font-serif text-[1.5rem] xs:text-2xl sm:text-3xl lg:text-4xl text-white">
+            <h2 className="font-serif text-[1.4rem] xs:text-[1.6rem] sm:text-[1.85rem] md:text-[2.1rem] lg:text-4xl text-white">
               Six reasons guests keep coming back
             </h2>
             <div className="mt-3 sm:mt-4 flex justify-center">
@@ -413,7 +421,7 @@ export default function GalleryPage({ setPage }) {
             <p className="text-emerald-600 text-[10px] sm:text-xs tracking-[0.18em] sm:tracking-[0.2em] uppercase font-light mb-2">
               Frequently Asked
             </p>
-            <h2 className="font-serif text-[1.5rem] xs:text-2xl sm:text-3xl lg:text-4xl text-stone-900">
+            <h2 className="font-serif text-[1.4rem] xs:text-[1.6rem] sm:text-[1.85rem] md:text-[2.1rem] lg:text-4xl text-stone-900">
               Questions guests ask before booking
             </h2>
             <div className="mt-3 sm:mt-4 flex justify-center">
@@ -454,7 +462,7 @@ export default function GalleryPage({ setPage }) {
       {/* ── CLOSING CTA ──────────────────────────────────────── */}
       <section className="bg-stone-50/70 border-t border-stone-200/60 py-10 sm:py-14 lg:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-serif text-[1.5rem] xs:text-2xl sm:text-3xl lg:text-4xl text-stone-900">
+          <h2 className="font-serif text-[1.4rem] xs:text-[1.6rem] sm:text-[1.85rem] md:text-[2.1rem] lg:text-4xl text-stone-900">
             Ready to step in?
           </h2>
           <p className="mt-3 text-stone-500 text-sm sm:text-base font-light max-w-xl mx-auto">

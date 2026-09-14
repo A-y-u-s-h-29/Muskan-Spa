@@ -315,33 +315,45 @@ export default function Header({ page, setPage, menuOpen, setMenuOpen, selectedL
             </button>
 
             {locationOpen && (
-              <div className="mt-1 mb-2 rounded-2xl border border-stone-200 bg-white p-2.5 max-h-[50vh] overflow-y-auto">
-                <p className="px-3 pt-1 pb-2 text-[10px] uppercase tracking-[0.2em] text-stone-400 font-light">
+              <div className="mt-1 mb-2 rounded-2xl border border-stone-200 bg-white p-3 sm:p-4 max-h-[55vh] overflow-y-auto">
+                <p className="px-1 pb-2 text-[10px] uppercase tracking-[0.2em] text-stone-400 font-light border-b border-stone-100">
                   Choose your location
                 </p>
-                <div className="grid grid-cols-2 xs:grid-cols-3 gap-1.5">
-                  {LOCATIONS.map((loc) => {
-                    const isSelected = loc === selectedLocation;
-                    return (
-                      <button
-                        key={loc}
-                        type="button"
-                        {...tapHandlers(() => pickLocation(loc))}
-                        className={`text-left rounded-lg px-3 py-2.5 text-[13px] sm:text-sm transition-colors duration-200 truncate cursor-pointer ${
-                          isSelected
-                            ? "bg-emerald-50 text-emerald-700 font-medium"
-                            : "text-stone-600 hover:bg-stone-50 hover:text-stone-900 active:bg-stone-100"
-                        }`}
-                      >
-                        {loc}
-                      </button>
-                    );
-                  })}
+
+                <div className="grid grid-cols-1 xs:grid-cols-2 gap-4 mt-3">
+                  {LOCATION_GROUPS.map((group) => (
+                    <div key={group.label}>
+                      <h3 className="text-[10px] font-medium uppercase tracking-[0.15em] text-emerald-700 mb-1.5 border-b border-emerald-100 pb-1">
+                        {group.label}
+                      </h3>
+                      <ul className="space-y-0.5">
+                        {group.items.map((loc) => {
+                          const isSelected = loc === selectedLocation;
+                          return (
+                            <li key={loc}>
+                              <button
+                                type="button"
+                                {...tapHandlers(() => pickLocation(loc))}
+                                className={`w-full text-left rounded-lg px-2.5 py-2 text-[13px] sm:text-sm transition-colors duration-200 truncate cursor-pointer ${
+                                  isSelected
+                                    ? "bg-emerald-50 text-emerald-700 font-medium"
+                                    : "text-stone-600 hover:bg-stone-50 hover:text-stone-900 active:bg-stone-100"
+                                }`}
+                              >
+                                {loc}
+                              </button>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  ))}
                 </div>
+
                 <button
                   type="button"
                   {...tapHandlers(viewAllBranches)}
-                  className="mt-2 w-full text-left rounded-lg px-3 py-2.5 text-[11px] uppercase tracking-[0.15em] text-stone-400 hover:text-emerald-700 hover:bg-stone-50 transition-colors cursor-pointer"
+                  className="mt-3 w-full text-left rounded-lg px-2.5 py-2.5 text-[11px] uppercase tracking-[0.15em] text-stone-400 hover:text-emerald-700 hover:bg-stone-50 transition-colors cursor-pointer border-t border-stone-100"
                 >
                   View all branches →
                 </button>

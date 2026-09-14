@@ -113,9 +113,7 @@ const FAQS = [
   },
 ];
 
-/* ---------------------------------------------------------------
-   Therapist card (now with Call Now + WhatsApp buttons)
-   --------------------------------------------------------------- */
+/* ── Therapist card (with Call Now + WhatsApp) ───────────── */
 function TherapistCard({ therapist }) {
   const { name, role, experience, certified, desc, price, img } = therapist;
 
@@ -127,7 +125,8 @@ function TherapistCard({ therapist }) {
   )}`;
 
   return (
-    <div className="group relative rounded-2xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-2xl transition-all duration-500 aspect-[4/5]">
+    <div className="group relative rounded-2xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col min-h-[340px] sm:min-h-[380px] lg:min-h-[420px]">
+      {/* Background image */}
       <img
         src={img}
         alt={name}
@@ -137,44 +136,53 @@ function TherapistCard({ therapist }) {
           e.currentTarget.style.display = "none";
         }}
       />
+
+      {/* Gradient overlay — darker at bottom so text stays legible */}
       <div className="absolute inset-0 bg-gradient-to-t from-stone-950/95 via-stone-950/55 to-stone-950/10" />
 
-      {certified && (
-        <span className="absolute top-3 right-3 inline-flex items-center gap-1 rounded-full bg-emerald-600/90 backdrop-blur px-2.5 py-1 text-[10px] uppercase tracking-[0.12em] text-white font-light">
-          <BadgeCheck size={11} /> Certified
-        </span>
-      )}
-
-      <span className="absolute top-3 left-3 rounded-full bg-white/90 backdrop-blur px-2.5 py-1 text-[11px] font-medium text-emerald-800">
+      {/* Top-left: price */}
+      <span className="absolute top-2.5 sm:top-3 left-2.5 sm:left-3 rounded-full bg-white/90 backdrop-blur px-2 sm:px-2.5 py-0.5 sm:py-1 text-[10px] sm:text-[11px] font-medium text-emerald-800">
         {price}
       </span>
 
-      <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 text-white">
-        <h3 className="font-serif text-lg sm:text-xl leading-tight">{name}</h3>
-        <p className="text-[11px] uppercase tracking-[0.15em] text-emerald-300 mt-0.5">
+      {/* Top-right: certified */}
+      {certified && (
+        <span className="absolute top-2.5 sm:top-3 right-2.5 sm:right-3 inline-flex items-center gap-1 rounded-full bg-emerald-600/90 backdrop-blur px-2 sm:px-2.5 py-0.5 sm:py-1 text-[9px] sm:text-[10px] uppercase tracking-[0.12em] text-white font-light">
+          <BadgeCheck size={10} /> Certified
+        </span>
+      )}
+
+      {/* Bottom content — flex column, buttons pushed to bottom with mt-auto */}
+      <div className="relative mt-auto p-3.5 sm:p-4 lg:p-5 text-white flex flex-col">
+        <h3 className="font-serif text-base sm:text-lg lg:text-xl leading-tight">
+          {name}
+        </h3>
+        <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-emerald-300 mt-0.5">
           {role} · {experience}
         </p>
-        <p className="mt-2 text-[12px] sm:text-[13px] text-stone-200 font-light leading-snug line-clamp-2">
+        <p className="mt-1.5 sm:mt-2 text-[11px] sm:text-[12px] lg:text-[13px] text-stone-200 font-light leading-snug line-clamp-2">
           {desc}
         </p>
 
         {/* Call + WhatsApp buttons */}
-        <div className="mt-3 flex items-center gap-2">
+        <div className="mt-2.5 sm:mt-3 flex items-center gap-1.5 sm:gap-2">
           <a
             href={callLink}
             aria-label={`Call to book ${name}`}
-            className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-full bg-white/95 hover:bg-white text-stone-900 px-2.5 py-1.5 text-[11px] sm:text-xs font-medium transition-colors duration-300 active:scale-95"
+            className="flex-1 min-w-0 inline-flex items-center justify-center gap-1 sm:gap-1.5 rounded-full bg-white/95 hover:bg-white text-stone-900 px-2 sm:px-2.5 py-1.5 text-[10px] sm:text-[11px] lg:text-xs font-medium transition-colors duration-300 active:scale-95"
           >
-            <Phone size={12} /> Call Now
+            <Phone size={11} className="sm:size-[12px] flex-shrink-0" />
+            <span className="truncate">Call</span>
           </a>
           <a
             href={waLink}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`WhatsApp to book ${name}`}
-            className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white px-2.5 py-1.5 text-[11px] sm:text-xs font-medium transition-colors duration-300 active:scale-95"
+            className="flex-1 min-w-0 inline-flex items-center justify-center gap-1 sm:gap-1.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white px-2 sm:px-2.5 py-1.5 text-[10px] sm:text-[11px] lg:text-xs font-medium transition-colors duration-300 active:scale-95"
           >
-            <MessageCircle size={12} /> WhatsApp
+            <MessageCircle size={11} className="sm:size-[12px] flex-shrink-0" />
+            <span className="truncate">WhatsApp</span>
           </a>
         </div>
       </div>

@@ -21,15 +21,19 @@ export default function ServiceCard({ service, location, layout = "overlay" }) {
           </div>
         </div>
 
-        <div className="mt-3 sm:mt-4 grid grid-cols-2 gap-2 lg:gap-3">
+        <div className="mt-3 sm:mt-4 grid grid-cols-2 gap-1.5 sm:gap-2 lg:gap-3">
           <a href="tel:+918796910363"
-            className="flex items-center justify-center gap-1.5 lg:gap-2 rounded-full border border-stone-200 bg-white px-2.5 sm:px-3 py-2.5 lg:py-3 text-[11px] sm:text-xs lg:text-sm font-medium text-stone-700 transition-all duration-300 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-md active:scale-95 touch-manipulation">
-            <Phone size={13} className="sm:size-[14px] lg:size-[15px]" /> Call Now
+            aria-label="Call Now"
+            className="flex items-center justify-center gap-0.5 sm:gap-1.5 lg:gap-2 rounded-full border border-stone-200 bg-white px-1.5 sm:px-3 py-2 sm:py-2.5 lg:py-3 text-[8px] sm:text-xs lg:text-sm font-medium text-stone-700 transition-all duration-300 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-md active:scale-95 touch-manipulation">
+            <Phone size={10} className="sm:size-[14px] lg:size-[15px] shrink-0" />
+            <span className="whitespace-nowrap text-">Call Now</span>
           </a>
           <a href={waHref}
             target="_blank" rel="noopener noreferrer"
-            className="flex items-center justify-center gap-1.5 lg:gap-2 rounded-full bg-emerald-700 px-2.5 sm:px-3 py-2.5 lg:py-3 text-[11px] sm:text-xs lg:text-sm font-medium text-white transition-all duration-300 hover:bg-emerald-800 hover:shadow-lg hover:shadow-emerald-700/25 active:scale-95 touch-manipulation">
-            <MessageCircle size={13} className="sm:size-[14px] lg:size-[15px]" /> WhatsApp
+            aria-label="WhatsApp"
+            className="flex items-center justify-center gap-0.5 sm:gap-1.5 lg:gap-2 rounded-full bg-emerald-700 px-1.5 sm:px-3 py-2 sm:py-2.5 lg:py-3 text-[8px] sm:text-xs lg:text-sm font-medium text-white transition-all duration-300 hover:bg-emerald-800 hover:shadow-lg hover:shadow-emerald-700/25 active:scale-95 touch-manipulation">
+            <MessageCircle size={10} className="sm:size-[14px] lg:size-[15px] shrink-0" />
+            <span className="whitespace-nowrap">WhatsApp</span>
           </a>
         </div>
       </article>
@@ -57,14 +61,18 @@ export default function ServiceCard({ service, location, layout = "overlay" }) {
       <h2 className="mt-3 sm:mt-4 lg:mt-5 xl:mt-6 font-serif text-lg sm:text-xl lg:text-2xl text-stone-900 leading-snug">{service.name}</h2>
       <p className="mt-1 sm:mt-1.5 lg:mt-2 text-xs sm:text-sm text-stone-500 leading-relaxed flex-1 font-light">{service.desc}</p>
 
-      <div className="mt-4 lg:mt-5 grid grid-cols-2 gap-2 lg:gap-3">
+      <div className="mt-4 lg:mt-5 grid grid-cols-2 gap-1.5 sm:gap-2 lg:gap-3">
         <a href="tel:+918796910363"
-          className="flex items-center justify-center gap-1.5 lg:gap-2 rounded-full border border-stone-200 bg-white px-2.5 sm:px-3 py-2.5 lg:py-3 text-[11px] sm:text-xs lg:text-sm font-medium text-stone-700 transition-all duration-300 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-md active:scale-95 touch-manipulation">
-          <Phone size={13} className="sm:size-[14px] lg:size-[15px]" /> Call Now
+          aria-label="Call Now"
+          className="flex items-center justify-center gap-0.5 sm:gap-1.5 lg:gap-2 rounded-full border border-stone-200 bg-white px-1.5 sm:px-3 py-2 sm:py-2.5 lg:py-3 text-[8px] sm:text-xs lg:text-sm font-medium text-stone-700 transition-all duration-300 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-md active:scale-95 touch-manipulation">
+          <Phone size={10} className="sm:size-[14px] lg:size-[15px] shrink-0" />
+          <span className="whitespace-nowrap">Call Now</span>
         </a>
         <a href={waHref} target="_blank" rel="noopener noreferrer"
-          className="flex items-center justify-center gap-1.5 lg:gap-2 rounded-full bg-emerald-700 px-2.5 sm:px-3 py-2.5 lg:py-3 text-[11px] sm:text-xs lg:text-sm font-medium text-white transition-all duration-300 hover:bg-emerald-800 hover:shadow-lg hover:shadow-emerald-700/25 active:scale-95 touch-manipulation">
-          <MessageCircle size={13} className="sm:size-[14px] lg:size-[15px]" /> WhatsApp
+          aria-label="WhatsApp"
+          className="flex items-center justify-center gap-0.5 sm:gap-1.5 lg:gap-2 rounded-full bg-emerald-700 px-1.5 sm:px-3 py-2 sm:py-2.5 lg:py-3 text-[8px] sm:text-xs lg:text-sm font-medium text-white transition-all duration-300 hover:bg-emerald-800 hover:shadow-lg hover:shadow-emerald-700/25 active:scale-95 touch-manipulation">
+          <MessageCircle size={10} className="sm:size-[14px] lg:size-[15px] shrink-0" />
+          <span className="whitespace-nowrap">WhatsApp</span>
         </a>
       </div>
     </article>
