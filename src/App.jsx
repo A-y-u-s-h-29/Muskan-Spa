@@ -1,65 +1,27 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import FloatingButtons from "./components/FloatingButtons";
 import HomePage from "./pages/Home";
-import ServicesPage from "./pages/Services";
-import AboutPage from "./pages/About";
-import GalleryPage from "./pages/Gallery";
-import LocationsPage from "./pages/Locations";
-import LocationPage from "./pages/LocationPage";
-import GuidesPage, { GuideArticle } from "./pages/Guides";
-import ContactPage from "./pages/Contact";
 import { LOCATIONS } from "./data/locations";
 
-function LoadingScreen({ onComplete }) {
-  const [loading, setLoading] = useState(true);
-  const [fade, setFade] = useState(false);
+// Lazy-load everything except the home page
+const ServicesPage = lazy(() => import("./pages/Services"));
+const AboutPage = lazy(() => import("./pages/About"));
+const GalleryPage = lazy(() => import("./pages/Gallery"));
+const LocationsPage = lazy(() => import("./pages/Locations"));
+const LocationPage = lazy(() => import("./pages/LocationPage"));
+const GuidesPage = lazy(() => import("./pages/Guides"));
+const ContactPage = lazy(() => import("./pages/Contact"));
 
-  useEffect(() => {
-    const timer1 = setTimeout(() => setFade(true), 1800);
-    const timer2 = setTimeout(() => {
-      setLoading(false);
-      onComplete();
-    }, 2500);
-    return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-    };
-  }, [onComplete]);
-
-  if (!loading) return null;
-
-  return (
-    <div className={`fixed inset-0 z-[100] bg-white flex items-center justify-center transition-opacity duration-700 ${fade ? 'opacity-0' : 'opacity-100'}`}>
-      <div className="text-center px-4">
-        <div className="relative">
-          <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-px bg-stone-300" />
-          <div className="font-serif text-3xl sm:text-5xl md:text-7xl tracking-tight text-stone-900">
-            {"Mahika".split("").map((ch, i) => (
-              <span key={"m" + i} className="inline-block animate-[fadeUp_0.6s_ease-out_forwards] opacity-0" style={{ animationDelay: `${0.1 + i * 0.05}s` }}>{ch}</span>
-            ))}
-            <span className="inline-block mx-1 sm:mx-2 text-emerald-700 animate-[fadeUp_0.6s_ease-out_forwards] opacity-0" style={{ animationDelay: '0.4s' }}>·</span>
-            {"Russian".split("").map((ch, i) => (
-              <span key={"r" + i} className="inline-block text-emerald-700 animate-[fadeUp_0.6s_ease-out_forwards] opacity-0" style={{ animationDelay: `${0.45 + i * 0.05}s` }}>{ch}</span>
-            ))}
-          </div>
-          <p className="mt-3 sm:mt-4 text-[10px] sm:text-xs uppercase tracking-[0.3em] sm:tracking-[0.35em] text-stone-400 animate-[fadeUp_0.8s_ease-out_forwards] opacity-0" style={{ animationDelay: '0.9s' }}>
-            Aerocity · Delhi NCR
-          </p>
-          <div className="mt-4 sm:mt-6 flex justify-center">
-            <div className="w-12 sm:w-16 h-px bg-stone-200 animate-[expand_1.2s_ease-out_forwards] origin-left" />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+// GuideArticle is a named export, so wrap it
+const GuideArticle = lazy(() =>
+  import("./pages/Guides").then((m) => ({ default: m.GuideArticle }))
+);
 
 export default function MahikaRussianSpaWebsite() {
   const [page, setPage] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
-  const [showLoading, setShowLoading] = useState(true);
   const [selectedGuide, setSelectedGuide] = useState(null);
 
   const [selectedLocation, setSelectedLocation] = useState(() => {
@@ -122,18 +84,16 @@ export default function MahikaRussianSpaWebsite() {
         }
       `}</style>
 
-      <LoadingScreen onComplete={() => setShowLoading(false)} />
+      <Header
+        page={page}
+        setPage={setPage}
+        menuOpen={menuOpen}
+        setMenuOpen={setMenuOpen}
+        selectedLocation={selectedLocation}
+        setSelectedLocation={setSelectedLocation}
+      />
 
-      <div className={showLoading ? "hidden" : ""}>
-        <Header
-          page={page}
-          setPage={setPage}
-          menuOpen={menuOpen}
-          setMenuOpen={setMenuOpen}
-          selectedLocation={selectedLocation}
-          setSelectedLocation={setSelectedLocation}
-        />
-
+      <Suspense fallback={<div className="min-h-[60vh]" aria-hidden="true" />}>
         {page === "home" && (
           <HomePage setPage={setPage} selectedLocation={selectedLocation} />
         )}
@@ -161,11 +121,11 @@ export default function MahikaRussianSpaWebsite() {
         {page === "contact" && (
           <ContactPage selectedLocation={selectedLocation} />
         )}
+      </Suspense>
 
-        <Footer setPage={setPage} />
+      <Footer setPage={setPage} />
 
-        <FloatingButtons />
-      </div>
+      <FloatingButtons />
     </div>
   );
 }
