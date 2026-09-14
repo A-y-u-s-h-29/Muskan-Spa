@@ -1,0 +1,83 @@
+export const RUSSIAN_THERAPISTS = [
+  {
+    name: "Anastasia",
+    role: "Senior Therapist",
+    experience: "10 yrs",
+    certified: true,
+    desc: "Deep tissue and signature Russian rituals. Known for precise, firm work that releases tension fast.",
+    price: "₹3,500",
+    img: "r1.webp",
+  },
+  {
+    name: "Olga",
+    role: "Deep Tissue Expert",
+    experience: "8 yrs",
+    certified: true,
+    desc: "Specialises in deep muscle release for desk-bound shoulders and lower-back tightness.",
+    price: "₹3,600",
+    img: "r2.jpg",
+  },
+  {
+    name: "Natalia",
+    role: "Aroma Therapist",
+    experience: "7 yrs",
+    certified: true,
+    desc: "Aromatherapy blends and long flowing strokes for complete nervous-system reset.",
+    price: "₹3,200",
+    img: "r3.jpg",
+  },
+  {
+    name: "Irina",
+    role: "Facial Specialist",
+    experience: "9 yrs",
+    certified: true,
+    desc: "Signature radiance facials and gentle lymphatic work for visibly brighter skin.",
+    price: "₹2,500",
+    img: "r4.webp",
+  },
+  {
+    name: "Svetlana",
+    role: "Hot Stone Expert",
+    experience: "6 yrs",
+    certified: true,
+    desc: "Heated basalt stones and warm oils to melt knots and improve circulation.",
+    price: "₹3,800",
+    img: "r5.webp",
+  },
+  {
+    name: "Yulia",
+    role: "Reflexology Expert",
+    experience: "8 yrs",
+    certified: true,
+    desc: "Targeted pressure-point work on feet and hands to ease full-body fatigue.",
+    price: "₹1,199",
+    img: "r6.webp",
+  },
+  {
+    name: "Ekaterina",
+    role: "Russian Banya Master",
+    experience: "11 yrs",
+    certified: true,
+    desc: "Traditional Russian Banya rituals paired with venik and cool-down technique.",
+    price: "₹3,500",
+    img: "r7.webp",
+  },
+];
+
+export const INDIAN_THERAPISTS = [
+  { name: "Aarohi", role: "Senior Therapist", experience: "9 yrs", certified: true, desc: "Signature Swedish and body-to-body sessions with a steady, unhurried pace.", price: "₹2,800", img: "i1.webp" },
+  { name: "Meera", role: "Deep Tissue Expert", experience: "7 yrs", certified: true, desc: "Slow, deep strokes focused on chronic knots in the back, neck and legs.", price: "₹3,600", img: "i2.webp" },
+  { name: "Riya", role: "Aroma Therapist", experience: "6 yrs", certified: true, desc: "Warm aromatic oils chosen for your skin and mood, with long relaxing strokes.", price: "₹3,200", img: "i3.webp" },
+  { name: "Ananya", role: "Facial Specialist", experience: "8 yrs", certified: true, desc: "Gentle cleanse, exfoliation and hydration for brighter, calmer skin.", price: "₹2,500", img: "i4.webp" },
+  { name: "Priya", role: "Hot Stone Expert", experience: "5 yrs", certified: true, desc: "Heated stones and warm oils to release tension and improve circulation.", price: "₹3,800", img: "i5.webp" },
+  { name: "Kavya", role: "Reflexology Expert", experience: "6 yrs", certified: true, desc: "Pressure-point work on the feet to ease fatigue through the whole body.", price: "₹1,199", img: "i6.webp" },
+  { name: "Neha", role: "Balinese Specialist", experience: "7 yrs", certified: true, desc: "Flowing Balinese strokes with warm oils for deep relaxation.", price: "₹1,999", img: "i7.webp" },
+  { name: "Sneha", role: "Deep Tissue Expert", experience: "8 yrs", certified: true, desc: "Firm, targeted pressure that works into stiff shoulders, backs and legs.", price: "₹2,299", img: "i8.webp" },
+  { name: "Divya", role: "Aroma Therapist", experience: "5 yrs", certified: true, desc: "Essential-oil blends tailored to your mood for a quiet, calming session.", price: "₹3,200", img: "i9.webp" },
+  { name: "Isha", role: "Express Session Expert", experience: "4 yrs", certified: true, desc: "Fast, focused head, neck and shoulder release for busy days.", price: "₹999", img: "i10.webp" },
+  { name: "Tanvi", role: "Facial Specialist", experience: "6 yrs", certified: true, desc: "Hydrating facials that leave skin visibly brighter and refreshed.", price: "₹1,599", img: "i11.webp" },
+  { name: "Ritika", role: "Four-Hand Specialist", experience: "9 yrs", certified: true, desc: "Synchronised four-hand sessions for a truly immersive experience.", price: "₹5,500", img: "i12.webp" },
+];
+
+// Backwards-compatible export (in case any other file still imports TEAM_MEMBERS)
+export const TEAM_MEMBERS = [...RUSSIAN_THERAPISTS, ...INDIAN_THERAPISTS];
