@@ -70,23 +70,33 @@ function TherapistCard({ t, origin }) {
           </span>
         </div>
 
-        {/* CTAs */}
-        <div className="mt-3 sm:mt-4 grid grid-cols-2 gap-2">
-          <a
-            href="tel:+918796910363"
-            className="flex items-center justify-center gap-1.5 rounded-full border border-stone-200 bg-white px-2.5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-medium text-stone-700 transition-all duration-300 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-md active:scale-95 touch-manipulation"
-          >
-            <Phone size={12} className="sm:size-[13px] shrink-0" /> Call Now
-          </a>
-          <a
-            href={buildTherapistWhatsAppLink(t, origin)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-1.5 rounded-full bg-emerald-700 px-2.5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-medium text-white transition-all duration-300 hover:bg-emerald-800 hover:shadow-lg hover:shadow-emerald-700/25 active:scale-95 touch-manipulation"
-          >
-            <MessageCircle size={12} className="sm:size-[13px] shrink-0" /> WhatsApp
-          </a>
-        </div>
+        {/* CTAs — shorter labels on mobile, slightly larger sizing */}
+<div className="mt-3 sm:mt-4 grid grid-cols-2 gap-1.5 sm:gap-2">
+  <a
+    href="tel:+918796910363"
+    aria-label="Call Now"
+    className="flex items-center justify-center gap-0.5 sm:gap-1.5 rounded-full border border-stone-200 bg-white px-2 sm:px-2.5 py-2 sm:py-2.5 text-[9px] xs:text-[10px] sm:text-xs font-medium text-stone-700 transition-all duration-300 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-md active:scale-95 touch-manipulation"
+  >
+    <Phone size={11} className="sm:size-[13px] shrink-0" />
+    <span className="truncate">
+      <span className="sm:hidden">Call</span>
+      <span className="hidden sm:inline">Call Now</span>
+    </span>
+  </a>
+  <a
+    href={buildTherapistWhatsAppLink(t, origin)}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="WhatsApp"
+    className="flex items-center justify-center gap-0.5 sm:gap-1.5 rounded-full bg-emerald-700 px-2 sm:px-2.5 py-2 sm:py-2.5 text-[9px] xs:text-[10px] sm:text-xs font-medium text-white transition-all duration-300 hover:bg-emerald-800 hover:shadow-lg hover:shadow-emerald-700/25 active:scale-95 touch-manipulation"
+  >
+    <MessageCircle size={11} className="sm:size-[13px] shrink-0" />
+    <span className="truncate">
+      <span className="sm:hidden">Whats</span>
+      <span className="hidden sm:inline">WhatsApp</span>
+    </span>
+  </a>
+</div>
       </div>
     </article>
   );
@@ -113,7 +123,7 @@ function TherapistGroup({ eyebrow, title, subtitle, members, origin }) {
 
       {/* Grid */}
       <div className="mt-6 sm:mt-8 lg:mt-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 xs:gap-3 sm:gap-4 lg:gap-6">
           {members.map((m) => (
             <TherapistCard key={m.name} t={m} origin={origin} />
           ))}
@@ -128,8 +138,6 @@ export default function TeamSection({ selectedLocation }) {
 
   return (
     <section className="py-10 sm:py-16 lg:py-24 bg-white overflow-hidden">
-      
-
       {/* Russian therapists */}
       <TherapistGroup
         eyebrow="Russian Therapists"
