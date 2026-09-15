@@ -208,7 +208,7 @@ export default function HeroSlider({ location }) {
                       <MessageCircle size={15} className="sm:size-[16px] shrink-0" /> Book on WhatsApp
                     </a>
                     <a
-                      href="tel:+918796910363"
+                      href="tel:+918287674605"
                       className="flex flex-1 xs:flex-none items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 sm:px-7 py-3 sm:py-3.5 text-xs sm:text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 active:scale-95 touch-manipulation"
                     >
                       <Phone size={15} className="sm:size-[16px] shrink-0" /> Call Now
@@ -344,7 +344,7 @@ export default function HeroSlider({ location }) {
                     <MessageCircle size={15} className="sm:size-[16px] shrink-0" /> Book on WhatsApp
                   </a>
                   <a
-                    href="tel:+918796910363"
+                    href="tel:+918287674605"
                     className="flex flex-1 xs:flex-none items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 sm:px-7 py-3 sm:py-3.5 text-xs sm:text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20 active:scale-95 touch-manipulation"
                   >
                     <Phone size={15} className="sm:size-[16px] shrink-0" /> Call Now

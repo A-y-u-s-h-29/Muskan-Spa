@@ -1,4 +1,4 @@
-export const WHATSAPP_NUMBER = "918796910363";
+export const WHATSAPP_NUMBER = "918287674605";
 
 export const LOCATIONS = [
   "Mahipalpur", "Aerocity", "Basant Kunj", "Gurgaon", "Dwarka", "Saket", "CP",

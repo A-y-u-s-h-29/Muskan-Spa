@@ -13,8 +13,8 @@ const ADDRESS =
   "Office No. 118, Defence Enclave, Adjoining Aerocity, Mahipalpur, New Delhi 110037";
 
 const PHONE_DISPLAY = "+91 87969 10363";
-const PHONE_TEL = "+918796910363";
-const WHATSAPP = "918796910363";
+const PHONE_TEL = "+918287674605";
+const WHATSAPP = "918287674605";
 const EMAIL = "hello@mahikarussianspa.com";
 
 export default function Contact({ selectedLocation }) {

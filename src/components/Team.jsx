@@ -73,7 +73,7 @@ function TherapistCard({ t, origin }) {
         {/* CTAs — shorter labels on mobile, slightly larger sizing */}
 <div className="mt-3 sm:mt-4 grid grid-cols-2 gap-1.5 sm:gap-2">
   <a
-    href="tel:+918796910363"
+    href="tel:+918287674605"
     aria-label="Call Now"
     className="flex items-center justify-center gap-0.5 sm:gap-1.5 rounded-full border border-stone-200 bg-white px-2 sm:px-2.5 py-2 sm:py-2.5 text-[9px] xs:text-[10px] sm:text-xs font-medium text-stone-700 transition-all duration-300 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-md active:scale-95 touch-manipulation"
   >

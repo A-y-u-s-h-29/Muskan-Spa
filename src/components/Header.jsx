@@ -263,7 +263,7 @@ export default function Header({ page, setPage, menuOpen, setMenuOpen, selectedL
             )}
           </div>
 
-          <a href="tel:+918796910363"
+          <a href="tel:+918287674605"
              className="flex items-center gap-1.5 rounded-full bg-emerald-700 px-3 lg:px-4 xl:px-5 py-2 lg:py-2.5 text-[11px] lg:text-xs xl:text-sm text-white whitespace-nowrap transition-all duration-300 hover:bg-emerald-800 hover:shadow-lg hover:shadow-emerald-700/20">
             <Phone size={14} className="shrink-0" />
             <span className="hidden xl:inline">Call Now</span>
@@ -361,7 +361,7 @@ export default function Header({ page, setPage, menuOpen, setMenuOpen, selectedL
             )}
           </div>
 
-          <a href="tel:+918796910363"
+          <a href="tel:+918287674605"
              className="text-center bg-emerald-700 text-white text-sm sm:text-base px-6 py-3.5 rounded-full hover:bg-emerald-800 transition-colors mt-3">
             Call Now
           </a>

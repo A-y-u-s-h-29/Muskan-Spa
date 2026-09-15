@@ -22,7 +22,7 @@ export default function ServiceCard({ service, location, layout = "overlay" }) {
         </div>
 
         <div className="mt-3 sm:mt-4 grid grid-cols-2 gap-1.5 sm:gap-2 lg:gap-3">
-          <a href="tel:+918796910363"
+          <a href="tel:+918287674605"
             aria-label="Call Now"
             className="flex items-center justify-center gap-0.5 sm:gap-1.5 lg:gap-2 rounded-full border border-stone-200 bg-white px-1.5 sm:px-3 py-2 sm:py-2.5 lg:py-3 text-[8px] sm:text-xs lg:text-sm font-medium text-stone-700 transition-all duration-300 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-md active:scale-95 touch-manipulation">
             <Phone size={10} className="sm:size-[14px] lg:size-[15px] shrink-0" />
@@ -62,7 +62,7 @@ export default function ServiceCard({ service, location, layout = "overlay" }) {
       <p className="mt-1 sm:mt-1.5 lg:mt-2 text-xs sm:text-sm text-stone-500 leading-relaxed flex-1 font-light">{service.desc}</p>
 
       <div className="mt-4 lg:mt-5 grid grid-cols-2 gap-1.5 sm:gap-2 lg:gap-3">
-        <a href="tel:+918796910363"
+        <a href="tel:+918287674605"
           aria-label="Call Now"
           className="flex items-center justify-center gap-0.5 sm:gap-1.5 lg:gap-2 rounded-full border border-stone-200 bg-white px-1.5 sm:px-3 py-2 sm:py-2.5 lg:py-3 text-[8px] sm:text-xs lg:text-sm font-medium text-stone-700 transition-all duration-300 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-md active:scale-95 touch-manipulation">
           <Phone size={10} className="sm:size-[14px] lg:size-[15px] shrink-0" />

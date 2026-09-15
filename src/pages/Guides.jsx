@@ -197,8 +197,8 @@ export const GUIDES = [
 const ADDRESS =
   "Office No. 118, Defence Enclave, Adjoining Aerocity, Mahipalpur, New Delhi 110037";
 
-const PHONE_NUMBER = "918796910363";
-const PHONE_DISPLAY = "+91 87969 10363";
+const PHONE_NUMBER = "918287674605";
+const PHONE_DISPLAY = "+91 8287674605";
 
 /* ===============================================================
    GUIDES LISTING PAGE

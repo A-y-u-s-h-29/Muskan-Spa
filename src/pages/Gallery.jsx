@@ -95,7 +95,7 @@ const FAQS = [
 function TherapistCard({ therapist }) {
   const { name, role, experience, certified, desc, price, img } = therapist;
 
-  const PHONE_NUMBER = "918796910363"; // +91 87969 10363 without + sign
+  const PHONE_NUMBER = "918287674605"; // +91 87969 10363 without + sign
 
   const callLink = `tel:+${PHONE_NUMBER}`;
   const waLink = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(
