@@ -636,7 +636,7 @@ export default function LocationPage({ location, setPage }) {
               <p className="flex items-center gap-2"><Clock size={15} className="text-emerald-600" /> Open daily, 10 AM – 10 PM</p>
               <p className="flex items-center gap-2"><MapPin size={15} className="text-emerald-600" /> {location}, Delhi NCR</p>
               <a href={"tel:+" + WHATSAPP_NUMBER} className="flex items-center gap-2 hover:text-emerald-700 transition-colors">
-                <Phone size={15} className="text-emerald-600" /> +91 87969 10363
+                <Phone size={15} className="text-emerald-600" /> +91 8287674605
               </a>
             </div>
           </div>
