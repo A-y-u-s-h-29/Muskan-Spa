@@ -28,7 +28,7 @@ export default function Footer({ setPage }) {
         <div>
           <p className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-stone-400 mb-3 sm:mb-5">Contact</p>
           <a href={"tel:+" + WHATSAPP_NUMBER} className="text-sm text-stone-400 flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3 hover:text-stone-100 transition-colors">
-            <Phone size={14} className="text-stone-500 flex-shrink-0" /> +91 87969 10363
+            <Phone size={14} className="text-stone-500 flex-shrink-0" /> +91 8287674605
           </a>
           <a href={"https://wa.me/" + WHATSAPP_NUMBER} target="_blank" rel="noopener noreferrer"
              className="text-sm text-stone-400 flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3 hover:text-stone-100 transition-colors">

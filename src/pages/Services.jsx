@@ -737,7 +737,7 @@ export default function ServicesPage({ setPage, selectedLocation }) {
                   className="flex items-center justify-center gap-1.5 sm:gap-2 whitespace-nowrap rounded-full bg-white px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-4 text-xs sm:text-sm font-medium text-emerald-900 transition-all duration-300 hover:bg-emerald-50 active:scale-95"
                 >
                   <Phone size={13} className="sm:size-[14px]" />
-                  <span>+91 87969 10363</span>
+                  <span>+91 8287674605</span>
                 </a>
                 <a
                   href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
