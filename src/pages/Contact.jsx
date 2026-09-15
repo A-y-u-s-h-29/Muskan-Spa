@@ -12,7 +12,7 @@ import {
 const ADDRESS =
   "Office No. 118, Defence Enclave, Adjoining Aerocity, Mahipalpur, New Delhi 110037";
 
-const PHONE_DISPLAY = "+91 87969 10363";
+const PHONE_DISPLAY = "+91 8287674605";
 const PHONE_TEL = "+918287674605";
 const WHATSAPP = "918287674605";
 const EMAIL = "hello@mahikarussianspa.com";
@@ -234,7 +234,7 @@ export default function Contact({ selectedLocation }) {
                         type="tel"
                         value={form.phone}
                         onChange={update("phone")}
-                        placeholder="e.g. +91 98765 43210"
+                        placeholder="e.g. +91 8287674605"
                         className="w-full rounded-xl border border-stone-200 bg-stone-50/50 px-4 py-3 text-sm text-stone-800 placeholder:text-stone-400 focus:outline-none focus:border-emerald-400 focus:bg-white transition-colors"
                       />
                     </div>
