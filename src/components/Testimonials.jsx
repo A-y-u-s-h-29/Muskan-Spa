@@ -14,7 +14,7 @@ export default function Testimonials() {
             </div>
             <div className="min-w-0">
               <p className="text-xs sm:text-sm font-medium text-stone-800 truncate">{testimonial.name}</p>
-              <p className="text-[7px] xs:text-[8px] sm:text-[9px] lg:text-[10px] uppercase tracking-wide text-stone-400 truncate">{testimonial.location}</p>
+              <p className="text-[7px] xs:text-[8px] sm:text-[9px] lg:text-[10px] uppercase tracking-wide text-stone-900 truncate">{testimonial.location}</p>
             </div>
           </div>
           <div className="flex gap-0.5 mb-2 sm:mb-2.5 lg:mb-3">
@@ -29,7 +29,7 @@ export default function Testimonials() {
             )}
           </div>
           <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-light">"{testimonial.text}"</p>
-          <p className="mt-2 sm:mt-2.5 lg:mt-3 text-[7px] xs:text-[8px] sm:text-[9px] lg:text-[10px] uppercase tracking-wider text-emerald-600/60 font-light truncate">
+          <p className="mt-2 sm:mt-2.5 lg:mt-3 text-[7px] xs:text-[8px] sm:text-[9px] lg:text-[10px] uppercase tracking-wider text-emerald-700/90 font-light truncate">
             {testimonial.treatment}
           </p>
         </div>

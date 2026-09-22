@@ -148,7 +148,7 @@ const FAQS = [
 /* ── FAQ Item component ───────────────────────────────────── */
 function FaqItem({ q, a, isOpen, onToggle }) {
   return (
-    <div className="border-b border-stone-200 last:border-b-0">
+    <div className="border-b border-stone-300 last:border-b-0">
       <button
         type="button"
         onClick={onToggle}
@@ -196,7 +196,7 @@ export default function HomePage({ setPage, selectedLocation }) {
       <HeroSlider />
 
       {/* Testimonials */}
-      <section className="py-10 sm:py-16 lg:py-20 xl:py-28 bg-stone-50/50 border-t border-stone-200/60">
+      <section className="py-10 sm:py-16 lg:py-20 xl:py-28 bg-[#E1DCC9] border-t border-stone-300/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6 sm:mb-8 lg:mb-10 xl:mb-14">
             <p className="text-emerald-600 text-[10px] sm:text-xs lg:text-sm tracking-[0.18em] sm:tracking-[0.22em] lg:tracking-[0.25em] uppercase font-light mb-1.5 sm:mb-2 lg:mb-3">What Our Guests Say</p>
@@ -213,7 +213,7 @@ export default function HomePage({ setPage, selectedLocation }) {
       <TeamSection selectedLocation={selectedLocation} />
 
       {/* Features */}
-      <section className="py-10 sm:py-16 lg:py-20 border-y border-stone-200/60 bg-stone-50/50">
+      <section className="py-10 sm:py-16 lg:py-20 border-y border-stone-300/60 bg-[#E1DCC9]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 text-center">
           <div className="group flex flex-col items-center text-center">
             <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-emerald-100/60 flex items-center justify-center mb-2 sm:mb-3 lg:mb-4 group-hover:bg-emerald-100 transition-colors">
@@ -240,7 +240,7 @@ export default function HomePage({ setPage, selectedLocation }) {
       </section>
 
       {/* Signature Treatments */}
-      <section className="py-10 sm:py-16 lg:py-20 xl:py-28">
+      <section className="py-10 sm:py-16 lg:py-20 xl:py-28 bg-stone-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 sm:mb-8 lg:mb-10 xl:mb-12 gap-3 sm:gap-0">
             <div>
@@ -258,7 +258,7 @@ export default function HomePage({ setPage, selectedLocation }) {
           <div className="sm:hidden mt-6 flex justify-center">
             <button
               onClick={() => setPage("services")}
-              className="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-white px-5 py-2.5 text-sm text-stone-700 hover:border-emerald-300 hover:text-emerald-700 transition-colors"
+              className="inline-flex items-center gap-2 rounded-full border border-stone-300 bg-stone-50 px-5 py-2.5 text-sm text-stone-700 hover:border-emerald-300 hover:text-emerald-700 transition-colors"
             >
               See all services <ChevronRight size={15} />
             </button>
@@ -267,7 +267,7 @@ export default function HomePage({ setPage, selectedLocation }) {
       </section>
 
       {/* Gallery preview */}
-      <section className="pb-10 sm:pb-16 lg:pb-20 xl:pb-28">
+      <section className="pb-10 sm:pb-16 lg:pb-20 xl:pb-28 bg-stone-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-4 sm:mb-6 lg:mb-8 xl:mb-12 gap-3 sm:gap-0">
             <div>
@@ -283,7 +283,7 @@ export default function HomePage({ setPage, selectedLocation }) {
           <div className="sm:hidden mt-6 flex justify-center">
             <button
               onClick={() => setPage("gallery")}
-              className="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-white px-5 py-2.5 text-sm text-stone-700 hover:border-emerald-300 hover:text-emerald-700 transition-colors"
+              className="inline-flex items-center gap-2 rounded-full border border-stone-300 bg-stone-50 px-5 py-2.5 text-sm text-stone-700 hover:border-emerald-300 hover:text-emerald-700 transition-colors"
             >
               Full gallery <ChevronRight size={15} />
             </button>
@@ -292,7 +292,7 @@ export default function HomePage({ setPage, selectedLocation }) {
       </section>
 
       {/* ── Signs Your Body Needs a Massage ─────────────────── */}
-      <section className="py-10 sm:py-16 lg:py-20 xl:py-24 bg-stone-50/60 border-t border-stone-200/60">
+      <section className="py-10 sm:py-16 lg:py-20 xl:py-24 bg-stone-200/60 border-t border-stone-300/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 items-center">
 
           <div className="order-2 lg:order-1">
@@ -373,7 +373,7 @@ export default function HomePage({ setPage, selectedLocation }) {
             {WHY_US.map(({ icon: Icon, title, desc }) => (
               <div
                 key={title}
-                className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 sm:p-6 lg:p-7 hover:bg-white/[0.06] hover:border-emerald-500/30 transition-all duration-300"
+                className="rounded-2xl border border-white/10 bg-stone-800/[0.4] p-5 sm:p-6 lg:p-7 hover:bg-stone-700/[0.5] hover:border-emerald-500/30 transition-all duration-300"
               >
                 <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-emerald-700/20 border border-emerald-500/30 flex items-center justify-center mb-3 sm:mb-4">
                   <Icon size={18} className="text-emerald-300" />
@@ -391,7 +391,7 @@ export default function HomePage({ setPage, selectedLocation }) {
       </section>
 
       {/* ── Massage Myths vs. Facts ──────────────────────────── */}
-      <section className="py-10 sm:py-16 lg:py-20 xl:py-24 bg-white border-t border-stone-200/60">
+      <section className="py-10 sm:py-16 lg:py-20 xl:py-24 bg-stone-100 border-t border-stone-300/60">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10 lg:mb-12">
             <p className="text-emerald-600 text-[10px] sm:text-xs tracking-[0.18em] sm:tracking-[0.2em] uppercase font-light mb-2">
@@ -409,9 +409,9 @@ export default function HomePage({ setPage, selectedLocation }) {
             {MYTHS.map((item, i) => (
               <div
                 key={i}
-                className="rounded-2xl border border-stone-200 bg-stone-50/40 overflow-hidden"
+                className="rounded-2xl border border-stone-300 bg-stone-200/40 overflow-hidden"
               >
-                <div className="flex items-start gap-2.5 sm:gap-3 p-4 sm:p-5 bg-red-50/40 border-b border-stone-200/60">
+                <div className="flex items-start gap-2.5 sm:gap-3 p-4 sm:p-5 bg-red-100/40 border-b border-stone-300/60">
                   <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-red-100 text-red-600 flex-shrink-0 mt-0.5">
                     <X size={14} />
                   </span>
@@ -445,7 +445,7 @@ export default function HomePage({ setPage, selectedLocation }) {
       </section>
 
       {/* ── All Locations ─────────────────────────────────────── */}
-      <section className="py-10 sm:py-16 lg:py-20 border-t border-stone-200/60 bg-stone-50/50">
+      <section className="py-10 sm:py-16 lg:py-20 border-t border-stone-300/60 bg-stone-200/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6 sm:mb-8 lg:mb-10">
             <p className="text-emerald-600 text-[10px] sm:text-xs lg:text-sm tracking-[0.18em] sm:tracking-[0.22em] lg:tracking-[0.25em] uppercase font-light mb-1.5 sm:mb-2 lg:mb-3">
@@ -464,16 +464,16 @@ export default function HomePage({ setPage, selectedLocation }) {
               <button
                 key={loc}
                 onClick={() => handleLocationClick(loc)}
-                className="group flex items-center gap-2 rounded-full border border-stone-200 bg-white px-3 sm:px-4 py-2.5 text-[13px] sm:text-sm text-stone-700 shadow-sm transition-all duration-200 hover:border-emerald-400 hover:bg-emerald-50 hover:text-emerald-800 hover:shadow-md min-w-0"
+                className="group flex items-center gap-2 rounded-full border border-stone-300 bg-stone-50 px-3 sm:px-4 py-2.5 text-[13px] sm:text-sm text-stone-700 shadow-sm transition-all duration-200 hover:border-emerald-400 hover:bg-emerald-50 hover:text-emerald-800 hover:shadow-md min-w-0"
               >
                 <MapPin size={13} className="text-emerald-500 flex-shrink-0 transition-colors group-hover:text-emerald-700" />
                 <span className="truncate">{loc}</span>
-                <ChevronRight size={13} className="ml-auto text-stone-300 flex-shrink-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-emerald-600" />
+                <ChevronRight size={13} className="ml-auto text-stone-400 flex-shrink-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-emerald-600" />
               </button>
             ))}
           </div>
 
-          <p className="mt-6 sm:mt-8 text-center text-xs text-stone-400 font-light px-4">
+          <p className="mt-6 sm:mt-8 text-center text-xs text-stone-500 font-light px-4">
             Can't find your area?{" "}
             <a
               href={`https://wa.me/${WHATSAPP_NUMBER}`}
@@ -489,7 +489,7 @@ export default function HomePage({ setPage, selectedLocation }) {
       </section>
 
       {/* ── 5-Star Hotel Partnerships ─────────────────────────── */}
-      <section className="bg-stone-50/80 border-t border-stone-200/60 py-10 sm:py-16 lg:py-20 xl:py-24">
+      <section className="bg-stone-200/60 border-t border-stone-300/60 py-10 sm:py-16 lg:py-20 xl:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-6 sm:mb-8 lg:mb-10 max-w-2xl">
             <p className="text-emerald-600 text-[10px] sm:text-xs tracking-[0.18em] sm:tracking-[0.2em] uppercase font-light mb-2 flex items-center gap-2">
@@ -509,7 +509,7 @@ export default function HomePage({ setPage, selectedLocation }) {
               return (
                 <div
                   key={hotel.name}
-                  className="group rounded-2xl border border-stone-200 bg-white overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-row h-40 sm:h-44"
+                  className="group rounded-2xl border border-stone-300 bg-stone-50 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-row h-40 sm:h-44"
                 >
                   <div className="flex-1 p-3.5 sm:p-4 flex flex-col min-w-0">
                     <div className="flex items-start gap-1.5 mb-1">
@@ -526,7 +526,7 @@ export default function HomePage({ setPage, selectedLocation }) {
                     <div className="mt-2 flex items-center gap-1.5 flex-wrap">
                       <a
                         href={`tel:+${hotel.whatsapp}`}
-                        className="inline-flex items-center gap-1 rounded-full border border-stone-300 px-2.5 py-1 text-[10px] text-stone-700 hover:border-emerald-700 hover:text-emerald-700 transition-colors"
+                        className="inline-flex items-center gap-1 rounded-full border border-stone-400 px-2.5 py-1 text-[10px] text-stone-700 hover:border-emerald-700 hover:text-emerald-700 transition-colors"
                       >
                         <Phone size={10} /> Call
                       </a>
@@ -534,7 +534,7 @@ export default function HomePage({ setPage, selectedLocation }) {
                         href={waLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 rounded-full border border-stone-300 px-2.5 py-1 text-[10px] text-stone-700 hover:border-emerald-700 hover:text-emerald-700 transition-colors"
+                        className="inline-flex items-center gap-1 rounded-full border border-stone-400 px-2.5 py-1 text-[10px] text-stone-700 hover:border-emerald-700 hover:text-emerald-700 transition-colors"
                       >
                         <MessageCircle size={10} /> Chat
                       </a>
@@ -549,7 +549,7 @@ export default function HomePage({ setPage, selectedLocation }) {
                     </div>
                   </div>
 
-                  <div className="relative w-24 sm:w-28 lg:w-32 flex-shrink-0 bg-stone-100">
+                  <div className="relative w-24 sm:w-28 lg:w-32 flex-shrink-0 bg-stone-200">
                     <img
                       src={hotel.img}
                       alt={hotel.name}
@@ -567,7 +567,7 @@ export default function HomePage({ setPage, selectedLocation }) {
       </section>
 
       {/* ── About Our Spa ─────────────────────────────────────── */}
-      <section className="py-10 sm:py-16 lg:py-20 xl:py-24 bg-white">
+      <section className="py-10 sm:py-16 lg:py-20 xl:py-24 bg-stone-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 items-center">
           <div className="relative order-1 lg:order-1">
             <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden aspect-[4/3] shadow-xl">
@@ -633,7 +633,7 @@ export default function HomePage({ setPage, selectedLocation }) {
       </section>
 
       {/* ── Traveler's Wellness Guide ─────────────────────────── */}
-      <section className="border-t border-stone-200/60">
+      <section className="border-t border-stone-300/60 bg-stone-200/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-16 lg:pt-20">
           <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 lg:mb-14">
             <p className="text-emerald-600 text-[10px] sm:text-xs tracking-[0.18em] sm:tracking-[0.2em] uppercase font-light mb-2">
@@ -665,8 +665,8 @@ export default function HomePage({ setPage, selectedLocation }) {
                   label: "text-emerald-900",
                 },
                 {
-                  bg: "bg-stone-50",
-                  border: "border-stone-200",
+                  bg: "bg-stone-100",
+                  border: "border-stone-300",
                   accent: "bg-stone-400",
                   dot: "text-stone-400",
                   eyebrow: "text-stone-600",
@@ -756,7 +756,7 @@ export default function HomePage({ setPage, selectedLocation }) {
       </section>
 
       {/* ── FAQ ───────────────────────────────────────────────── */}
-      <section className="py-10 sm:py-16 lg:py-20 xl:py-24 bg-white">
+      <section className="py-10 sm:py-16 lg:py-20 xl:py-24 bg-stone-100">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6 sm:mb-8 lg:mb-10">
             <p className="text-emerald-600 text-[10px] sm:text-xs tracking-[0.18em] sm:tracking-[0.2em] uppercase font-light mb-2">
@@ -770,7 +770,7 @@ export default function HomePage({ setPage, selectedLocation }) {
             </div>
           </div>
 
-          <div className="rounded-2xl sm:rounded-3xl border border-stone-200 bg-stone-50/40 px-4 sm:px-6 lg:px-8">
+          <div className="rounded-2xl sm:rounded-3xl border border-stone-300 bg-stone-200/40 px-4 sm:px-6 lg:px-8">
             {FAQS.map((f, i) => (
               <FaqItem
                 key={f.q}
@@ -782,7 +782,7 @@ export default function HomePage({ setPage, selectedLocation }) {
             ))}
           </div>
 
-          <p className="mt-6 sm:mt-8 text-center text-xs text-stone-400 font-light px-4">
+          <p className="mt-6 sm:mt-8 text-center text-xs text-stone-500 font-light px-4">
             Still have a question?{" "}
             <a
               href={`https://wa.me/${WHATSAPP_NUMBER}`}

@@ -84,7 +84,8 @@ export default function Header({ page, setPage, menuOpen, setMenuOpen, selectedL
     };
   }, []);
 
-  const overlay = page === "home" && !scrolled && !menuOpen;
+  // Header never overlays the hero image on any device.
+  const overlay = false;
 
   const isLocationPage = page === "location";
   const heroBg = isLocationPage ? pickHeroImage(selectedLocation) : null;
@@ -92,7 +93,8 @@ export default function Header({ page, setPage, menuOpen, setMenuOpen, selectedL
     ? RUSSIAN_THERAPISTS.find((t) => t.img === heroBg) || null
     : null;
 
-  const locationOverlay = isLocationPage && !scrolled && !menuOpen;
+  // Header never overlays the hero image on any device.
+  const locationOverlay = false;
 
   const tapOnce = (fn) => {
     const now = Date.now();
@@ -157,14 +159,14 @@ export default function Header({ page, setPage, menuOpen, setMenuOpen, selectedL
           : "bg-white/95 backdrop-blur-xl shadow-sm"
       }`}
     >
-      <div className="relative max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-2 h-14 sm:h-20 lg:h-24">
+      <div className="relative max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-2 h-16 sm:h-20 lg:h-24">
         <button
           {...tapHandlers(() => goToPage("home"))}
           className="text-left group flex-shrink min-w-0 mr-3 lg:mr-4"
         >
-          <span className={`font-serif text-sm xs:text-base sm:text-xl lg:text-2xl xl:text-3xl tracking-tight ${logoPrimary}`}>Mahika</span>
-          <span className={`font-serif text-sm xs:text-base sm:text-xl lg:text-2xl xl:text-3xl ${logoSecondary}`}> Russian Spa</span>
-          <span className={`block text-[7px] xs:text-[8px] sm:text-[9px] lg:text-[10px] xl:text-[11px] uppercase tracking-[0.2em] xs:tracking-[0.25em] sm:tracking-[0.3em] lg:tracking-[0.35em] mt-0.5 font-light ${logoTagline}`}>
+          <span className={`font-serif text-xl xs:text-2xl sm:text-xl lg:text-2xl xl:text-3xl tracking-tight ${logoPrimary}`}>Mahika</span>
+          <span className={`font-serif text-xl xs:text-2xl sm:text-xl lg:text-2xl xl:text-3xl ${logoSecondary}`}> Russian Spa</span>
+          <span className={`block text-[9px] xs:text-[10px] sm:text-[9px] lg:text-[10px] xl:text-[11px] uppercase tracking-[0.2em] xs:tracking-[0.25em] sm:tracking-[0.3em] lg:tracking-[0.35em] mt-0.5 font-light ${logoTagline}`}>
             {heroTherapist ? `Featuring ${heroTherapist.name}` : "Aerocity · Delhi NCR"}
           </span>
         </button>
